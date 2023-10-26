@@ -12,6 +12,6 @@ public class SmartHomeClient extends AbstractClient{
 
     @Override
     protected void handleMessageFromServer(Object msg) {
-
+        System.out.println("recived message from server");
     }
 }
