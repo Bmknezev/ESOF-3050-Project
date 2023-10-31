@@ -1,3 +1,6 @@
+import java.io.IOException;
+import java.util.Objects;
+
 public class SmartHomeClient extends AbstractClient{
 
     /**
@@ -12,6 +15,7 @@ public class SmartHomeClient extends AbstractClient{
 
     @Override
     protected void handleMessageFromServer(Object msg) {
-        System.out.println("recived message from server");
+        String message = msg.toString();
+        System.out.println(message);
     }
 }
