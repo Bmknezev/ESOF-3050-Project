@@ -6,7 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.image.ImageView;
 
-public class PleaseProvideControllerClassName {
+public class SmartLightMenuController {
 
     @FXML
     private Slider BrightnessSlider;

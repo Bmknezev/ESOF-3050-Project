@@ -6,7 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
 
-public class PleaseProvideControllerClassName {
+public class SmartCoffeeMakerMenuController {
 
     @FXML
     private Button BrewCoffeeButton;

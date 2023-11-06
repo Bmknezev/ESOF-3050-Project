@@ -6,7 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
-public class PleaseProvideControllerClassName {
+public class SmartLockMenuController {
 
     @FXML
     private Button ChangePINButton;
