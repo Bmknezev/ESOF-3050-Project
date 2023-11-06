@@ -1,8 +1,10 @@
+import GUI.Control.AbstractController;
+
+
 import java.io.IOException;
-import java.util.Objects;
 
 public class SmartHomeClient extends AbstractClient{
-
+private AbstractController tmp;
     /**
      * Constructs the client.
      *
@@ -15,7 +17,16 @@ public class SmartHomeClient extends AbstractClient{
 
     @Override
     protected void handleMessageFromServer(Object msg) {
-        String message = msg.toString();
-        System.out.println(message);
+        System.out.println("Message received");
+        tmp.link(msg);
+    }
+
+    public void request(int i, AbstractController c) {
+        tmp = c;
+        try {
+            sendToServer(i);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
