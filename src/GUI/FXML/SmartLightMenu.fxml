@@ -42,7 +42,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="ToggleLightStatusButton" mnemonicParsing="false" prefWidth="150.0" text="Turn On / Turn Off" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Button fx:id="ToggleLightStatusButton" mnemonicParsing="false" onAction="#ToggleLightStatusButtonPressed" prefWidth="150.0" text="Turn On / Turn Off" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
             <Button fx:id="CreateAutomationButton" mnemonicParsing="false" prefWidth="150.0" text="Create Light Schedule" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
             <Button fx:id="EditAutomationsButton" mnemonicParsing="false" prefWidth="150.0" text="Edit Light Schedules" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
             <Label text="Brightness:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
@@ -50,13 +50,13 @@
                   <Insets right="8.0" />
                </padding>
             </Label>
-            <Label text="(Current Brightness)" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <Label fx:id="brightnessLabel" text="(Current Brightness)" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <padding>
                   <Insets left="8.0" />
                </padding>
             </Label>
             <Button fx:id="ChangeColourButton" mnemonicParsing="false" prefWidth="150.0" text="Change Colour" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-            <Slider fx:id="BrightnessSlider" value="50.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <Slider fx:id="BrightnessSlider" blockIncrement="1.0" onMouseDragged="#BrightnessSliderReleased" value="50.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <padding>
                   <Insets left="8.0" right="8.0" />
                </padding>

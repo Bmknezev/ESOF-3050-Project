@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import smartDevice.SmartLight;
 
 import java.io.IOException;
 
@@ -16,8 +17,7 @@ public class SmartHome extends Application {
         SmartHomeClient s = new SmartHomeClient("127.0.0.1", 19920);
         java.util.Scanner scanner = new java.util.Scanner(System.in);
 
-        //create new light object
-        light l = new light(100, 0.5f);
+
 
         try {
             s.openConnection();
@@ -25,6 +25,9 @@ public class SmartHome extends Application {
             throw new RuntimeException(e);
         }
         */
+
+
+
         launch(args);
     }
 
@@ -46,6 +49,9 @@ public class SmartHome extends Application {
         // injecting first scene into the controller of the second scene
         SmartLightMenuController secondPaneController = secondPaneLoader.getController();
         secondPaneController.setFirstScene(firstScene);
+        //create new light object
+        SmartLight l = new SmartLight("light 1", true, -1,true,0x000000,100,false );
+        secondPaneController.linkLight(l);
 
         primaryStage.setTitle("Smart Home");
         primaryStage.setScene(firstScene);
