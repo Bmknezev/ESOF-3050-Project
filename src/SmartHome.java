@@ -32,12 +32,12 @@ public class SmartHome extends Application {
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader firstPaneLoader = new FXMLLoader(getClass().getResource("/GUI/FXML/LoginMenu.fxml"));
         Parent firstPane = firstPaneLoader.load();
-        Scene firstScene = new Scene(firstPane, 300, 275);
+        Scene firstScene = new Scene(firstPane, 600, 575);
 
         // getting loader and a pane for the second scene
         FXMLLoader secondPaneLoader = new FXMLLoader(getClass().getResource("/GUI/FXML/SmartLightMenu.fxml"));
         Parent secondPane = secondPaneLoader.load();
-        Scene secondScene = new Scene(secondPane, 300, 275);
+        Scene secondScene = new Scene(secondPane, 600, 575);
 
         // injecting second scene into the controller of the first scene
         LoginMenuController firstPaneController = firstPaneLoader.getController();
@@ -47,7 +47,7 @@ public class SmartHome extends Application {
         SmartLightMenuController secondPaneController = secondPaneLoader.getController();
         secondPaneController.setFirstScene(firstScene);
 
-        primaryStage.setTitle("Switching scenes");
+        primaryStage.setTitle("Smart Home");
         primaryStage.setScene(firstScene);
         primaryStage.show();
     }
