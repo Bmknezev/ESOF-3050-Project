@@ -49,7 +49,7 @@
                   </VBox>
                   <VBox alignment="CENTER_LEFT">
                      <children>
-                        <TextField fx:id="emailTextField" alignment="CENTER_RIGHT" />
+                        <TextField fx:id="emailTextField" />
                         <TextField fx:id="passwordTextField" />
                      </children>
                   </VBox>
