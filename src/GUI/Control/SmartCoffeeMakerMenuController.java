@@ -1,6 +1,7 @@
 package GUI.Control;
 
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
@@ -35,4 +36,8 @@ public class SmartCoffeeMakerMenuController {
     @FXML
     private ToggleGroup Temperature;
 
+    private Scene first;
+    public void setFirstScene(Scene firstScene) {
+        first = firstScene;
+    }
 }

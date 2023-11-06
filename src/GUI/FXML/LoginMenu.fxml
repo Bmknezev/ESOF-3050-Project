@@ -55,7 +55,7 @@
                   </VBox>
                </children>
             </HBox>
-            <Button fx:id="enterButton" mnemonicParsing="false" prefWidth="150.0" text="Enter" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="TOP" />
+            <Button fx:id="enterButton" mnemonicParsing="false" onAction="#LoginButtonPressed" prefWidth="150.0" text="Enter" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="TOP" />
          </children>
       </GridPane>
    </center>

@@ -1,6 +1,7 @@
 package GUI.Control;
 
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
@@ -32,4 +33,6 @@ public class SmartLightMenuController {
     @FXML
     private Button ToggleLightStatusButton;
 
+    public void setFirstScene(Scene firstScene) {
+    }
 }
