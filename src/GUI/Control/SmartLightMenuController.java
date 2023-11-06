@@ -11,7 +11,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import smartDevice.SmartLight;
 
-public class SmartLightMenuController {
+public class SmartLightMenuController extends AbstractController{
 
     @FXML
     private Slider BrightnessSlider;
@@ -56,12 +56,13 @@ public class SmartLightMenuController {
         stage.setScene(first);
 
     }
-    public void linkLight(SmartLight l){
-        light = l;
+    @Override
+    public void link(Object l){
+        light = (SmartLight) l;
         BrightnessSlider.adjustValue(light.getBrightness());
         SmartDeviceNameLabel.setText(light.getName());
         StatusIndicatorLabel.setText(light.getStatus() ? "On" : "Off");
-        brightnessLabel.setText(String.valueOf(light.getBrightness()) + "%");
+        brightnessLabel.setText(light.getBrightness() + "%");
     }
 
     public void ToggleLightStatusButtonPressed(ActionEvent actionEvent) {
@@ -86,6 +87,8 @@ public class SmartLightMenuController {
 
     public void BrightnessSliderReleased(MouseEvent mouseEvent) {
         light.setBrightness((int) BrightnessSlider.getValue());
-        brightnessLabel.setText(String.valueOf(light.getBrightness()) + "%" );
+        brightnessLabel.setText(light.getBrightness() + "%" );
     }
+
+
 }

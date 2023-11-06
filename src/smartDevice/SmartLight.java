@@ -4,14 +4,17 @@ public class SmartLight extends SmartDevice{
     private int colour; //hexadecimal colour value (e.g. 0x000000 is black, 0xFFFFFF is white)
     private int brightness; //brightness value from 0 to 100
     private boolean lightStatus; //true if light is on, false if light is off
-    private String name;
 
-    public SmartLight(String name, boolean connectionStatus, int battery, boolean status, int colour, int brightness, boolean lightStatus){
+    private String name;
+    private int deviceID;
+
+    public SmartLight(String name, int id, boolean connectionStatus, int battery, boolean status, int colour, int brightness, boolean lightStatus){
         super(connectionStatus, battery, status);
         this.colour = colour;
         this.brightness = brightness;
         this.lightStatus = lightStatus;
         this.name = name;
+        this.deviceID = id;
     }
 
     public void setColour(int colour){
@@ -26,7 +29,7 @@ public class SmartLight extends SmartDevice{
         return colour;
     }
 
-    public int getBrightness(){
+    public float getBrightness(){
         return brightness;
     }
 
@@ -45,4 +48,14 @@ public class SmartLight extends SmartDevice{
     public void setName(String name){
         this.name = name;
     }
+
+    public int getDeviceID(){
+        return deviceID;
+    }
+
+    public void setDeviceID(int id){
+        this.deviceID = id;
+    }
+
+
 }
