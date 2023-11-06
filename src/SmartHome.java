@@ -1,5 +1,4 @@
 import GUI.Control.LoginMenuController;
-import GUI.Control.SmartCoffeeMakerMenuController;
 import GUI.Control.SmartLightMenuController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -7,8 +6,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import smartDevice.SmartLight;
-
-import java.io.IOException;
 
 public class SmartHome extends Application {
 
@@ -49,6 +46,7 @@ public class SmartHome extends Application {
         // injecting first scene into the controller of the second scene
         SmartLightMenuController secondPaneController = secondPaneLoader.getController();
         secondPaneController.setFirstScene(firstScene);
+
         //create new light object
         SmartLight l = new SmartLight("light 1", true, -1,true,0x000000,100,false );
         secondPaneController.linkLight(l);
