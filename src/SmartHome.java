@@ -8,8 +8,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+    // aim for router 10.100.64.1
+
 public class SmartHome extends Application {
-    static SmartHomeClient s = new SmartHomeClient("127.0.0.1", 19920);
+    static SmartHomeClient s = new SmartHomeClient("10.100.65.45", 19920);
     public static void main(String[] args) {
 
         try {
