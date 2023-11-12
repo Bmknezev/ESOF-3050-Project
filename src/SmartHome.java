@@ -10,14 +10,17 @@ import java.io.IOException;
 
 public class SmartHome extends Application {
     static SmartHomeClient s = new SmartHomeClient("10.100.147.179", 19920);
+
+    static boolean guiTest = true;
     public static void main(String[] args) {
 
-        try {
-            s.openConnection();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        if (guiTest == false){
+            try {
+                s.openConnection();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
-
 
         launch(args);
     }
@@ -43,10 +46,11 @@ public class SmartHome extends Application {
 
         //create new light object
         //SmartLight l = new SmartLight("light 1", true, -1,true,0x000000,100,false );
-        s.request(1, secondPaneController);
+        if (guiTest == false){
+            s.request(1, secondPaneController);
+        }
 
         //secondPaneController.link(l);
-
 
         primaryStage.setTitle("Smart Home");
         primaryStage.setScene(firstScene);
