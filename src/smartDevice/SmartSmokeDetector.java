@@ -8,8 +8,8 @@ public class SmartSmokeDetector extends SmartDevice{
     private boolean alarmStatus; //true if alarm is ready, false if alarm is not ready
     private boolean alarm; //true if alarm is going off, false if alarm is not going off
 
-    public SmartSmokeDetector(boolean connectionStatus, int battery, boolean status){
-        super(connectionStatus, battery, status);
+    public SmartSmokeDetector(boolean connectionStatus, int battery, boolean status, String name){
+        super(connectionStatus, battery, status, name);
         this.lastTested = new Date();
         this.testStatus = true;
         this.alarmStatus = false;
@@ -32,6 +32,9 @@ public class SmartSmokeDetector extends SmartDevice{
         this.alarm = alarm;
     }
 
+    @Override
+    public String getDeviceType() { return "Smart Smoke Detector"; }
+
     public Date getLastTested(){
         return lastTested;
     }
@@ -47,6 +50,4 @@ public class SmartSmokeDetector extends SmartDevice{
     public boolean getAlarm(){
         return alarm;
     }
-
-
 }

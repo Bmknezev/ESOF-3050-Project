@@ -5,8 +5,8 @@ public class SmartThermostat extends SmartDevice{
     private boolean heatEnabled; //if true, heat is enabled
     private boolean coolEnabled; //if true, cool is enabled
 
-    public SmartThermostat(boolean connectionStatus, int battery, boolean status, float temperature, float setpoint, boolean heatEnabled, boolean coolEnabled){
-        super(connectionStatus, battery, status);
+    public SmartThermostat(boolean connectionStatus, int battery, boolean status, String name, float temperature, float setpoint, boolean heatEnabled, boolean coolEnabled){
+        super(connectionStatus, battery, status, name);
         this.temperature = temperature;
         this.setpoint = setpoint;
         this.heatEnabled = heatEnabled;
@@ -29,6 +29,9 @@ public class SmartThermostat extends SmartDevice{
         this.coolEnabled = coolEnabled;
     }
 
+    @Override
+    public String getDeviceType() { return "Smart Thermostat"; }
+
     public float getTemperature(){
         return temperature;
     }
@@ -44,6 +47,4 @@ public class SmartThermostat extends SmartDevice{
     public boolean getCoolEnabled(){
         return coolEnabled;
     }
-
-
 }

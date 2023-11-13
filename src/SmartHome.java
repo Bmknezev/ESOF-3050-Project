@@ -1,4 +1,5 @@
 import GUI.Control.LoginMenuController;
+import GUI.Control.DeviceSelectionMenuController;
 import GUI.Control.SmartLightMenuController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +15,7 @@ public class SmartHome extends Application {
     static boolean guiTest = true;
     public static void main(String[] args) {
 
-        if (guiTest == false){
+        if (!guiTest){
             try {
                 s.openConnection();
             } catch (IOException e) {
@@ -27,33 +28,46 @@ public class SmartHome extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader firstPaneLoader = new FXMLLoader(getClass().getResource("/GUI/FXML/LoginMenu.fxml"));
-        Parent firstPane = firstPaneLoader.load();
-        Scene firstScene = new Scene(firstPane, 600, 575);
+        // getting loader and a pane for the login scene
+        FXMLLoader loginPaneLoader = new FXMLLoader(getClass().getResource("/GUI/FXML/LoginMenu.fxml"));
+        Parent loginPane = loginPaneLoader.load();
+        Scene loginScene = new Scene(loginPane, 600, 575);
 
-        // getting loader and a pane for the second scene
-        FXMLLoader secondPaneLoader = new FXMLLoader(getClass().getResource("/GUI/FXML/SmartLightMenu.fxml"));
-        Parent secondPane = secondPaneLoader.load();
-        Scene secondScene = new Scene(secondPane, 600, 575);
+        // getting loader and a pane for the device selection scene
+        FXMLLoader deviceSelectionPaneLoader = new FXMLLoader(getClass().getResource("/GUI/FXML/DeviceSelectionMenu.fxml"));
+        Parent deviceSelectionPane = deviceSelectionPaneLoader.load();
+        Scene deviceSelectionScene = new Scene(deviceSelectionPane, 600, 575);
 
-        // injecting second scene into the controller of the first scene
-        LoginMenuController firstPaneController = firstPaneLoader.getController();
-        firstPaneController.setSecondScene(secondScene);
+        // getting loader and a pane for the light device scene
+        FXMLLoader lightDevicePaneLoader = new FXMLLoader(getClass().getResource("/GUI/FXML/SmartLightMenu.fxml"));
+        Parent lightDevicePane = lightDevicePaneLoader.load();
+        Scene lightDeviceScene = new Scene(lightDevicePane, 600, 575);
 
-        // injecting first scene into the controller of the second scene
-        SmartLightMenuController secondPaneController = secondPaneLoader.getController();
-        secondPaneController.setFirstScene(firstScene);
+        // injecting device selection scene into the controller of the login scene as the next scene
+        LoginMenuController loginPaneController = loginPaneLoader.getController();
+        loginPaneController.setNextScene(deviceSelectionScene);
+
+        // injecting the device selection scene into the controller of the light device scene as the previous scene
+        SmartLightMenuController lightDevicePaneController = lightDevicePaneLoader.getController();
+        lightDevicePaneController.setPreviousScene(deviceSelectionScene);
+
+        // injecting the login scene into the controller of the device selection scene as the previous scene
+        DeviceSelectionMenuController deviceSelectionPaneController = deviceSelectionPaneLoader.getController();
+        deviceSelectionPaneController.setPreviousScene(loginScene);
+        deviceSelectionPaneController.addNewDevice(lightDeviceScene, lightDevicePaneController.getSmartDevice());
+
+
 
         //create new light object
         //SmartLight l = new SmartLight("light 1", true, -1,true,0x000000,100,false );
-        if (guiTest == false){
-            s.request(1, secondPaneController);
+        if (!guiTest){
+            //s.request(1, lightDevicePaneController);
         }
 
         //secondPaneController.link(l);
 
         primaryStage.setTitle("Smart Home");
-        primaryStage.setScene(firstScene);
+        primaryStage.setScene(loginScene);
         primaryStage.show();
     }
 }
