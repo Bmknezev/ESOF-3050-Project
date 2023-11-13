@@ -21,6 +21,9 @@ public class SmartThermostatMenuController extends AbstractController{
     private Button EditAutomationsButton;
 
     @FXML
+    private Button backButton;
+
+    @FXML
     private Label HeatingCoolingStatusLabel;
 
     @FXML

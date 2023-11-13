@@ -1,5 +1,6 @@
 package GUI.Control;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -17,6 +18,9 @@ public class SmartCoffeeMakerMenuController extends AbstractController{
 
     @FXML
     private Button EditAutomationsButton;
+
+    @FXML
+    private Button backButton;
 
     @FXML
     private ToggleGroup Size;
@@ -43,6 +47,11 @@ public class SmartCoffeeMakerMenuController extends AbstractController{
 
     @Override
     public void update(String[] s) {
+
+    }
+
+    @FXML
+    void backButtonPressed(ActionEvent event) {
 
     }
 

@@ -13,19 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Control.SmartThermostatMenuController">
-   <top>
-      <VBox alignment="BOTTOM_CENTER" BorderPane.alignment="CENTER">
-         <children>
-            <Label fx:id="SmartDeviceNameLabel" text="(Smart Thermostat Name)">
-               <font>
-                  <Font name="System Bold" size="20.0" />
-               </font>
-            </Label>
-            <Label text="Smart Thermostat" />
-         </children>
-      </VBox>
-   </top>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Control.SmartThermostatMenuController">
    <center>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
@@ -65,10 +53,23 @@
                   <Insets right="8.0" />
                </padding>
             </Label>
+            <Button fx:id="backButton" cancelButton="true" mnemonicParsing="false" onAction="#backButtonPressed" text="Back" GridPane.rowIndex="2" />
          </children>
       </GridPane>
    </bottom>
    <padding>
       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
    </padding>
+   <top>
+      <VBox alignment="BOTTOM_CENTER" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="SmartDeviceNameLabel" text="(Smart Thermostat Name)">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label text="Smart Thermostat" />
+         </children>
+      </VBox>
+   </top>
 </BorderPane>

@@ -1,3 +1,4 @@
+import ClientServer.SmartHomeClient;
 import GUI.Control.*;
 
 import javafx.application.Application;

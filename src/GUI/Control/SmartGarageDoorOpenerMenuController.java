@@ -1,5 +1,6 @@
 package GUI.Control;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -16,6 +17,9 @@ public class SmartGarageDoorOpenerMenuController extends AbstractController{
 
     @FXML
     private Button EditAutomationsButton;
+
+    @FXML
+    private Button backButton;
 
     @FXML
     private ImageView SmartDeviceImageView;
@@ -40,5 +44,9 @@ public class SmartGarageDoorOpenerMenuController extends AbstractController{
 
     }
 
+    @FXML
+    void backButtonPressed(ActionEvent event) {
+
+    }
 
 }

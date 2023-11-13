@@ -114,4 +114,9 @@ public class SmartLockMenuController extends AbstractController{
             throw new RuntimeException(e);
         }
     }
+
+    @FXML
+    void backButtonPressed(ActionEvent event) {
+
+    }
 }

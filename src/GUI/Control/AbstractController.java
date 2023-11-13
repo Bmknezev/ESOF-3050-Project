@@ -1,5 +1,7 @@
 package GUI.Control;
 
+import ClientServer.SmartHomeClient;
+
 public abstract class AbstractController {
     protected SmartHomeClient client;
 
