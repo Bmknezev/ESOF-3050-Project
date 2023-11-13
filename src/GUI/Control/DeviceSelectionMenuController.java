@@ -33,6 +33,7 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
     }
 
     public void addNewDevice(String newDevice) {
+        //recieves a string from the server and parses it using delimiter character |, string contains device id, name, and device type
         String[] s = newDevice.split("\\|");
             // this creates a new label for the device name
         Label deviceNameLabel = new Label();
@@ -52,6 +53,7 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
             // this sets the button to change the scene when pressed
         manageDeviceButton.setOnAction(event ->{
             Stage stage = (Stage) manageDeviceButton.getScene().getWindow();
+            //this switch statement changes the scene based on the device type and requests the values for that device from the server
             switch (s[1]) {
                 case "Smart Light":
                     client.request(Integer.parseInt(s[2]), Controller[0]);
@@ -94,12 +96,14 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
     }
 
     public void addScene(Scene[] scenelist, AbstractDeviceController[] controller) {
+        //lists of all the device scenes and thier controllers
         sceneList = scenelist;
         Controller = controller;
     }
 
     @Override
     public void update(String[] s) {
+        //dont worry about this, im doing bad programming practices but it works
 
     }
 
