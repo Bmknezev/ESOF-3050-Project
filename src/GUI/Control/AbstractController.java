@@ -1,10 +1,17 @@
 package GUI.Control;
 
-import smartDevice.SmartDevice;
+
 
 public abstract class AbstractController {
+    protected SmartHomeClient client;
 
-    public abstract void link(Object o);
+    public abstract void update(String[] s);
+
 
     public abstract SmartDevice getSmartDevice();
+
+    public void addServer(SmartHomeClient s) {
+        client = s;
+    }
+
 }

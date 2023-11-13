@@ -1,5 +1,9 @@
 import GUI.Control.LoginMenuController;
+
 import GUI.Control.DeviceSelectionMenuController;
+
+import GUI.Control.SmartHomeClient;
+
 import GUI.Control.SmartLightMenuController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -10,9 +14,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class SmartHome extends Application {
-    static SmartHomeClient s = new SmartHomeClient("10.100.147.179", 19920);
+    static SmartHomeClient s = new SmartHomeClient("127.0.0.1", 19920);
 
-    static boolean guiTest = true;
+    static boolean guiTest = false;
     public static void main(String[] args) {
 
         if (!guiTest){
@@ -58,10 +62,17 @@ public class SmartHome extends Application {
 
 
 
+        //injecting server connection into the controller of the second scene
+        secondPaneController.addServer(s);
+
         //create new light object
         //SmartLight l = new SmartLight("light 1", true, -1,true,0x000000,100,false );
         if (!guiTest){
+
             //s.request(1, lightDevicePaneController);
+
+            s.request(1, secondPaneController);
+]
         }
 
         //secondPaneController.link(l);
