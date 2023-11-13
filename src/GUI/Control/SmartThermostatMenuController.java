@@ -49,17 +49,20 @@ public class SmartThermostatMenuController extends AbstractDeviceController {
     private int deviceID;
 
 
+    // this is a method that sets the previous scene to the scene that was passed in
     public void setPreviousScene(Scene previousScene) {
         previous = previousScene;
     }
-    public void BackButtonPressed(ActionEvent actionEvent) {
+
+    //change scenes when back button pressed
+    public void backButtonPressed(ActionEvent actionEvent) {
         Stage stage = (Stage) backButton.getScene().getWindow();
         stage.setScene(previous);
-
     }
 
     @Override
     public void update(String[] s) {
+        //take input string and update GUI
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -75,11 +78,7 @@ public class SmartThermostatMenuController extends AbstractDeviceController {
 
     }
 
-    public void backButtonPressed(ActionEvent actionEvent) {
-        Stage stage = (Stage) backButton.getScene().getWindow();
-        stage.setScene(previous);
-    }
-
+    //send new values to server
     private void UpdateServer(String msg){
         String message = 0 + "@" + deviceID + "@" + msg;
         try {
@@ -89,6 +88,7 @@ public class SmartThermostatMenuController extends AbstractDeviceController {
         }
     }
 
+    //change temperature when button pressed, request new values from server
     public void ChangeTempButtonPressed(ActionEvent actionEvent) {
         SetpointStatusLabel.setText(ChangeTempTextField.getText());
         UpdateServer("setpoint|" + ChangeTempTextField.getText());

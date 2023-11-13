@@ -43,10 +43,12 @@ public class SmartHome extends Application {
         Parent lightDevicePane = lightDevicePaneLoader.load();
         Scene lightDeviceScene = new Scene(lightDevicePane, 600, 575);
 
+        //getting loader and a pane for the lock device scene
         FXMLLoader lockDevicePaneLoader = new FXMLLoader(getClass().getResource("/GUI/FXML/SmartLockMenu.fxml"));
         Parent lockDevicePane = lockDevicePaneLoader.load();
         Scene lockDeviceScene = new Scene(lockDevicePane, 600, 575);
 
+        //getting loader and a pane for the thermostat device scene
         FXMLLoader thermostatDevicePaneLoader = new FXMLLoader(getClass().getResource("/GUI/FXML/SmartThermostatMenu.fxml"));
         Parent thermostatDevicePane = thermostatDevicePaneLoader.load();
         Scene thermostatDeviceScene = new Scene(thermostatDevicePane, 600, 575);
