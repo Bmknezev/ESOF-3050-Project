@@ -6,7 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
-public class SmartThermostatMenuController {
+public class SmartThermostatMenuController extends AbstractController{
 
     @FXML
     private Button ChangeTempButton;
@@ -32,4 +32,13 @@ public class SmartThermostatMenuController {
     @FXML
     private Label TemperatureStatusLabel;
 
+    @Override
+    public void update(String[] s) {
+
+    }
+
+    @Override
+    public String getSmartDevice() {
+        return SmartDeviceNameLabel.getText() + "|Smart Thermostat";
+    }
 }

@@ -80,13 +80,14 @@ public class SmartLightMenuController extends AbstractController{
         if(Objects.equals(StatusIndicatorLabel.getText(), "On")){
             StatusIndicatorLabel.setText("Off");
             SmartDeviceImageView.setImage(new javafx.scene.image.Image("/GUI/Images/light_Icon_off.png"));
+            UpdateServer("lightStatus|false");
         }
         else{
             StatusIndicatorLabel.setText("On");
             SmartDeviceImageView.setImage(new javafx.scene.image.Image("/GUI/Images/light Icon.png"));
+            UpdateServer("lightStatus|true");
         }
 
-        UpdateServer();
     }
 
     public void ChangeColourButtonPressed(ActionEvent actionEvent) {
@@ -105,13 +106,12 @@ public class SmartLightMenuController extends AbstractController{
     public void BrightnessSliderReleased(MouseEvent mouseEvent) {
 
         brightnessLabel.setText((int) BrightnessSlider.getValue() + "%");
-        UpdateServer();
+        UpdateServer("brightness|" + (int) BrightnessSlider.getValue());
 
     }
 
-    private void UpdateServer(){
-        boolean tmp = StatusIndicatorLabel.getText().equals("On");
-        String message = 0 + "@" + deviceID + "@" + tmp + "|" + (int)BrightnessSlider.getValue() + "|" + 0x000000;
+    private void UpdateServer(String msg){
+        String message = 0 + "@" + deviceID + "@" + msg;
         try {
             super.client.sendToServer(message);
         }catch (Exception e){

@@ -71,7 +71,6 @@ public class SmartHome extends Application {
             s.request(1, lightDevicePaneController);
         }
 
-        //secondPaneController.link(l);
 
         primaryStage.setTitle("Smart Home");
         primaryStage.setScene(loginScene);
