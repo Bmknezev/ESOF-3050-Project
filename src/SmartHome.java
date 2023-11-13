@@ -70,9 +70,9 @@ public class SmartHome extends Application {
         lockDeviceScene.setUserData(lockDevicePaneController);
 
         //injecting the device selection scene into the controller of the thermostat device scene as the previous scene
-        SmartThermostatMenuController thermostatDevicePaneController = thermostatDevicePaneLoader.getController();
-        thermostatDevicePaneController.setPreviousScene(deviceSelectionScene);
-        thermostatDeviceScene.setUserData(thermostatDevicePaneController);
+        //SmartThermostatMenuController thermostatDevicePaneController = thermostatDevicePaneLoader.getController();
+        //thermostatDevicePaneController.setPreviousScene(deviceSelectionScene);
+        //thermostatDeviceScene.setUserData(thermostatDevicePaneController);
 
 
         //injecting server connection into the controller of the second scene
