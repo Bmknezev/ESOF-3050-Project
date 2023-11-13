@@ -5,6 +5,7 @@ import java.io.IOException;
 
 public class SmartHomeClient extends AbstractClient {
 private AbstractController tmp;
+private DeviceSelectionMenuController tmp2;
     /**
      * Constructs the client.
      *
@@ -18,13 +19,31 @@ private AbstractController tmp;
     @Override
     protected void handleMessageFromServer(Object msg) {
         System.out.println("Message received: " + msg.toString());
-        String[] s = msg.toString().split("@");
-        tmp.update(s);
+        String[] s1 = msg.toString().split("@");
+        if(s1[0].equals("1")){
+            String[] s = s1[1].split("~");
+            for (String string : s) {
+                tmp2.addNewDevice(string);
+            }
+        }else {
+            String[] s = s1[1].split("\\|");
+            tmp.update(s);
+        }
     }
 
     public void request(int i, AbstractController c) {
         tmp = c;
         String s = true + "@" + i;
+        try {
+            sendToServer(s);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void getDevices(DeviceSelectionMenuController deviceSelectionPaneController) {
+        tmp2 = deviceSelectionPaneController;
+        String s = true + "@" + -1;
         try {
             sendToServer(s);
         } catch (IOException e) {

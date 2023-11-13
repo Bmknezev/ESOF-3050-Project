@@ -22,11 +22,13 @@ public class DeviceSelectionMenuController {
 
     private Scene previous;
 
+    private Scene scene;
+
     public void setPreviousScene(Scene previousScene) {
         previous = previousScene;
     }
 
-    public void addNewDevice(Scene newDeviceScene, String newDevice) {
+    public void addNewDevice(String newDevice) {
         String[] s = newDevice.split("\\|");
             // this creates a new label for the device name
         Label deviceNameLabel = new Label();
@@ -43,10 +45,10 @@ public class DeviceSelectionMenuController {
 
             // this creates a new button that is linked to the new device
         Button manageDeviceButton = new Button("Manage Device");
-            // this sets the button to change thescene when pressed
+            // this sets the button to change the scene when pressed
         manageDeviceButton.setOnAction(event ->{
             Stage stage = (Stage) manageDeviceButton.getScene().getWindow();
-            stage.setScene(newDeviceScene);
+            stage.setScene(scene);
         });
 
             // this creates a new hbox to contain the new elements created
@@ -67,4 +69,7 @@ public class DeviceSelectionMenuController {
         stage.setScene(previous);
     }
 
+    public void addScene(Scene lightDeviceScene) {
+        scene = lightDeviceScene;
+    }
 }
