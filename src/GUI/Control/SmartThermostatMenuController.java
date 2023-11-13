@@ -49,10 +49,7 @@ public class SmartThermostatMenuController extends AbstractDeviceController {
     private int deviceID;
 
 
-    /**
-    * this is a method that sets the previous scene to the scene that was passed in
-    * @param previousScene this is the scene that the back button will take the user to
-    * */
+    // this is a method that sets the previous scene to the scene that was passed in
     public void setPreviousScene(Scene previousScene) {
         previous = previousScene;
     }
@@ -61,6 +58,7 @@ public class SmartThermostatMenuController extends AbstractDeviceController {
     public void backButtonPressed(ActionEvent actionEvent) {
         Stage stage = (Stage) backButton.getScene().getWindow();
         stage.setScene(previous);
+
     }
 
     @Override
