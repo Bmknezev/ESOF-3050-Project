@@ -1,6 +1,7 @@
 import ClientServer.SmartHomeClient;
 import GUI.Control.*;
 
+import GUI.Control.Abstract.AbstractDeviceController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -85,7 +86,7 @@ public class SmartHome extends Application {
         sceneList[0] = lightDeviceScene;
         sceneList[1] = lockDeviceScene;
 
-        AbstractController[] Controller = new AbstractController[5];
+        AbstractDeviceController[] Controller = new AbstractDeviceController[5];
         Controller[0] = lightDevicePaneController;
         Controller[1] = lockDevicePaneController;
 

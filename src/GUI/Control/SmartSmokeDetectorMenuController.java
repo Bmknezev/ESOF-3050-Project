@@ -1,13 +1,13 @@
 package GUI.Control;
 
-import GUI.Control.AbstractController;
+import GUI.Control.Abstract.AbstractDeviceController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 
-public class SmartSmokeDetectorMenuController extends AbstractController {
+public class SmartSmokeDetectorMenuController extends AbstractDeviceController {
 
     @FXML
     private Label BatteryStatusLabel;

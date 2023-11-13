@@ -1,5 +1,6 @@
 package GUI.Control;
 
+import GUI.Control.Abstract.AbstractDeviceController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -8,7 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
 
-public class SmartCoffeeMakerMenuController extends AbstractController{
+public class SmartCoffeeMakerMenuController extends AbstractDeviceController {
 
     @FXML
     private Button BrewCoffeeButton;

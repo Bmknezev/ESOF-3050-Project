@@ -1,13 +1,13 @@
 package ClientServer;
 
 
-import GUI.Control.AbstractController;
+import GUI.Control.Abstract.AbstractDeviceController;
 import GUI.Control.DeviceSelectionMenuController;
 
 import java.io.IOException;
 
 public class SmartHomeClient extends ClientServer.AbstractClient {
-private AbstractController tmp;
+private AbstractDeviceController tmp;
 private DeviceSelectionMenuController tmp2;
     /**
      * Constructs the client.
@@ -34,7 +34,7 @@ private DeviceSelectionMenuController tmp2;
         }
     }
 
-    public void request(int i, AbstractController c) {
+    public void request(int i, AbstractDeviceController c) {
         tmp = c;
         String s = true + "@" + i;
         try {

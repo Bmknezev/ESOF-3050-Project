@@ -1,5 +1,6 @@
 package GUI.Control;
 
+import GUI.Control.Abstract.AbstractDeviceController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -12,7 +13,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
-public class DeviceSelectionMenuController extends AbstractController{
+public class DeviceSelectionMenuController extends AbstractDeviceController {
 
     @FXML
     private Button backButton;
@@ -23,7 +24,7 @@ public class DeviceSelectionMenuController extends AbstractController{
     private Scene previous;
 
     private Scene[] sceneList = new Scene[5];
-    AbstractController[] Controller;
+    AbstractDeviceController[] Controller;
 
 
     public void setPreviousScene(Scene previousScene) {
@@ -82,7 +83,7 @@ public class DeviceSelectionMenuController extends AbstractController{
         stage.setScene(previous);
     }
 
-    public void addScene(Scene[] scenelist, AbstractController[] controller) {
+    public void addScene(Scene[] scenelist, AbstractDeviceController[] controller) {
         sceneList = scenelist;
         Controller = controller;
     }

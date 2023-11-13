@@ -1,5 +1,6 @@
 package GUI.Control;
 
+import GUI.Control.Abstract.AbstractDeviceController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -7,7 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
-public class SmartGarageDoorOpenerMenuController extends AbstractController{
+public class SmartGarageDoorOpenerMenuController extends AbstractDeviceController {
 
     @FXML
     private Button ChangePINButton;
