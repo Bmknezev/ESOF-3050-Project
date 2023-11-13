@@ -112,7 +112,6 @@ public class SmartLightMenuController extends AbstractDeviceController {
 
         brightnessLabel.setText((int) BrightnessSlider.getValue() + "%");
         UpdateServer("brightness|" + (int) BrightnessSlider.getValue());
-
     }
 
     private void UpdateServer(String msg){

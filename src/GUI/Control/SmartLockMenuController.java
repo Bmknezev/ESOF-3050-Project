@@ -118,6 +118,7 @@ public class SmartLockMenuController extends AbstractDeviceController {
 
     @FXML
     void backButtonPressed(ActionEvent event) {
-
+        Stage stage = (Stage) backButton.getScene().getWindow();
+        stage.setScene(previous);
     }
 }

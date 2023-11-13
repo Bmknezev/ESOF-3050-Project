@@ -1,6 +1,7 @@
 package GUI.Control;
 
 import GUI.Control.Abstract.AbstractDeviceController;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -38,6 +39,10 @@ public class SmartThermostatMenuController extends AbstractDeviceController {
 
     @Override
     public void update(String[] s) {
+        
+    }
 
+
+    public void backButtonPressed(ActionEvent actionEvent) {
     }
 }
