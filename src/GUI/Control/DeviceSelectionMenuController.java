@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -66,14 +67,20 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
         });
 
             // this creates a new hbox to contain the new elements created
-        HBox newDeviceHBox = new HBox();
+        HBox deviceControlHBox = new HBox();
             // these set the parameters of the hbox
-        newDeviceHBox.setSpacing(15);
-        newDeviceHBox.setAlignment(Pos.CENTER_LEFT);
+        deviceControlHBox.setSpacing(15);
+        deviceControlHBox.setAlignment(Pos.CENTER_RIGHT);
             // this adds the elements to the hbox
-        newDeviceHBox.getChildren().addAll(deviceNameLabel, deviceTypeLabel, manageDeviceButton);
+        deviceControlHBox.getChildren().addAll(deviceTypeLabel, manageDeviceButton);
             // this adds the hbox to the vbox
-        deviceVBox.getChildren().add(newDeviceHBox);
+
+        StackPane deviceStackPane = new StackPane();
+        deviceStackPane.setAlignment(Pos.CENTER_LEFT);
+
+        deviceStackPane.getChildren().addAll(deviceNameLabel, deviceControlHBox);
+
+        deviceVBox.getChildren().add(deviceStackPane);
     }
 
     @FXML
