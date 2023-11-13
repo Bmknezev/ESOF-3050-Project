@@ -63,16 +63,12 @@ public class SmartHome extends Application {
 
 
         //injecting server connection into the controller of the second scene
-        secondPaneController.addServer(s);
+        lightDevicePaneController.addServer(s);
 
         //create new light object
         //SmartLight l = new SmartLight("light 1", true, -1,true,0x000000,100,false );
         if (!guiTest){
-
-            //s.request(1, lightDevicePaneController);
-
-            s.request(1, secondPaneController);
-]
+            s.request(1, lightDevicePaneController);
         }
 
         //secondPaneController.link(l);

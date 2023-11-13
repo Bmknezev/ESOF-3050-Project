@@ -11,7 +11,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
-import smartDevice.SmartDevice;
 
 public class DeviceSelectionMenuController {
 
@@ -27,18 +26,20 @@ public class DeviceSelectionMenuController {
         previous = previousScene;
     }
 
-    public void addNewDevice(Scene newDeviceScene, SmartDevice newDevice) {
+    public void addNewDevice(Scene newDeviceScene, String newDevice) {
+        String[] s = newDevice.split("\\|");
             // this creates a new label for the device name
         Label deviceNameLabel = new Label();
             // these set the parameters of the label
-        deviceNameLabel.setText(newDevice.getName());
+        System.out.println(s[0]);
+        deviceNameLabel.setText(s[0]);
         deviceNameLabel.setWrapText(true);
         deviceNameLabel.setFont(Font.font("System", FontWeight.BOLD, 15));
 
             // this creates a new label that shows the type of the new device
         Label deviceTypeLabel = new Label();
             // these set the parameters of the label
-        deviceTypeLabel.setText(newDevice.getDeviceType());
+        deviceTypeLabel.setText(s[1]);
 
             // this creates a new button that is linked to the new device
         Button manageDeviceButton = new Button("Manage Device");

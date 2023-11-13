@@ -47,13 +47,11 @@ public class SmartLightMenuController extends AbstractController{
 
     private Scene previous;
         // this is just a default object to test the GUI
-    private SmartLight light = new SmartLight(true, 69, true, "Default Light Name", 0xFFFFFF, 69, true, 1);
-
-    public void setPreviousScene(Scene previousScene) {
-        previous = previousScene;
 
     private int deviceID;
 
+    public void setPreviousScene(Scene previousScene) {
+        previous = previousScene;
     }
 
     public void BackButtonPressed(ActionEvent actionEvent) {
@@ -73,7 +71,10 @@ public class SmartLightMenuController extends AbstractController{
     }
 
     @Override
-    public SmartDevice getSmartDevice() {return light; }
+    public String getSmartDevice() {
+        return SmartDeviceNameLabel.getText() + "|Smart Light";
+    }
+
 
     public void ToggleLightStatusButtonPressed(ActionEvent actionEvent) {
         if(Objects.equals(StatusIndicatorLabel.getText(), "On")){
