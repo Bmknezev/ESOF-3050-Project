@@ -78,10 +78,6 @@ public class SmartLightMenuController extends AbstractController{
 
     }
 
-    @Override
-    public String getSmartDevice() {
-        return SmartDeviceNameLabel.getText() + "|Smart Light";
-    }
 
 
     public void ToggleLightStatusButtonPressed(ActionEvent actionEvent) {

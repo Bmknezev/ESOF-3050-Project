@@ -23,7 +23,7 @@ public class DeviceSelectionMenuController extends AbstractController{
     private Scene previous;
 
     private Scene[] sceneList = new Scene[5];
-    SmartLightMenuController lightController;
+    AbstractController[] Controller;
 
 
     public void setPreviousScene(Scene previousScene) {
@@ -52,7 +52,11 @@ public class DeviceSelectionMenuController extends AbstractController{
             Stage stage = (Stage) manageDeviceButton.getScene().getWindow();
             switch (s[1]) {
                 case "Smart Light":
-                    client.request(Integer.parseInt(s[2]), lightController);
+                    client.request(Integer.parseInt(s[2]), Controller[0]);
+                    stage.setScene(sceneList[0]);
+                    break;
+                case "Smart Lock":
+                    client.request(Integer.parseInt(s[2]), Controller[1]);
                     stage.setScene(sceneList[1]);
                     break;
                 default:
@@ -78,9 +82,9 @@ public class DeviceSelectionMenuController extends AbstractController{
         stage.setScene(previous);
     }
 
-    public void addScene(Scene lightDeviceScene, SmartLightMenuController controller) {
-        sceneList[1] = lightDeviceScene;
-        lightController = controller;
+    public void addScene(Scene[] scenelist, AbstractController[] controller) {
+        sceneList = scenelist;
+        Controller = controller;
     }
 
     @Override
@@ -88,8 +92,4 @@ public class DeviceSelectionMenuController extends AbstractController{
 
     }
 
-    @Override
-    public String getSmartDevice() {
-        return null;
-    }
 }

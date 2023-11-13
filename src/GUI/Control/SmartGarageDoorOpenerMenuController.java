@@ -40,8 +40,5 @@ public class SmartGarageDoorOpenerMenuController extends AbstractController{
 
     }
 
-    @Override
-    public String getSmartDevice() {
-        return SmartDeviceNameLabel.getText() + "|Smart Garage Door Opener";
-    }
+
 }

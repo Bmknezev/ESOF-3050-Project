@@ -1,10 +1,5 @@
-import GUI.Control.LoginMenuController;
+import GUI.Control.*;
 
-import GUI.Control.DeviceSelectionMenuController;
-
-import GUI.Control.SmartHomeClient;
-
-import GUI.Control.SmartLightMenuController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -47,6 +42,14 @@ public class SmartHome extends Application {
         Parent lightDevicePane = lightDevicePaneLoader.load();
         Scene lightDeviceScene = new Scene(lightDevicePane, 600, 575);
 
+        FXMLLoader lockDevicePaneLoader = new FXMLLoader(getClass().getResource("/GUI/FXML/SmartLockMenu.fxml"));
+        Parent lockDevicePane = lockDevicePaneLoader.load();
+        Scene lockDeviceScene = new Scene(lockDevicePane, 600, 575);
+
+        FXMLLoader thermostatDevicePaneLoader = new FXMLLoader(getClass().getResource("/GUI/FXML/SmartThermostatMenu.fxml"));
+        Parent thermostatDevicePane = thermostatDevicePaneLoader.load();
+        Scene thermostatDeviceScene = new Scene(thermostatDevicePane, 600, 575);
+
         // injecting device selection scene into the controller of the login scene as the next scene
         LoginMenuController loginPaneController = loginPaneLoader.getController();
         loginPaneController.setNextScene(deviceSelectionScene);
@@ -61,21 +64,36 @@ public class SmartHome extends Application {
         deviceSelectionPaneController.setPreviousScene(loginScene);
         //deviceSelectionPaneController.addNewDevice(lightDeviceScene, lightDevicePaneController.getSmartDevice());
 
+        //injecting the device selection scene into the controller of the lock device scene as the previous scene
+        SmartLockMenuController lockDevicePaneController = lockDevicePaneLoader.getController();
+        lockDevicePaneController.setPreviousScene(deviceSelectionScene);
+        lockDeviceScene.setUserData(lockDevicePaneController);
+
+        //injecting the device selection scene into the controller of the thermostat device scene as the previous scene
+        SmartThermostatMenuController thermostatDevicePaneController = thermostatDevicePaneLoader.getController();
+        thermostatDevicePaneController.setPreviousScene(deviceSelectionScene);
+        thermostatDeviceScene.setUserData(thermostatDevicePaneController);
 
 
         //injecting server connection into the controller of the second scene
         lightDevicePaneController.addServer(s);
+        lockDevicePaneController.addServer(s);
         deviceSelectionPaneController.addServer(s);
-        deviceSelectionPaneController.addScene(lightDeviceScene, lightDevicePaneController);
 
-        //create new light object
-        //SmartLight l = new SmartLight("light 1", true, -1,true,0x000000,100,false );
+        Scene[] sceneList = new Scene[5];
+        sceneList[0] = lightDeviceScene;
+        sceneList[1] = lockDeviceScene;
+
+        AbstractController[] Controller = new AbstractController[5];
+        Controller[0] = lightDevicePaneController;
+        Controller[1] = lockDevicePaneController;
+
+        deviceSelectionPaneController.addScene(sceneList, Controller);
+
+
         if (!guiTest){
             s.getDevices(deviceSelectionPaneController);
-            s.request(1, lightDevicePaneController);
-
         }
-//
 
         primaryStage.setTitle("Smart Home");
         primaryStage.setScene(loginScene);

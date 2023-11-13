@@ -1,10 +1,13 @@
 package GUI.Control;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 public class SmartThermostatMenuController extends AbstractController{
 
@@ -32,13 +35,25 @@ public class SmartThermostatMenuController extends AbstractController{
     @FXML
     private Label TemperatureStatusLabel;
 
+    private Scene previous;
+    // this is just a default object to test the GUI
+
+    private int deviceID;
+
+
+    public void setPreviousScene(Scene previousScene) {
+        previous = previousScene;
+    }
+
+    public void BackButtonPressed(ActionEvent actionEvent) {
+        //Stage stage = (Stage) backButton.getScene().getWindow();
+        //stage.setScene(previous);
+
+    }
+
     @Override
     public void update(String[] s) {
 
     }
 
-    @Override
-    public String getSmartDevice() {
-        return SmartDeviceNameLabel.getText() + "|Smart Thermostat";
-    }
 }
