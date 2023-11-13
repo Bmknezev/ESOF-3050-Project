@@ -12,7 +12,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
-public class DeviceSelectionMenuController {
+public class DeviceSelectionMenuController extends AbstractController{
 
     @FXML
     private Button backButton;
@@ -22,7 +22,9 @@ public class DeviceSelectionMenuController {
 
     private Scene previous;
 
-    private Scene scene;
+    private Scene[] sceneList = new Scene[5];
+    SmartLightMenuController lightController;
+
 
     public void setPreviousScene(Scene previousScene) {
         previous = previousScene;
@@ -48,7 +50,14 @@ public class DeviceSelectionMenuController {
             // this sets the button to change the scene when pressed
         manageDeviceButton.setOnAction(event ->{
             Stage stage = (Stage) manageDeviceButton.getScene().getWindow();
-            stage.setScene(scene);
+            switch (s[1]) {
+                case "Smart Light":
+                    client.request(Integer.parseInt(s[2]), lightController);
+                    stage.setScene(sceneList[1]);
+                    break;
+                default:
+                    break;
+            }
         });
 
             // this creates a new hbox to contain the new elements created
@@ -69,7 +78,18 @@ public class DeviceSelectionMenuController {
         stage.setScene(previous);
     }
 
-    public void addScene(Scene lightDeviceScene) {
-        scene = lightDeviceScene;
+    public void addScene(Scene lightDeviceScene, SmartLightMenuController controller) {
+        sceneList[1] = lightDeviceScene;
+        lightController = controller;
+    }
+
+    @Override
+    public void update(String[] s) {
+
+    }
+
+    @Override
+    public String getSmartDevice() {
+        return null;
     }
 }

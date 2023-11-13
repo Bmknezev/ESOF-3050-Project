@@ -54,6 +54,7 @@ public class SmartHome extends Application {
         // injecting the device selection scene into the controller of the light device scene as the previous scene
         SmartLightMenuController lightDevicePaneController = lightDevicePaneLoader.getController();
         lightDevicePaneController.setPreviousScene(deviceSelectionScene);
+        lightDeviceScene.setUserData(lightDevicePaneController);
 
         // injecting the login scene into the controller of the device selection scene as the previous scene
         DeviceSelectionMenuController deviceSelectionPaneController = deviceSelectionPaneLoader.getController();
@@ -64,7 +65,8 @@ public class SmartHome extends Application {
 
         //injecting server connection into the controller of the second scene
         lightDevicePaneController.addServer(s);
-        deviceSelectionPaneController.addScene(lightDeviceScene);
+        deviceSelectionPaneController.addServer(s);
+        deviceSelectionPaneController.addScene(lightDeviceScene, lightDevicePaneController);
 
         //create new light object
         //SmartLight l = new SmartLight("light 1", true, -1,true,0x000000,100,false );

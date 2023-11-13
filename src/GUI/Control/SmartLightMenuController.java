@@ -1,5 +1,6 @@
 package GUI.Control;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -50,6 +51,7 @@ public class SmartLightMenuController extends AbstractController{
 
     private int deviceID;
 
+
     public void setPreviousScene(Scene previousScene) {
         previous = previousScene;
     }
@@ -62,12 +64,18 @@ public class SmartLightMenuController extends AbstractController{
 
     @Override
     public void update(String[] s) {
-        deviceID = Integer.parseInt(s[0]);
-        SmartDeviceNameLabel.setText(s[1]);
-        SmartDeviceImageView.setImage(Boolean.parseBoolean(s[2]) ? new javafx.scene.image.Image("/GUI/Images/light Icon.png") : new javafx.scene.image.Image("/GUI/Images/light_Icon_off.png"));
-        StatusIndicatorLabel.setText(Boolean.parseBoolean(s[2]) ? "On" : "Off");
-        brightnessLabel.setText(s[3] + "%");
-        BrightnessSlider.setValue(Integer.parseInt(s[3]));
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                deviceID = Integer.parseInt(s[0]);
+                SmartDeviceNameLabel.setText(s[1]);
+                SmartDeviceImageView.setImage(Boolean.parseBoolean(s[2]) ? new javafx.scene.image.Image("/GUI/Images/light Icon.png") : new javafx.scene.image.Image("/GUI/Images/light_Icon_off.png"));
+                StatusIndicatorLabel.setText(Boolean.parseBoolean(s[2]) ? "On" : "Off");
+                brightnessLabel.setText(s[3] + "%");
+                BrightnessSlider.setValue(Integer.parseInt(s[3]));
+            }
+        });
+
     }
 
     @Override
