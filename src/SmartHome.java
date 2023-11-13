@@ -23,7 +23,6 @@ public class SmartHome extends Application {
                 throw new RuntimeException(e);
             }
         }
-
         launch(args);
     }
 
@@ -72,24 +71,32 @@ public class SmartHome extends Application {
         lockDeviceScene.setUserData(lockDevicePaneController);
 
         //injecting the device selection scene into the controller of the thermostat device scene as the previous scene
-        //SmartThermostatMenuController thermostatDevicePaneController = thermostatDevicePaneLoader.getController();
-        //thermostatDevicePaneController.setPreviousScene(deviceSelectionScene);
-        //thermostatDeviceScene.setUserData(thermostatDevicePaneController);
+        SmartThermostatMenuController thermostatDevicePaneController = thermostatDevicePaneLoader.getController();
+        thermostatDevicePaneController.setPreviousScene(deviceSelectionScene);
+        thermostatDeviceScene.setUserData(thermostatDevicePaneController);
+
+
 
 
         //injecting server connection into the controller of the second scene
         lightDevicePaneController.addServer(s);
         lockDevicePaneController.addServer(s);
+        thermostatDevicePaneController.addServer(s);
         deviceSelectionPaneController.addServer(s);
 
+        //making list of device scenes to enable switching scenes
         Scene[] sceneList = new Scene[5];
         sceneList[0] = lightDeviceScene;
         sceneList[1] = lockDeviceScene;
+        sceneList[2] = thermostatDeviceScene;
 
+        //making list of device controllers to change values
         AbstractDeviceController[] Controller = new AbstractDeviceController[5];
         Controller[0] = lightDevicePaneController;
         Controller[1] = lockDevicePaneController;
+        Controller[2] = thermostatDevicePaneController;
 
+        //adding both lists to device selection menu controller
         deviceSelectionPaneController.addScene(sceneList, Controller);
 
 
