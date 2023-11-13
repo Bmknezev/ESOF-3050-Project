@@ -9,7 +9,9 @@ import javafx.scene.control.Slider;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+
 import java.util.Objects;
+
 
 public class SmartLightMenuController extends AbstractController{
 
@@ -43,16 +45,20 @@ public class SmartLightMenuController extends AbstractController{
     @FXML
     private Label brightnessLabel;
 
-    private Scene first;
+    private Scene previous;
+        // this is just a default object to test the GUI
+    private SmartLight light = new SmartLight(true, 69, true, "Default Light Name", 0xFFFFFF, 69, true, 1);
+
+    public void setPreviousScene(Scene previousScene) {
+        previous = previousScene;
+
     private int deviceID;
 
-    public void setFirstScene(Scene firstScene) {
-        first = firstScene;
     }
 
     public void BackButtonPressed(ActionEvent actionEvent) {
         Stage stage = (Stage) backButton.getScene().getWindow();
-        stage.setScene(first);
+        stage.setScene(previous);
 
     }
 
@@ -65,6 +71,9 @@ public class SmartLightMenuController extends AbstractController{
         brightnessLabel.setText(s[3] + "%");
         BrightnessSlider.setValue(Integer.parseInt(s[3]));
     }
+
+    @Override
+    public SmartDevice getSmartDevice() {return light; }
 
     public void ToggleLightStatusButtonPressed(ActionEvent actionEvent) {
         if(Objects.equals(StatusIndicatorLabel.getText(), "On")){
@@ -93,8 +102,10 @@ public class SmartLightMenuController extends AbstractController{
 
 
     public void BrightnessSliderReleased(MouseEvent mouseEvent) {
+
         brightnessLabel.setText((int) BrightnessSlider.getValue() + "%");
         UpdateServer();
+
     }
 
     private void UpdateServer(){

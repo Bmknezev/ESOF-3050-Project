@@ -8,11 +8,14 @@ public abstract class SmartDevice implements Serializable {
 
     private boolean status; //device ready to use
 
+    private String name; //name of device
 
-    public SmartDevice(boolean connectionStatus, int battery, boolean status){
+
+    public SmartDevice(boolean connectionStatus, int battery, boolean status, String name){
         this.connectionStatus = connectionStatus;
         this.battery = battery;
         this.status = status;
+        this.name = name;
     }
 
     public void setConnectionStatus(boolean connectionStatus){
@@ -27,6 +30,8 @@ public abstract class SmartDevice implements Serializable {
         this.status = status;
     }
 
+    public void setName(String name) {this.name = name; }
+
     public boolean getConnectionStatus(){
         return connectionStatus;
     }
@@ -38,6 +43,10 @@ public abstract class SmartDevice implements Serializable {
     public boolean getStatus(){
         return status;
     }
+
+    public String getName() {return name; }
+
+    public abstract String getDeviceType();
 
 
 }
