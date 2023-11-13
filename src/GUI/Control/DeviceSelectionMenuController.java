@@ -11,9 +11,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
-import smartDevice.SmartDevice;
 
-public class DeviceSelectionMenuController {
+public class DeviceSelectionMenuController extends AbstractController{
 
     @FXML
     private Button backButton;
@@ -23,29 +22,42 @@ public class DeviceSelectionMenuController {
 
     private Scene previous;
 
+    private Scene[] sceneList = new Scene[5];
+    SmartLightMenuController lightController;
+
+
     public void setPreviousScene(Scene previousScene) {
         previous = previousScene;
     }
 
-    public void addNewDevice(Scene newDeviceScene, SmartDevice newDevice) {
+    public void addNewDevice(String newDevice) {
+        String[] s = newDevice.split("\\|");
             // this creates a new label for the device name
         Label deviceNameLabel = new Label();
             // these set the parameters of the label
-        deviceNameLabel.setText(newDevice.getName());
+        System.out.println(s[0]);
+        deviceNameLabel.setText(s[0]);
         deviceNameLabel.setWrapText(true);
         deviceNameLabel.setFont(Font.font("System", FontWeight.BOLD, 15));
 
             // this creates a new label that shows the type of the new device
         Label deviceTypeLabel = new Label();
             // these set the parameters of the label
-        deviceTypeLabel.setText(newDevice.getDeviceType());
+        deviceTypeLabel.setText(s[1]);
 
             // this creates a new button that is linked to the new device
         Button manageDeviceButton = new Button("Manage Device");
-            // this sets the button to change thescene when pressed
+            // this sets the button to change the scene when pressed
         manageDeviceButton.setOnAction(event ->{
             Stage stage = (Stage) manageDeviceButton.getScene().getWindow();
-            stage.setScene(newDeviceScene);
+            switch (s[1]) {
+                case "Smart Light":
+                    client.request(Integer.parseInt(s[2]), lightController);
+                    stage.setScene(sceneList[1]);
+                    break;
+                default:
+                    break;
+            }
         });
 
             // this creates a new hbox to contain the new elements created
@@ -66,4 +78,18 @@ public class DeviceSelectionMenuController {
         stage.setScene(previous);
     }
 
+    public void addScene(Scene lightDeviceScene, SmartLightMenuController controller) {
+        sceneList[1] = lightDeviceScene;
+        lightController = controller;
+    }
+
+    @Override
+    public void update(String[] s) {
+
+    }
+
+    @Override
+    public String getSmartDevice() {
+        return null;
+    }
 }

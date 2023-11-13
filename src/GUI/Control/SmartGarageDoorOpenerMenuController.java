@@ -6,7 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
-public class SmartGarageDoorOpenerMenuController {
+public class SmartGarageDoorOpenerMenuController extends AbstractController{
 
     @FXML
     private Button ChangePINButton;
@@ -35,4 +35,13 @@ public class SmartGarageDoorOpenerMenuController {
     @FXML
     private Button ToggleGarageDoorStatusButton;
 
+    @Override
+    public void update(String[] s) {
+
+    }
+
+    @Override
+    public String getSmartDevice() {
+        return SmartDeviceNameLabel.getText() + "|Smart Garage Door Opener";
+    }
 }

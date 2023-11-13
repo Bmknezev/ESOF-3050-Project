@@ -7,7 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
 
-public class SmartCoffeeMakerMenuController {
+public class SmartCoffeeMakerMenuController extends AbstractController{
 
     @FXML
     private Button BrewCoffeeButton;
@@ -39,5 +39,15 @@ public class SmartCoffeeMakerMenuController {
     private Scene first;
     public void setFirstScene(Scene firstScene) {
         first = firstScene;
+    }
+
+    @Override
+    public void update(String[] s) {
+
+    }
+
+    @Override
+    public String getSmartDevice() {
+        return SmartDeviceNameLabel.getText() + "|Smart Coffee Machine";
     }
 }
