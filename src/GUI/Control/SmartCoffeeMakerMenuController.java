@@ -46,8 +46,4 @@ public class SmartCoffeeMakerMenuController extends AbstractController{
 
     }
 
-    @Override
-    public String getSmartDevice() {
-        return SmartDeviceNameLabel.getText() + "|Smart Coffee Machine";
-    }
 }

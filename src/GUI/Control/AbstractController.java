@@ -9,5 +9,4 @@ public abstract class AbstractController {
         client = s;
     }
 
-    public abstract String getSmartDevice();
 }
