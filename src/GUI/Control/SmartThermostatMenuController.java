@@ -36,9 +36,4 @@ public class SmartThermostatMenuController extends AbstractController{
     public void update(String[] s) {
 
     }
-
-    @Override
-    public String getSmartDevice() {
-        return SmartDeviceNameLabel.getText() + "|Smart Thermostat";
-    }
 }
