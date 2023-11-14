@@ -63,9 +63,23 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
                     client.request(Integer.parseInt(s[2]), Controller[1]);
                     stage.setScene(sceneList[1]);
                     break;
-                    case "Smart Thermostat":
+                case "Smart Thermostat":
                     client.request(Integer.parseInt(s[2]), Controller[2]);
                     stage.setScene(sceneList[2]);
+                    break;
+                case "Smart Coffee Machine":
+                    client.request(Integer.parseInt(s[2]), Controller[3]);
+                    stage.setScene(sceneList[3]);
+                    break;
+                case "Smart Garage Door":
+                    client.request(Integer.parseInt(s[2]), Controller[4]);
+                    stage.setScene(sceneList[4]);
+                    break;
+                case "Smart Smoke Detector":
+                    client.request(Integer.parseInt(s[2]), Controller[5]);
+                    stage.setScene(sceneList[5]);
+                    break;
+
                 default:
                     break;
             }

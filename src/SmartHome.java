@@ -53,6 +53,22 @@ public class SmartHome extends Application {
         Parent thermostatDevicePane = thermostatDevicePaneLoader.load();
         Scene thermostatDeviceScene = new Scene(thermostatDevicePane, 600, 575);
 
+        //getting loader and a pane for the coffee machine device scene
+        FXMLLoader coffeeMakerDevicePaneLoader = new FXMLLoader(getClass().getResource("/GUI/FXML/SmartCoffeeMakerMenu.fxml"));
+        Parent coffeeMakerDevicePane = coffeeMakerDevicePaneLoader.load();
+        Scene coffeeMakerDeviceScene = new Scene(coffeeMakerDevicePane, 600, 575);
+
+        //getting loader and a pane for the garage door device scene
+        FXMLLoader garageDoorOpenerDevicePaneLoader = new FXMLLoader(getClass().getResource("/GUI/FXML/SmartGarageDoorOpenerMenu.fxml"));
+        Parent garageDoorOpenerDevicePane = garageDoorOpenerDevicePaneLoader.load();
+        Scene garageDoorOpenerDeviceScene = new Scene(garageDoorOpenerDevicePane, 600, 575);
+
+        //getting loader and a pane for the smoke detector device scene
+        FXMLLoader smokeDetectorDevicePaneLoader = new FXMLLoader(getClass().getResource("/GUI/FXML/SmartSmokeDetectorMenu.fxml"));
+        Parent smokeDetectorDevicePane = smokeDetectorDevicePaneLoader.load();
+        Scene smokeDetectorDeviceScene = new Scene(smokeDetectorDevicePane, 600, 575);
+
+
         // injecting device selection scene into the controller of the login scene as the next scene
         LoginMenuController loginPaneController = loginPaneLoader.getController();
         loginPaneController.setNextScene(deviceSelectionScene);
@@ -77,6 +93,24 @@ public class SmartHome extends Application {
         thermostatDevicePaneController.setPreviousScene(deviceSelectionScene);
         thermostatDeviceScene.setUserData(thermostatDevicePaneController);
 
+        //injecting the device selection scene into the controller of the coffee machine device scene as the previous scene
+        SmartCoffeeMakerMenuController coffeeMakerDevicePaneController = coffeeMakerDevicePaneLoader.getController();
+        coffeeMakerDevicePaneController.setPreviousScene(deviceSelectionScene);
+        coffeeMakerDeviceScene.setUserData(coffeeMakerDevicePaneController);
+
+        //injecting the device selection scene into the controller of the garage door device scene as the previous scene
+        SmartGarageDoorOpenerMenuController garageDoorOpenerDevicePaneController = garageDoorOpenerDevicePaneLoader.getController();
+        garageDoorOpenerDevicePaneController.setPreviousScene(deviceSelectionScene);
+        garageDoorOpenerDeviceScene.setUserData(garageDoorOpenerDevicePaneController);
+
+        //injecting the device selection scene into the controller of the smoke detector device scene as the previous scene
+        SmartSmokeDetectorMenuController smokeDetectorDevicePaneController = smokeDetectorDevicePaneLoader.getController();
+        smokeDetectorDevicePaneController.setPreviousScene(deviceSelectionScene);
+        smokeDetectorDeviceScene.setUserData(smokeDetectorDevicePaneController);
+
+
+
+
 
 
 
@@ -87,16 +121,23 @@ public class SmartHome extends Application {
         deviceSelectionPaneController.addServer(s);
 
         //making list of device scenes to enable switching scenes
-        Scene[] sceneList = new Scene[5];
+        Scene[] sceneList = new Scene[6];
         sceneList[0] = lightDeviceScene;
         sceneList[1] = lockDeviceScene;
         sceneList[2] = thermostatDeviceScene;
+        sceneList[3] = coffeeMakerDeviceScene;
+        sceneList[4] = garageDoorOpenerDeviceScene;
+        sceneList[5] = smokeDetectorDeviceScene;
+
 
         //making list of device controllers to change values
-        AbstractDeviceController[] Controller = new AbstractDeviceController[5];
+        AbstractDeviceController[] Controller = new AbstractDeviceController[6];
         Controller[0] = lightDevicePaneController;
         Controller[1] = lockDevicePaneController;
         Controller[2] = thermostatDevicePaneController;
+        Controller[3] = coffeeMakerDevicePaneController;
+        Controller[4] = garageDoorOpenerDevicePaneController;
+        Controller[5] = smokeDetectorDevicePaneController;
 
         //adding both lists to device selection menu controller
         deviceSelectionPaneController.addScene(sceneList, Controller);
