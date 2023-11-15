@@ -12,7 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import messages.AbstractDeviceMessage;
-import messages.LightMessage;
+import messages.server.LightMessage;
 
 import java.util.Objects;
 
@@ -67,13 +67,14 @@ public class SmartLightMenuController extends AbstractDeviceController {
 
     @Override
     public void update(AbstractDeviceMessage msg) {
+        System.out.println("got details");
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
                 LightMessage message = (LightMessage) msg;
                 SmartDeviceNameLabel.setText(message.getName());
                 deviceID = message.getDeviceID();
-                if(message.getStatus()){
+                if(message.getLightStatus()){
                     StatusIndicatorLabel.setText("On");
                     SmartDeviceImageView.setImage(new javafx.scene.image.Image("/GUI/Images/light Icon.png"));
                 }
@@ -124,7 +125,7 @@ public class SmartLightMenuController extends AbstractDeviceController {
 
     private void UpdateServer(){
         boolean lightStatus = Objects.equals(StatusIndicatorLabel.getText(), "On");
-        LightMessage message = new LightMessage(true, deviceID, SmartDeviceNameLabel.getText(), true, 100, true, 0x000000, (int) BrightnessSlider.getValue(), lightStatus);
+        LightMessage message = new LightMessage(deviceID, SmartDeviceNameLabel.getText(), 0x000000, (int) BrightnessSlider.getValue(), lightStatus);
         client.UpdateServer(message);
     }
 

@@ -3,8 +3,9 @@ package messages;
 public class StartupMessage extends AbstractMessage{
     private int clientID;
 
-    public StartupMessage(boolean type, int clientID){
-        super(type, true);
+    public StartupMessage(int clientID){
+        //used by both server and client
+        super(3);
         this.clientID = clientID;
     }
 

@@ -11,7 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import messages.AbstractDeviceMessage;
-import messages.GarageDoorMessage;
+import messages.server.GarageDoorMessage;
 
 public class SmartGarageDoorOpenerMenuController extends AbstractDeviceController {
 
@@ -68,7 +68,7 @@ public class SmartGarageDoorOpenerMenuController extends AbstractDeviceControlle
             public void run() {
                 GarageDoorMessage message = (GarageDoorMessage) msg;
                 SmartDeviceNameLabel.setText(message.getName());
-                if (message.getStatus()) {
+                if (message.getDoorStatus()) {
                     StatusIndicatorLabel.setText("Open");
                 } else {
                     StatusIndicatorLabel.setText("Closed");
@@ -81,7 +81,7 @@ public class SmartGarageDoorOpenerMenuController extends AbstractDeviceControlle
     }
 
     private void UpdateServer(){
-        GarageDoorMessage msg = new GarageDoorMessage(true, deviceID, SmartDeviceNameLabel.getText(), true, 100, true, false, false, false, false, 0, 0 );
+        GarageDoorMessage msg = new GarageDoorMessage(deviceID, SmartDeviceNameLabel.getText(), false, 0);
         client.UpdateServer(msg);
     }
 }

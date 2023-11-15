@@ -9,7 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import messages.AbstractDeviceMessage;
-import messages.CoffeeMessage;
+import messages.server.CoffeeMessage;
 
 import static java.lang.Thread.sleep;
 
@@ -76,7 +76,7 @@ public class SmartCoffeeMakerMenuController extends AbstractDeviceController {
             public void run() {
                 CoffeeMessage message = (CoffeeMessage) msg;
                 SmartDeviceNameLabel.setText(message.getName());
-                StatusIndicatorLabel.setText(message.getStatus() ? "On" : "Off");
+                StatusIndicatorLabel.setText(message.getReadyToBrew() ? "Ready to Brew" : "Not Ready to Brew");
                 waterLevel.setProgress(message.getWaterLevel());
                 coffeeLevel.setProgress(message.getCoffeeLevel());
                 coffeeBeanLevel.setProgress(message.getCoffeeBeanLevel());
@@ -86,7 +86,7 @@ public class SmartCoffeeMakerMenuController extends AbstractDeviceController {
     }
 
     private void UpdateServer(){
-        CoffeeMessage msg = new CoffeeMessage(true, deviceID, SmartDeviceNameLabel.getText(), true, 100, true, true, 0.5, 0.5, 0, "0.5", true, false, 0.5);
+        CoffeeMessage msg = new CoffeeMessage(deviceID, SmartDeviceNameLabel.getText(), false, 0.5, 0.5, "Coffee", false, 0.5);
         client.UpdateServer(msg);
     }
 

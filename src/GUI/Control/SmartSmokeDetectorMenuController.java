@@ -10,7 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import messages.AbstractDeviceMessage;
-import messages.SmokeDetectorMessage;
+import messages.server.SmokeDetectorMessage;
 
 import java.util.Date;
 
@@ -67,15 +67,10 @@ public class SmartSmokeDetectorMenuController extends AbstractDeviceController {
                 SmokeDetectorMessage message = (SmokeDetectorMessage) msg;
                 SmartDeviceNameLabel.setText(message.getName());
                 deviceID = message.getDeviceID();
-                if (message.getStatus()) {
+                if (message.getAlarmStatus()) {
                     StatusIndicatorLabel.setText("Active");
                 } else {
                     StatusIndicatorLabel.setText("Inactive");
-                }
-                if (message.getConnectionStatus()) {
-                    BatteryStatusLabel.setText("Connected");
-                } else {
-                    BatteryStatusLabel.setText("Disconnected");
                 }
                 //PreviousTestDateLabel.setText(message.getPreviousTestDate());
 
@@ -86,8 +81,6 @@ public class SmartSmokeDetectorMenuController extends AbstractDeviceController {
     }
 
     private void UpdateServer(){
-        Date date = new Date();
-        SmokeDetectorMessage message = new SmokeDetectorMessage(true, deviceID, SmartDeviceNameLabel.getText(), true, 100, true, date, true, true, false);
-        client.UpdateServer(message);
+
     }
 }

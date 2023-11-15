@@ -1,13 +1,15 @@
-package messages;
+package messages.server;
 
-public class LightMessage extends AbstractDeviceMessage{
+import messages.AbstractDeviceMessage;
+
+public class LightMessage extends AbstractDeviceMessage {
 
     private int colour;
     private int brightness;
     private boolean lightStatus;
 
-    public LightMessage(boolean type, int id, String name, boolean connectionStatus, int battery, boolean status, int colour, int brightness, boolean lightStatus){
-        super(type, id, name, connectionStatus, battery, status);
+    public LightMessage(int id, String name,int colour, int brightness, boolean lightStatus){
+        super(name, id);
         this.colour = colour;
         this.brightness = brightness;
         this.lightStatus = lightStatus;

@@ -4,7 +4,7 @@ package ClientServer;
 import GUI.Control.Abstract.AbstractDeviceController;
 import GUI.Control.DeviceSelectionMenuController;
 import messages.AbstractDeviceMessage;
-//import messages.DeviceRequestMessage;
+import messages.AbstractMessage;
 import messages.NewDeviceMessage;
 import messages.StartupMessage;
 
@@ -27,44 +27,51 @@ private int clientID = -1;
     @Override
     protected void handleMessageFromServer(Object msg) {
         System.out.println("Message received: " + msg.toString());
-        if (clientID == -1) {
-            clientID = ((StartupMessage) msg).getClientID();
-        }else if(((AbstractDeviceMessage)msg).getStartup()){
-            tmp2.addNewDevice((NewDeviceMessage) msg);
-        }
-        else{
-            ((AbstractDeviceController)tmp).update((AbstractDeviceMessage) msg);
+
+           //check message type
+        switch (((AbstractMessage)msg).getType()){
+            case 1:
+                System.out.println("Device details received.");
+                //device details received
+                tmp.update((AbstractDeviceMessage)msg);
+                break;
+            case 2:
+                //new device received
+                tmp2.addNewDevice((NewDeviceMessage)msg);
+                break;
+            case 3:
+                //client id received
+                clientID = ((StartupMessage)msg).getClientID();
+                break;
+            default:
+                System.out.println("Unknown message type received.");
+                break;
         }
     }
 
     public void request(int i, AbstractDeviceController c) {
         //request a device from server with device id i
         tmp = c;
-        //try {
-            //DeviceRequestMessage msg = new DeviceRequestMessage(i, clientID);
-            //sendToServer(msg);
-        //} catch (IOException e) {
-        //    throw new RuntimeException(e);
-        //}
+        NewDeviceMessage msg = new NewDeviceMessage(i);
+        Send(msg);
     }
 
     public void getDevices(DeviceSelectionMenuController deviceSelectionPaneController) {
         tmp2 = deviceSelectionPaneController;
-        StartupMessage msg = new StartupMessage(true, -1);
-        try {
-            sendToServer(msg);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        StartupMessage msg = new StartupMessage( -1);
+        Send(msg);
     }
 
     public void UpdateServer(AbstractDeviceMessage msg){
-        String message = clientID + "?" + msg;
-        System.out.println(message);
+        Send(msg);
+    }
+
+    private void Send(Object msg){
         try {
-            sendToServer(message);
+            sendToServer(msg);
         }catch (Exception e){
             throw new RuntimeException(e);
         }
     }
+
 }

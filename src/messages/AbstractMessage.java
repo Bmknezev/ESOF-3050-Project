@@ -1,28 +1,14 @@
 package messages;
 
 public abstract class AbstractMessage implements java.io.Serializable{
-    private boolean request; //true for request, false for response
-    private boolean startup = false; //true for startup, false for normal operation
+   private int type; //1 for requesting device details, 2 for receiving device details, 3 for new client message
 
 
-    public AbstractMessage(boolean type) {
-        this.request = type;
+    public AbstractMessage(int type) {
+        this.type = type;
     }
 
-    public AbstractMessage(boolean type, boolean startup) {
-        this.request = type;
-        this.startup = startup;
-    }
-
-    public boolean getMessageType() {
-        return request;
-    }
-
-    public boolean getStartup(){
-        return startup;
-    }
-
-    public void setStartup(boolean startup){
-        this.startup = startup;
+    public int getType(){
+        return type;
     }
 }

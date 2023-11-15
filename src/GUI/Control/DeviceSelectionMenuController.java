@@ -38,7 +38,6 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
             // this creates a new label for the device name
         Label deviceNameLabel = new Label();
             // these set the parameters of the label
-        System.out.println(newDevice.getDeviceName());
         deviceNameLabel.setText(newDevice.getDeviceName());
         deviceNameLabel.setWrapText(true);
         deviceNameLabel.setFont(Font.font("System", FontWeight.BOLD, 15));
@@ -80,6 +79,7 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
                     stage.setScene(sceneList[5]);
                     break;
                 default:
+                    System.out.println("Error: Device type not found");
                     break;
             }
         });

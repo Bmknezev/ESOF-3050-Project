@@ -11,7 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import messages.AbstractDeviceMessage;
-import messages.LockMessage;
+import messages.server.LockMessage;
 
 public class SmartLockMenuController extends AbstractDeviceController {
 
@@ -118,7 +118,7 @@ public class SmartLockMenuController extends AbstractDeviceController {
     }
 
     private void UpdateServer(){
-        LockMessage message = new LockMessage(true, deviceID, SmartDeviceNameLabel.getText(), true, 100, true, !StatusIndicatorLabel.getText().equals("Locked"), 1234, 0);
+        LockMessage message = new LockMessage(deviceID,SmartDeviceNameLabel.getText(), StatusIndicatorLabel.getText().equals("Locked"), 0, 0);
         client.UpdateServer(message);
     }
 

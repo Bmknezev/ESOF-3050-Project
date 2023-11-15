@@ -11,7 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import messages.AbstractDeviceMessage;
-import messages.ThermostatMessage;
+import messages.server.ThermostatMessage;
 
 public class SmartThermostatMenuController extends AbstractDeviceController {
 
@@ -87,7 +87,7 @@ public class SmartThermostatMenuController extends AbstractDeviceController {
 
     //send new values to server
     private void UpdateServer(){
-        ThermostatMessage message = new ThermostatMessage(true, deviceID, SmartDeviceNameLabel.getText(), true, 100, true, 20, 20, true, true,true );
+        ThermostatMessage message = new ThermostatMessage(deviceID, SmartDeviceNameLabel.getText(), Float.parseFloat(SetpointStatusLabel.getText()), true, false);
         client.UpdateServer(message);
     }
 
@@ -95,6 +95,5 @@ public class SmartThermostatMenuController extends AbstractDeviceController {
     public void ChangeTempButtonPressed(ActionEvent actionEvent) {
         SetpointStatusLabel.setText(ChangeTempTextField.getText());
         UpdateServer();
-        super.client.request(deviceID, this);
     }
 }

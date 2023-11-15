@@ -1,14 +1,16 @@
-package messages;
+package messages.server;
 
-public class LockMessage extends AbstractDeviceMessage{
+import messages.AbstractDeviceMessage;
+
+public class LockMessage extends AbstractDeviceMessage {
 
         private boolean lockStatus;
         private int password;
         private int timer;
 
 
-        public LockMessage(boolean type, int id, String name, boolean connectionStatus, int battery, boolean status, boolean lockStatus, int password, int timer){
-            super(type, id, name, connectionStatus, battery, status);
+        public LockMessage(int id, String name, boolean lockStatus, int password, int timer){
+            super(name, id);
             this.lockStatus = lockStatus;
             this.password = password;
             this.timer = timer;
