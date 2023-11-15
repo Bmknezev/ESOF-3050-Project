@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Control.SmartSmokeDetectorMenuController">
    <top>
       <VBox alignment="BOTTOM_CENTER" BorderPane.alignment="CENTER">
          <children>
@@ -55,6 +55,7 @@
             <Button fx:id="TestAlarmButton" mnemonicParsing="false" prefWidth="170.0" text="Test Alarm" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
             <Button fx:id="CreateAutomationButton" mnemonicParsing="false" prefWidth="170.0" text="Create Auto Test Schedule" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
             <Button fx:id="EditAutomationsButton" mnemonicParsing="false" prefWidth="170.0" text="Edit Auto Test Schedules" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+            <Button fx:id="backButton" cancelButton="true" mnemonicParsing="false" onAction="#backButtonPressed" text="Back" GridPane.rowIndex="2" />
          </children>
       </GridPane>
    </bottom>

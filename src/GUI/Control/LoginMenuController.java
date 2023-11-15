@@ -18,19 +18,19 @@ public class LoginMenuController {
     @FXML
     private TextField passwordTextField;
 
-    private Scene second;
+    private Scene next;
 
     public void LoginButtonPressed(ActionEvent actionEvent) {
-        openSecondScene();
+        openNextScene();
     }
 
-    public void setSecondScene(Scene secondScene) {
-        second = secondScene;
+    public void setNextScene(Scene nextScene) {
+        next = nextScene;
     }
 
-    public void openSecondScene(){
+    public void openNextScene(){
         Stage stage = (Stage) enterButton.getScene().getWindow();
-        stage.setScene(second);
+        stage.setScene(next);
     }
 
 }

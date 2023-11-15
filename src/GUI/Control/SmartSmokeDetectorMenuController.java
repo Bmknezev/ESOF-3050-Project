@@ -7,14 +7,13 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
-public class SmartGarageDoorOpenerMenuController extends AbstractDeviceController {
+public class SmartSmokeDetectorMenuController extends AbstractDeviceController {
 
     @FXML
-    private Button ChangePINButton;
+    private Label BatteryStatusLabel;
 
     @FXML
     private Button CreateAutomationButton;
@@ -23,7 +22,7 @@ public class SmartGarageDoorOpenerMenuController extends AbstractDeviceControlle
     private Button EditAutomationsButton;
 
     @FXML
-    private Button backButton;
+    private Label PreviousTestDateLabel;
 
     @FXML
     private ImageView SmartDeviceImageView;
@@ -35,13 +34,10 @@ public class SmartGarageDoorOpenerMenuController extends AbstractDeviceControlle
     private Label StatusIndicatorLabel;
 
     @FXML
-    private Button TempOpenButton;
+    private Button TestAlarmButton;
 
     @FXML
-    private TextField TempOpenTextField;
-
-    @FXML
-    private Button ToggleGarageDoorStatusButton;
+    private Button backButton;
 
     private Scene previous;
     // this is just a default object to test the GUI
@@ -66,8 +62,13 @@ public class SmartGarageDoorOpenerMenuController extends AbstractDeviceControlle
             public void run() {
                 deviceID = Integer.parseInt(s[0]);
                 SmartDeviceNameLabel.setText(s[1]);
-                SmartDeviceImageView.setImage(Boolean.parseBoolean(s[2]) ? new javafx.scene.image.Image("/GUI/Images/Garage Door Opener Icon.png") : new javafx.scene.image.Image("/GUI/Images/Garage Door Opener Icon.png"));
+                SmartDeviceImageView.setImage(Boolean.parseBoolean(s[2]) ? new javafx.scene.image.Image("/GUI/Images/Smoke Detector Icon.png") : new javafx.scene.image.Image("/GUI/Images/Smoke Detector Icon.png"));
                 StatusIndicatorLabel.setText(Boolean.parseBoolean(s[2]) ? "On" : "Off");
+                //TestStatusLabel.setText(Boolean.parseBoolean(s[3]) ? "Test Needed" : "Test Not Needed");
+                //alarm is s[4]
+                BatteryStatusLabel.setText(s[5] + "%");
+                PreviousTestDateLabel.setText(s[6]);
+
             }
         });
 

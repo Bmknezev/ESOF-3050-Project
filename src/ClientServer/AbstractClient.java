@@ -1,4 +1,4 @@
-// This file contains material supporting section 3.7 of the textbook:
+package ClientServer;// This file contains material supporting section 3.7 of the textbook:
 // "Object Oriented Software Engineering" and is issued under the open-source
 // license found at www.lloseng.com
 
@@ -7,7 +7,7 @@ import java.net.*;
 import java.util.*;
 
 /**
-* The <code> AbstractClient </code> contains all the
+* The <code> GUI.Control.AbstractClient </code> contains all the
 * methods necessary to set up the client side of a client-server
 * architecture.  When a client is thus connected to the
 * server, the two programs can then exchange <code> Object </code>
@@ -387,4 +387,4 @@ public abstract class AbstractClient implements Runnable
     }
   }
 }
-// end of AbstractClient class
+// end of GUI.Control.AbstractClient class

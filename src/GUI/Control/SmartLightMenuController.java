@@ -1,5 +1,7 @@
 package GUI.Control;
 
+import GUI.Control.Abstract.AbstractDeviceController;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -9,9 +11,11 @@ import javafx.scene.control.Slider;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import smartDevice.SmartLight;
 
-public class SmartLightMenuController extends AbstractController{
+import java.util.Objects;
+
+
+public class SmartLightMenuController extends AbstractDeviceController {
 
     @FXML
     private Slider BrightnessSlider;
@@ -43,33 +47,52 @@ public class SmartLightMenuController extends AbstractController{
     @FXML
     private Label brightnessLabel;
 
-    private Scene first;
+    private Scene previous;
+        // this is just a default object to test the GUI
 
-    private SmartLight light;
+    private int deviceID;
 
-    public void setFirstScene(Scene firstScene) {
-        first = firstScene;
+
+    public void setPreviousScene(Scene previousScene) {
+        previous = previousScene;
     }
 
     public void BackButtonPressed(ActionEvent actionEvent) {
         Stage stage = (Stage) backButton.getScene().getWindow();
-        stage.setScene(first);
+        stage.setScene(previous);
 
     }
+
     @Override
-    public void link(Object l){
-        light = (SmartLight) l;
-        BrightnessSlider.adjustValue(light.getBrightness());
-        SmartDeviceNameLabel.setText(light.getName());
-        StatusIndicatorLabel.setText(light.getStatus() ? "On" : "Off");
-        brightnessLabel.setText(light.getBrightness() + "%");
+    public void update(String[] s) {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                deviceID = Integer.parseInt(s[0]);
+                SmartDeviceNameLabel.setText(s[1]);
+                SmartDeviceImageView.setImage(Boolean.parseBoolean(s[2]) ? new javafx.scene.image.Image("/GUI/Images/light Icon.png") : new javafx.scene.image.Image("/GUI/Images/light_Icon_off.png"));
+                StatusIndicatorLabel.setText(Boolean.parseBoolean(s[2]) ? "On" : "Off");
+                brightnessLabel.setText(s[3] + "%");
+                BrightnessSlider.setValue(Integer.parseInt(s[3]));
+            }
+        });
+
     }
+
+
 
     public void ToggleLightStatusButtonPressed(ActionEvent actionEvent) {
-        light.setStatus(!light.getStatus());
-        StatusIndicatorLabel.setText(light.getStatus() ? "On" : "Off");
-        System.out.println(light.getStatus());
-        SmartDeviceImageView.setImage(light.getStatus() ? new javafx.scene.image.Image("/GUI/Images/light Icon.png") : new javafx.scene.image.Image("/GUI/Images/light_Icon_off.png"));
+        if(Objects.equals(StatusIndicatorLabel.getText(), "On")){
+            StatusIndicatorLabel.setText("Off");
+            SmartDeviceImageView.setImage(new javafx.scene.image.Image("/GUI/Images/light_Icon_off.png"));
+            UpdateServer("lightStatus|false");
+        }
+        else{
+            StatusIndicatorLabel.setText("On");
+            SmartDeviceImageView.setImage(new javafx.scene.image.Image("/GUI/Images/light Icon.png"));
+            UpdateServer("lightStatus|true");
+        }
+
     }
 
     public void ChangeColourButtonPressed(ActionEvent actionEvent) {
@@ -86,9 +109,18 @@ public class SmartLightMenuController extends AbstractController{
 
 
     public void BrightnessSliderReleased(MouseEvent mouseEvent) {
-        light.setBrightness((int) BrightnessSlider.getValue());
-        brightnessLabel.setText(light.getBrightness() + "%" );
+
+        brightnessLabel.setText((int) BrightnessSlider.getValue() + "%");
+        UpdateServer("brightness|" + (int) BrightnessSlider.getValue());
     }
 
+    private void UpdateServer(String msg){
+        String message = 0 + "@" + deviceID + "@" + msg;
+        try {
+            super.client.sendToServer(message);
+        }catch (Exception e){
+            throw new RuntimeException(e);
+        }
+    }
 
 }
