@@ -78,8 +78,11 @@ public class SmartCoffeeMakerMenuController extends AbstractDeviceController {
                 SmartDeviceNameLabel.setText(message.getName());
                 StatusIndicatorLabel.setText(message.getReadyToBrew() ? "Ready to Brew" : "Not Ready to Brew");
                 waterLevel.setProgress(message.getWaterLevel());
+                waterLevel.setStyle("-fx-accent: #0055ff;");
                 coffeeLevel.setProgress(message.getCoffeeLevel());
+                coffeeLevel.setStyle("-fx-accent: #723003;");
                 coffeeBeanLevel.setProgress(message.getCoffeeBeanLevel());
+                coffeeBeanLevel.setStyle("-fx-accent: #5b2906;");
             }
         });
 
@@ -92,6 +95,6 @@ public class SmartCoffeeMakerMenuController extends AbstractDeviceController {
 
 
     public void BrewCoffeeButtonPressed(ActionEvent actionEvent) {
-        //pdateServer("BrewCoffee|"+((RadioButton)Size.getSelectedToggle()).getText()+"|"+((RadioButton)Strength.getSelectedToggle()).getText());
+
     }
 }
