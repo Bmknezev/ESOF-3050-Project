@@ -5,14 +5,23 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import messages.AbstractDeviceMessage;
+import messages.CoffeeMessage;
+
+import static java.lang.Thread.sleep;
 
 public class SmartCoffeeMakerMenuController extends AbstractDeviceController {
 
+    public ProgressBar waterLevel;
+    public ProgressBar coffeeLevel;
+    public ProgressBar coffeeBeanLevel;
+    public RadioButton smallButton;
+    public RadioButton mediumButton;
+    public RadioButton largeButton;
+    public RadioButton extraLargeButton;
     @FXML
     private Button BrewCoffeeButton;
 
@@ -61,34 +70,28 @@ public class SmartCoffeeMakerMenuController extends AbstractDeviceController {
     }
 
     @Override
-    public void update(String[] s) {
+    public void update(AbstractDeviceMessage msg) {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                deviceID = Integer.parseInt(s[0]);
-                SmartDeviceNameLabel.setText(s[1]);
-                //SmartDeviceImageView.setImage(Boolean.parseBoolean(s[2]) ? new javafx.scene.image.Image("/GUI/Images/Coffee Icon.png") : new javafx.scene.image.Image("/GUI/Images/Coffee Icon.png"));
-                StatusIndicatorLabel.setText(Boolean.parseBoolean(s[2]) ? "On" : "Off");
-                //waterlevel
-                //coffelevel
-                //coffeetype
-                //ready to brew
-                //brewing
-
-
+                CoffeeMessage message = (CoffeeMessage) msg;
+                SmartDeviceNameLabel.setText(message.getName());
+                StatusIndicatorLabel.setText(message.getStatus() ? "On" : "Off");
+                waterLevel.setProgress(message.getWaterLevel());
+                coffeeLevel.setProgress(message.getCoffeeLevel());
+                coffeeBeanLevel.setProgress(message.getCoffeeBeanLevel());
             }
         });
 
     }
 
-    private void UpdateServer(String msg){
-        String message = 0 + "@" + deviceID + "@" + msg;
-        try {
-            super.client.sendToServer(message);
-        }catch (Exception e){
-            throw new RuntimeException(e);
-        }
+    private void UpdateServer(){
+        CoffeeMessage msg = new CoffeeMessage(true, deviceID, SmartDeviceNameLabel.getText(), true, 100, true, true, 0.5, 0.5, 0, "0.5", true, false, 0.5);
+        client.UpdateServer(msg);
     }
 
 
+    public void BrewCoffeeButtonPressed(ActionEvent actionEvent) {
+        //pdateServer("BrewCoffee|"+((RadioButton)Size.getSelectedToggle()).getText()+"|"+((RadioButton)Strength.getSelectedToggle()).getText());
+    }
 }

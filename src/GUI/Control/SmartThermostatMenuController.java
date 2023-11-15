@@ -10,6 +10,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import messages.AbstractDeviceMessage;
+import messages.ThermostatMessage;
 
 public class SmartThermostatMenuController extends AbstractDeviceController {
 
@@ -62,38 +64,37 @@ public class SmartThermostatMenuController extends AbstractDeviceController {
     }
 
     @Override
-    public void update(String[] s) {
+    public void update(AbstractDeviceMessage msg) {
         //take input string and update GUI
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                deviceID = Integer.parseInt(s[0]);
-                SmartDeviceNameLabel.setText(s[1]);
-                SmartDeviceImageView.setImage(new javafx.scene.image.Image("/GUI/Images/Thermostat Icon.png"));
-                TemperatureStatusLabel.setText(s[2]);
-                SetpointStatusLabel.setText(s[3]);
-                HeatingCoolingStatusLabel.setText(s[4]);
-
+                ThermostatMessage message = (ThermostatMessage) msg;
+                if(message.getMode()) {
+                    HeatingCoolingStatusLabel.setText("Heating");
+                }
+                else {
+                    HeatingCoolingStatusLabel.setText("Cooling");
+                }
+                SmartDeviceNameLabel.setText(message.getName());
+                deviceID = message.getDeviceID();
+                TemperatureStatusLabel.setText(message.getTemperature() + "°C");
+                SetpointStatusLabel.setText(message.getSetpoint() + "°C");
             }
         });
 
     }
 
     //send new values to server
-    private void UpdateServer(String msg){
-        String message = 0 + "@" + deviceID + "@" + msg;
-        try {
-            super.client.sendToServer(message);
-        }catch (Exception e){
-            throw new RuntimeException(e);
-        }
+    private void UpdateServer(){
+        ThermostatMessage message = new ThermostatMessage(true, deviceID, SmartDeviceNameLabel.getText(), true, 100, true, 20, 20, true, true,true );
+        client.UpdateServer(message);
     }
 
     //change temperature when button pressed, request new values from server
     public void ChangeTempButtonPressed(ActionEvent actionEvent) {
         SetpointStatusLabel.setText(ChangeTempTextField.getText());
-        UpdateServer("setpoint|" + ChangeTempTextField.getText());
-
+        UpdateServer();
         super.client.request(deviceID, this);
     }
 }

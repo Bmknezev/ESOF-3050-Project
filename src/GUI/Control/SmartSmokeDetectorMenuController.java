@@ -9,6 +9,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import messages.AbstractDeviceMessage;
+import messages.SmokeDetectorMessage;
+
+import java.util.Date;
 
 public class SmartSmokeDetectorMenuController extends AbstractDeviceController {
 
@@ -56,30 +60,34 @@ public class SmartSmokeDetectorMenuController extends AbstractDeviceController {
     }
 
     @Override
-    public void update(String[] s) {
+    public void update(AbstractDeviceMessage msg) {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                deviceID = Integer.parseInt(s[0]);
-                SmartDeviceNameLabel.setText(s[1]);
-                SmartDeviceImageView.setImage(Boolean.parseBoolean(s[2]) ? new javafx.scene.image.Image("/GUI/Images/Smoke Detector Icon.png") : new javafx.scene.image.Image("/GUI/Images/Smoke Detector Icon.png"));
-                StatusIndicatorLabel.setText(Boolean.parseBoolean(s[2]) ? "On" : "Off");
-                //TestStatusLabel.setText(Boolean.parseBoolean(s[3]) ? "Test Needed" : "Test Not Needed");
-                //alarm is s[4]
-                BatteryStatusLabel.setText(s[5] + "%");
-                PreviousTestDateLabel.setText(s[6]);
+                SmokeDetectorMessage message = (SmokeDetectorMessage) msg;
+                SmartDeviceNameLabel.setText(message.getName());
+                deviceID = message.getDeviceID();
+                if (message.getStatus()) {
+                    StatusIndicatorLabel.setText("Active");
+                } else {
+                    StatusIndicatorLabel.setText("Inactive");
+                }
+                if (message.getConnectionStatus()) {
+                    BatteryStatusLabel.setText("Connected");
+                } else {
+                    BatteryStatusLabel.setText("Disconnected");
+                }
+                //PreviousTestDateLabel.setText(message.getPreviousTestDate());
+
 
             }
         });
 
     }
 
-    private void UpdateServer(String msg){
-        String message = 0 + "@" + deviceID + "@" + msg;
-        try {
-            super.client.sendToServer(message);
-        }catch (Exception e){
-            throw new RuntimeException(e);
-        }
+    private void UpdateServer(){
+        Date date = new Date();
+        SmokeDetectorMessage message = new SmokeDetectorMessage(true, deviceID, SmartDeviceNameLabel.getText(), true, 100, true, date, true, true, false);
+        client.UpdateServer(message);
     }
 }

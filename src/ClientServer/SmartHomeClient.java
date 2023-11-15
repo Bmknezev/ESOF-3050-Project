@@ -3,12 +3,17 @@ package ClientServer;
 
 import GUI.Control.Abstract.AbstractDeviceController;
 import GUI.Control.DeviceSelectionMenuController;
+import messages.AbstractDeviceMessage;
+//import messages.DeviceRequestMessage;
+import messages.NewDeviceMessage;
+import messages.StartupMessage;
 
 import java.io.IOException;
 
 public class SmartHomeClient extends ClientServer.AbstractClient {
 private AbstractDeviceController tmp;
 private DeviceSelectionMenuController tmp2;
+private int clientID = -1;
     /**
      * Constructs the client.
      *
@@ -22,34 +27,43 @@ private DeviceSelectionMenuController tmp2;
     @Override
     protected void handleMessageFromServer(Object msg) {
         System.out.println("Message received: " + msg.toString());
-        String[] s1 = msg.toString().split("@");
-        if(s1[0].equals("1")){
-            String[] s = s1[1].split("~");
-            for (String string : s) {
-                tmp2.addNewDevice(string);
-            }
-        }else {
-            String[] s = s1[1].split("\\|");
-            tmp.update(s);
+        if (clientID == -1) {
+            clientID = ((StartupMessage) msg).getClientID();
+        }else if(((AbstractDeviceMessage)msg).getStartup()){
+            tmp2.addNewDevice((NewDeviceMessage) msg);
+        }
+        else{
+            ((AbstractDeviceController)tmp).update((AbstractDeviceMessage) msg);
         }
     }
 
     public void request(int i, AbstractDeviceController c) {
+        //request a device from server with device id i
         tmp = c;
-        String s = true + "@" + i;
+        //try {
+            //DeviceRequestMessage msg = new DeviceRequestMessage(i, clientID);
+            //sendToServer(msg);
+        //} catch (IOException e) {
+        //    throw new RuntimeException(e);
+        //}
+    }
+
+    public void getDevices(DeviceSelectionMenuController deviceSelectionPaneController) {
+        tmp2 = deviceSelectionPaneController;
+        StartupMessage msg = new StartupMessage(true, -1);
         try {
-            sendToServer(s);
+            sendToServer(msg);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void getDevices(DeviceSelectionMenuController deviceSelectionPaneController) {
-        tmp2 = deviceSelectionPaneController;
-        String s = true + "@" + -1;
+    public void UpdateServer(AbstractDeviceMessage msg){
+        String message = clientID + "?" + msg;
+        System.out.println(message);
         try {
-            sendToServer(s);
-        } catch (IOException e) {
+            sendToServer(message);
+        }catch (Exception e){
             throw new RuntimeException(e);
         }
     }

@@ -10,6 +10,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import messages.AbstractDeviceMessage;
+import messages.GarageDoorMessage;
 
 public class SmartGarageDoorOpenerMenuController extends AbstractDeviceController {
 
@@ -60,25 +62,26 @@ public class SmartGarageDoorOpenerMenuController extends AbstractDeviceControlle
     }
 
     @Override
-    public void update(String[] s) {
+    public void update(AbstractDeviceMessage msg) {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                deviceID = Integer.parseInt(s[0]);
-                SmartDeviceNameLabel.setText(s[1]);
-                SmartDeviceImageView.setImage(Boolean.parseBoolean(s[2]) ? new javafx.scene.image.Image("/GUI/Images/Garage Door Opener Icon.png") : new javafx.scene.image.Image("/GUI/Images/Garage Door Opener Icon.png"));
-                StatusIndicatorLabel.setText(Boolean.parseBoolean(s[2]) ? "On" : "Off");
+                GarageDoorMessage message = (GarageDoorMessage) msg;
+                SmartDeviceNameLabel.setText(message.getName());
+                if (message.getStatus()) {
+                    StatusIndicatorLabel.setText("Open");
+                } else {
+                    StatusIndicatorLabel.setText("Closed");
+                }
+
+
             }
         });
 
     }
 
-    private void UpdateServer(String msg){
-        String message = 0 + "@" + deviceID + "@" + msg;
-        try {
-            super.client.sendToServer(message);
-        }catch (Exception e){
-            throw new RuntimeException(e);
-        }
+    private void UpdateServer(){
+        GarageDoorMessage msg = new GarageDoorMessage(true, deviceID, SmartDeviceNameLabel.getText(), true, 100, true, false, false, false, false, 0, 0 );
+        client.UpdateServer(msg);
     }
 }

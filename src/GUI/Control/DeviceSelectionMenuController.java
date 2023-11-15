@@ -13,6 +13,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import messages.AbstractDeviceMessage;
+import messages.NewDeviceMessage;
 
 public class DeviceSelectionMenuController extends AbstractDeviceController {
 
@@ -32,21 +34,19 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
         previous = previousScene;
     }
 
-    public void addNewDevice(String newDevice) {
-        //recieves a string from the server and parses it using delimiter character |, string contains device id, name, and device type
-        String[] s = newDevice.split("\\|");
+    public void addNewDevice(NewDeviceMessage newDevice) {
             // this creates a new label for the device name
         Label deviceNameLabel = new Label();
             // these set the parameters of the label
-        System.out.println(s[0]);
-        deviceNameLabel.setText(s[0]);
+        System.out.println(newDevice.getDeviceName());
+        deviceNameLabel.setText(newDevice.getDeviceName());
         deviceNameLabel.setWrapText(true);
         deviceNameLabel.setFont(Font.font("System", FontWeight.BOLD, 15));
 
             // this creates a new label that shows the type of the new device
         Label deviceTypeLabel = new Label();
             // these set the parameters of the label
-        deviceTypeLabel.setText(s[1]);
+        deviceTypeLabel.setText(newDevice.getDeviceType());
 
             // this creates a new button that is linked to the new device
         Button manageDeviceButton = new Button("Manage Device");
@@ -54,32 +54,31 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
         manageDeviceButton.setOnAction(event ->{
             Stage stage = (Stage) manageDeviceButton.getScene().getWindow();
             //this switch statement changes the scene based on the device type and requests the values for that device from the server
-            switch (s[1]) {
+            switch (newDevice.getDeviceType()) {
                 case "Smart Light":
-                    client.request(Integer.parseInt(s[2]), Controller[0]);
+                    client.request(newDevice.getDeviceID(), Controller[0]);
                     stage.setScene(sceneList[0]);
                     break;
                 case "Smart Lock":
-                    client.request(Integer.parseInt(s[2]), Controller[1]);
+                    client.request(newDevice.getDeviceID(), Controller[1]);
                     stage.setScene(sceneList[1]);
                     break;
                 case "Smart Thermostat":
-                    client.request(Integer.parseInt(s[2]), Controller[2]);
+                    client.request(newDevice.getDeviceID(), Controller[2]);
                     stage.setScene(sceneList[2]);
                     break;
                 case "Smart Coffee Machine":
-                    client.request(Integer.parseInt(s[2]), Controller[3]);
+                    client.request(newDevice.getDeviceID(), Controller[3]);
                     stage.setScene(sceneList[3]);
                     break;
                 case "Smart Garage Door":
-                    client.request(Integer.parseInt(s[2]), Controller[4]);
+                    client.request(newDevice.getDeviceID(), Controller[4]);
                     stage.setScene(sceneList[4]);
                     break;
                 case "Smart Smoke Detector":
-                    client.request(Integer.parseInt(s[2]), Controller[5]);
+                    client.request(newDevice.getDeviceID(), Controller[5]);
                     stage.setScene(sceneList[5]);
                     break;
-
                 default:
                     break;
             }
@@ -115,10 +114,10 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
         Controller = controller;
     }
 
+
+
     @Override
-    public void update(String[] s) {
+    public void update(AbstractDeviceMessage msg) {
         //dont worry about this, im doing bad programming practices but it works
-
     }
-
 }

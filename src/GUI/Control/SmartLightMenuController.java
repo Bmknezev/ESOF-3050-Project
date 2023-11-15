@@ -11,6 +11,8 @@ import javafx.scene.control.Slider;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import messages.AbstractDeviceMessage;
+import messages.LightMessage;
 
 import java.util.Objects;
 
@@ -64,16 +66,24 @@ public class SmartLightMenuController extends AbstractDeviceController {
     }
 
     @Override
-    public void update(String[] s) {
+    public void update(AbstractDeviceMessage msg) {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                deviceID = Integer.parseInt(s[0]);
-                SmartDeviceNameLabel.setText(s[1]);
-                SmartDeviceImageView.setImage(Boolean.parseBoolean(s[2]) ? new javafx.scene.image.Image("/GUI/Images/light Icon.png") : new javafx.scene.image.Image("/GUI/Images/light_Icon_off.png"));
-                StatusIndicatorLabel.setText(Boolean.parseBoolean(s[2]) ? "On" : "Off");
-                brightnessLabel.setText(s[3] + "%");
-                BrightnessSlider.setValue(Integer.parseInt(s[3]));
+                LightMessage message = (LightMessage) msg;
+                SmartDeviceNameLabel.setText(message.getName());
+                deviceID = message.getDeviceID();
+                if(message.getStatus()){
+                    StatusIndicatorLabel.setText("On");
+                    SmartDeviceImageView.setImage(new javafx.scene.image.Image("/GUI/Images/light Icon.png"));
+                }
+                else{
+                    StatusIndicatorLabel.setText("Off");
+                    SmartDeviceImageView.setImage(new javafx.scene.image.Image("/GUI/Images/light_Icon_off.png"));
+                }
+                BrightnessSlider.setValue(message.getBrightness());
+                brightnessLabel.setText(message.getBrightness() + "%");
+
             }
         });
 
@@ -85,14 +95,12 @@ public class SmartLightMenuController extends AbstractDeviceController {
         if(Objects.equals(StatusIndicatorLabel.getText(), "On")){
             StatusIndicatorLabel.setText("Off");
             SmartDeviceImageView.setImage(new javafx.scene.image.Image("/GUI/Images/light_Icon_off.png"));
-            UpdateServer("lightStatus|false");
         }
         else{
             StatusIndicatorLabel.setText("On");
             SmartDeviceImageView.setImage(new javafx.scene.image.Image("/GUI/Images/light Icon.png"));
-            UpdateServer("lightStatus|true");
         }
-
+    UpdateServer();
     }
 
     public void ChangeColourButtonPressed(ActionEvent actionEvent) {
@@ -111,16 +119,13 @@ public class SmartLightMenuController extends AbstractDeviceController {
     public void BrightnessSliderReleased(MouseEvent mouseEvent) {
 
         brightnessLabel.setText((int) BrightnessSlider.getValue() + "%");
-        UpdateServer("brightness|" + (int) BrightnessSlider.getValue());
+        UpdateServer();
     }
 
-    private void UpdateServer(String msg){
-        String message = 0 + "@" + deviceID + "@" + msg;
-        try {
-            super.client.sendToServer(message);
-        }catch (Exception e){
-            throw new RuntimeException(e);
-        }
+    private void UpdateServer(){
+        boolean lightStatus = Objects.equals(StatusIndicatorLabel.getText(), "On");
+        LightMessage message = new LightMessage(true, deviceID, SmartDeviceNameLabel.getText(), true, 100, true, 0x000000, (int) BrightnessSlider.getValue(), lightStatus);
+        client.UpdateServer(message);
     }
 
 }

@@ -10,6 +10,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import messages.AbstractDeviceMessage;
+import messages.LockMessage;
 
 public class SmartLockMenuController extends AbstractDeviceController {
 
@@ -59,14 +61,22 @@ public class SmartLockMenuController extends AbstractDeviceController {
     }
 
     @Override
-    public void update(String[] s) {
+    public void update(AbstractDeviceMessage msg) {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                deviceID = Integer.parseInt(s[0]);
-                SmartDeviceNameLabel.setText(s[1]);
-                SmartDeviceImageView.setImage(Boolean.parseBoolean(s[2]) ? new javafx.scene.image.Image("/GUI/Images/Lock Icon.png") : new javafx.scene.image.Image("/GUI/Images/Lock Icon.png"));
-                StatusIndicatorLabel.setText(Boolean.parseBoolean(s[2]) ? "Locked" : "Unlocked");
+                LockMessage message = (LockMessage) msg;
+                SmartDeviceNameLabel.setText(message.getName());
+                deviceID = message.getDeviceID();
+                if(message.getLockStatus()){
+                    StatusIndicatorLabel.setText("Locked");
+                    SmartDeviceImageView.setImage(new javafx.scene.image.Image("/GUI/Images/Lock Icon.png"));
+                }
+                else{
+                    StatusIndicatorLabel.setText("Unlocked");
+                    SmartDeviceImageView.setImage(new javafx.scene.image.Image("/GUI/Images/Lock Icon.png"));
+                }
+
             }
         });
 
@@ -97,23 +107,19 @@ public class SmartLockMenuController extends AbstractDeviceController {
         if(StatusIndicatorLabel.getText().equals("Locked")){
             StatusIndicatorLabel.setText("Unlocked");
             SmartDeviceImageView.setImage(new javafx.scene.image.Image("/GUI/Images/Lock Icon.png"));
-            UpdateServer("lockStatus|false");
+            UpdateServer();
         }
         else{
             StatusIndicatorLabel.setText("Locked");
             SmartDeviceImageView.setImage(new javafx.scene.image.Image("/GUI/Images/Lock Icon.png"));
-            UpdateServer("lockStatus|true");
+            UpdateServer();
         }
 
     }
 
-    private void UpdateServer(String msg){
-        String message = 0 + "@" + deviceID + "@" + msg;
-        try {
-            super.client.sendToServer(message);
-        }catch (Exception e){
-            throw new RuntimeException(e);
-        }
+    private void UpdateServer(){
+        LockMessage message = new LockMessage(true, deviceID, SmartDeviceNameLabel.getText(), true, 100, true, !StatusIndicatorLabel.getText().equals("Locked"), 1234, 0);
+        client.UpdateServer(message);
     }
 
     @FXML
