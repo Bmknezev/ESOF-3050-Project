@@ -9,7 +9,10 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import messages.AbstractDeviceMessage;
+import messages.BrewCoffeeMessage;
 import messages.server.CoffeeMessage;
+
+import java.io.IOException;
 
 import static java.lang.Thread.sleep;
 
@@ -92,6 +95,11 @@ public class SmartCoffeeMakerMenuController extends AbstractDeviceController {
 
 
     public void BrewCoffeeButtonPressed(ActionEvent actionEvent) {
-        //pdateServer("BrewCoffee|"+((RadioButton)Size.getSelectedToggle()).getText()+"|"+((RadioButton)Strength.getSelectedToggle()).getText());
+
+        try {
+            client.sendToServer(new BrewCoffeeMessage(SmartDeviceNameLabel.getText(), deviceID, ((ToggleButton) Size.getSelectedToggle()).getText(), ((ToggleButton) Strength.getSelectedToggle()).getText(), waterLevel.getProgress(), coffeeBeanLevel.getProgress(), coffeeLevel.getProgress(), ((ToggleButton) Temperature.getSelectedToggle()).getText()));
+        }catch (IOException e){
+
+        }
     }
 }
