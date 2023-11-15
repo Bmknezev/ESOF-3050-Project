@@ -118,6 +118,9 @@ public class SmartHome extends Application {
         lightDevicePaneController.addServer(s);
         lockDevicePaneController.addServer(s);
         thermostatDevicePaneController.addServer(s);
+        coffeeMakerDevicePaneController.addServer(s);
+        garageDoorOpenerDevicePaneController.addServer(s);
+        smokeDetectorDevicePaneController.addServer(s);
         deviceSelectionPaneController.addServer(s);
 
         //making list of device scenes to enable switching scenes
