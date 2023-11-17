@@ -71,10 +71,12 @@ public class SmartLockMenuController extends AbstractDeviceController {
                 if(message.getLockStatus()){
                     StatusIndicatorLabel.setText("Locked");
                     SmartDeviceImageView.setImage(new javafx.scene.image.Image("/GUI/Images/Lock Icon.png"));
+                    ToggleLockStatusButton.setText("Unlock");
                 }
                 else{
                     StatusIndicatorLabel.setText("Unlocked");
                     SmartDeviceImageView.setImage(new javafx.scene.image.Image("/GUI/Images/Lock Icon.png"));
+                    ToggleLockStatusButton.setText("Lock");
                 }
 
             }

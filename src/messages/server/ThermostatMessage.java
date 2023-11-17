@@ -7,9 +7,9 @@ public class ThermostatMessage extends AbstractDeviceMessage {
     private float setpoint; //the temperature the thermostat is set to
     private boolean heatEnabled; //if true, heat is enabled
     private boolean coolEnabled; //if true, cool is enabled
-    private boolean mode;
+    private int mode; //0 for off, 1 for heat, 2 for cool
 
-    public ThermostatMessage(int id, String name, float temperature, float setpoint, boolean heatEnabled, boolean coolEnabled, boolean mode){
+    public ThermostatMessage(int id, String name, float temperature, float setpoint, boolean heatEnabled, boolean coolEnabled, int mode){
         super(name, id);
         this.temperature = temperature;
         this.setpoint = setpoint;
@@ -41,7 +41,7 @@ public class ThermostatMessage extends AbstractDeviceMessage {
         return coolEnabled;
     }
 
-    public boolean getMode() {
+    public int getMode() {
         return mode;
     }
 }

@@ -15,6 +15,8 @@ import messages.server.ThermostatMessage;
 
 public class SmartThermostatMenuController extends AbstractDeviceController {
 
+    public Button coolingEnableButton;
+    public Button heatingEnableButton;
     @FXML
     private Button ChangeTempButton;
 
@@ -70,16 +72,25 @@ public class SmartThermostatMenuController extends AbstractDeviceController {
             @Override
             public void run() {
                 ThermostatMessage message = (ThermostatMessage) msg;
-                if(message.getMode()) {
-                    HeatingCoolingStatusLabel.setText("Heating");
-                }
-                else {
-                    HeatingCoolingStatusLabel.setText("Cooling");
+                switch(((ThermostatMessage) msg).getMode()){
+                    case 0:
+                        HeatingCoolingStatusLabel.setText("Off");
+                        break;
+                    case 1:
+                        HeatingCoolingStatusLabel.setText("Heating");
+                        break;
+                    case 2:
+                        HeatingCoolingStatusLabel.setText("Cooling");
+                        break;
+
                 }
                 SmartDeviceNameLabel.setText(message.getName());
                 deviceID = message.getDeviceID();
-                TemperatureStatusLabel.setText(message.getTemperature() + "°C");
-                SetpointStatusLabel.setText(message.getSetpoint() + "°C");
+                TemperatureStatusLabel.setText(message.getTemperature() + " °C");
+                SetpointStatusLabel.setText(message.getSetpoint() + " °C");
+                heatingEnableButton.setText(message.getHeatEnabled() ? "Disable Heating" : "Enable Heating");
+                coolingEnableButton.setText(message.getCoolEnabled() ? "Disable Cooling" : "Enable Cooling");
+
             }
         });
 
@@ -87,13 +98,37 @@ public class SmartThermostatMenuController extends AbstractDeviceController {
 
     //send new values to server
     private void UpdateServer(){
-        ThermostatMessage message = new ThermostatMessage(deviceID, SmartDeviceNameLabel.getText(), Float.parseFloat(SetpointStatusLabel.getText()), true, false);
+        boolean heat = heatingEnableButton.getText().equals("Disable Heating");
+        boolean cool = coolingEnableButton.getText().equals("Disable Cooling");
+        String setpoint = SetpointStatusLabel.getText();
+        String[] setpointSplit = setpoint.split(" ");
+        ThermostatMessage message = new ThermostatMessage(deviceID, SmartDeviceNameLabel.getText(), Float.parseFloat(setpointSplit[0]), heat, cool);
         client.UpdateServer(message);
     }
 
     //change temperature when button pressed, request new values from server
     public void ChangeTempButtonPressed(ActionEvent actionEvent) {
         SetpointStatusLabel.setText(ChangeTempTextField.getText());
+        UpdateServer();
+    }
+
+    public void coolingEnableButtonPressed(ActionEvent actionEvent) {
+        if(coolingEnableButton.getText().equals("Enable Cooling")){
+            coolingEnableButton.setText("Disable Cooling");
+        }
+        else{
+            coolingEnableButton.setText("Enable Cooling");
+        }
+        UpdateServer();
+    }
+
+    public void heatingEnableButtonPressed(ActionEvent actionEvent) {
+        if(heatingEnableButton.getText().equals("Enable Heating")){
+            heatingEnableButton.setText("Disable Heating");
+        }
+        else{
+            heatingEnableButton.setText("Enable Heating");
+        }
         UpdateServer();
     }
 }
