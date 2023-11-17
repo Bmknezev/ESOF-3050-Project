@@ -4,18 +4,18 @@ import messages.AbstractDeviceMessage;
 
 public class LightMessage extends AbstractDeviceMessage {
 
-    private int colour;
+    private String colour;
     private int brightness;
     private boolean lightStatus;
 
-    public LightMessage(int id, String name,int colour, int brightness, boolean lightStatus){
+    public LightMessage(int id, String name,String colour, int brightness, boolean lightStatus){
         super(name, id);
         this.colour = colour;
         this.brightness = brightness;
         this.lightStatus = lightStatus;
     }
 
-    public int getColour() {
+    public String getColour() {
         return colour;
     }
 

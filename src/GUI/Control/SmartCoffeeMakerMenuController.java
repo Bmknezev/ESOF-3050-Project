@@ -82,6 +82,7 @@ public class SmartCoffeeMakerMenuController extends AbstractDeviceController {
                 StatusIndicatorLabel.setText(message.getReadyToBrew() ? "Ready to Brew" : "Not Ready to Brew");
                 waterLevel.setProgress(message.getWaterLevel());
                 coffeeLevel.setProgress(message.getCoffeeLevel());
+                //coffeeLevel.setStyle("-fx-accent: rgba(255,255,128,0.5)");
                 coffeeBeanLevel.setProgress(message.getCoffeeBeanLevel());
             }
         });
