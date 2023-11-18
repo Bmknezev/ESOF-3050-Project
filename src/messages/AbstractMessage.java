@@ -5,6 +5,7 @@ public abstract class AbstractMessage implements java.io.Serializable{
 
 
     public AbstractMessage(int type) {
+        //constructor
         this.type = type;
     }
 

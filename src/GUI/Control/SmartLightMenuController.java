@@ -68,25 +68,33 @@ public class SmartLightMenuController extends AbstractDeviceController {
 
     @Override
     public void update(AbstractDeviceMessage msg) {
-        System.out.println("got details");
+        //this method updates the GUI with the values from the server
+        //this is run on the JavaFX thread
         Platform.runLater(() -> {
+            //convert the message to a LightMessage
             LightMessage message = (LightMessage) msg;
+            //name and device id are always included in the message
             SmartDeviceNameLabel.setText(message.getName());
             deviceID = message.getDeviceID();
+
+            //check if values are updated, if they are update the GUI
             if(message.getLightStatus()){
                 StatusIndicatorLabel.setText("On");
-                //SmartDeviceImageView.setImage(new javafx.scene.image.Image("/GUI/Images/light Icon.png"));
                 ToggleLightStatusButton.setText("Turn Off");
             }
             else{
                 StatusIndicatorLabel.setText("Off");
                 ToggleLightStatusButton.setText("Turn On");
             }
+            //setting the light icon
             SmartDeviceImageView.setImage(new javafx.scene.image.Image("/GUI/Images/light_Icon_off.png"));
+            //setting the light colour
             lightColour.setStyle("-fx-background-color: #" + message.getColour());
-            System.out.println("colour: " + message.getColour());
+            //setting the brightness slider
             BrightnessSlider.setValue(message.getBrightness());
+            //setting the brightness label
             brightnessLabel.setText(message.getBrightness() + "%");
+            //setting the colour picker
             colourPicker.setValue(javafx.scene.paint.Color.valueOf(message.getColour()));
 
         });
@@ -96,18 +104,26 @@ public class SmartLightMenuController extends AbstractDeviceController {
 
 
     public void ToggleLightStatusButtonPressed(ActionEvent actionEvent) {
+        //runs when the on/off button is pressed
+
+        //first checks if the light is on or off and changes the GUI accordingly
         if(Objects.equals(StatusIndicatorLabel.getText(), "On")){
+            //change labels
             StatusIndicatorLabel.setText("Off");
+            //change text on on/off button
             ToggleLightStatusButton.setText("Turn On");
+            //sets the colour pane to be invisible
             lightColour.setVisible(false);
-            //SmartDeviceImageView.setImage(new javafx.scene.image.Image("/GUI/Images/light_Icon_off.png"));
         }
         else{
+            //change labels
             StatusIndicatorLabel.setText("On");
+            //change text on on/off button
             ToggleLightStatusButton.setText("Turn Off");
+            //sets the colour pane to be visible
             lightColour.setVisible(true);
-            //SmartDeviceImageView.setImage(new javafx.scene.image.Image("/GUI/Images/light Icon.png"));
         }
+        //updates the server with the new values
     UpdateServer();
     }
 
@@ -121,25 +137,28 @@ public class SmartLightMenuController extends AbstractDeviceController {
 
 
     public void BrightnessSliderReleased(MouseEvent mouseEvent) {
-
+        //change text on the brightness label to match the slider
         brightnessLabel.setText((int) BrightnessSlider.getValue() + "%");
+        //updates the server with the new values
+        //needs to be moved to a separate method
         UpdateServer();
     }
 
     private void UpdateServer(){
+        //this method updates the server with the new values
+
+        //converts the on/off label to a boolean
         boolean lightStatus = Objects.equals(StatusIndicatorLabel.getText(), "On");
-        //int color = Integer.parseInt(Integer.toHexString(Integer.parseInt(lightColour.getStyle().substring(23), 16)));
-        System.out.println("colour: " + lightColour.getStyle());
+        //creates a new LightMessage with the new values
         LightMessage message = new LightMessage(deviceID, SmartDeviceNameLabel.getText(), lightColour.getStyle().substring(23), (int) BrightnessSlider.getValue(), lightStatus);
+        //passes the message to the client to be sent to the server
         client.UpdateServer(message);
     }
 
-    public void changeColourButtonPressed(ActionEvent actionEvent) {
-
-    }
-
     public void changeColour(ActionEvent actionEvent) {
+        //uses the built in colour picker to change the colour of the light
         lightColour.setStyle("-fx-background-color: #" + Integer.toHexString(colourPicker.getValue().hashCode()));
+        //updates the server with the new values
         UpdateServer();
     }
 }

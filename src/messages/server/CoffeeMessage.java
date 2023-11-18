@@ -11,6 +11,7 @@ public class CoffeeMessage extends AbstractDeviceMessage {
     private double coffeeLevel; //amount of coffee in pot
 
     public CoffeeMessage( int id, String name, boolean cupStatus, double waterLevel, double coffeeBeanLevel, String coffeeType, boolean readyToBrew, double coffeeLevel){
+        //constructor
         super(name, id);
         this.cupStatus = cupStatus;
         this.waterLevel = waterLevel;
