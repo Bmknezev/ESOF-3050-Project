@@ -81,10 +81,12 @@ public class SmartLightMenuController extends AbstractDeviceController {
             if(message.getLightStatus()){
                 StatusIndicatorLabel.setText("On");
                 ToggleLightStatusButton.setText("Turn Off");
+                lightColour.setVisible(true);
             }
             else{
                 StatusIndicatorLabel.setText("Off");
                 ToggleLightStatusButton.setText("Turn On");
+                lightColour.setVisible(false);
             }
             //setting the light icon
             SmartDeviceImageView.setImage(new javafx.scene.image.Image("/GUI/Images/light_Icon_off.png"));

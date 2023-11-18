@@ -118,6 +118,6 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
 
     @Override
     public void update(AbstractDeviceMessage msg) {
-        //dont worry about this, im doing bad programming practices but it works
+        //dont worry about this, im doing bad programming practices, but it works
     }
 }

@@ -12,6 +12,7 @@ public class SmartHomeClient extends ClientServer.AbstractClient {
 private AbstractDeviceController deviceController;
 private DeviceSelectionMenuController mainMenuController;
 private int clientID = -1;
+private int currentDeviceID = -1;
     /**
      * Constructs the client.
      *
@@ -32,7 +33,8 @@ private int clientID = -1;
             case 1:
                 System.out.println("Device details received.");
                 //device details received
-                deviceController.update((AbstractDeviceMessage)msg);
+                if(currentDeviceID == ((AbstractDeviceMessage)msg).getDeviceID())
+                    deviceController.update((AbstractDeviceMessage)msg);
                 break;
             case 2:
                 //new device received
@@ -52,6 +54,7 @@ private int clientID = -1;
         //request a device from server with device id i
         //c is the controller for the device
         deviceController = c;
+        setCurrentDeviceID(i);
         NewDeviceMessage msg = new NewDeviceMessage(i);
         Send(msg);
     }
@@ -75,6 +78,10 @@ private int clientID = -1;
         }catch (Exception e){
             throw new RuntimeException(e);
         }
+    }
+
+    public void setCurrentDeviceID(int id){
+        currentDeviceID = id;
     }
 
 }
