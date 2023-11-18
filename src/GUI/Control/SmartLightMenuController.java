@@ -69,28 +69,26 @@ public class SmartLightMenuController extends AbstractDeviceController {
     @Override
     public void update(AbstractDeviceMessage msg) {
         System.out.println("got details");
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                LightMessage message = (LightMessage) msg;
-                SmartDeviceNameLabel.setText(message.getName());
-                deviceID = message.getDeviceID();
-                if(message.getLightStatus()){
-                    StatusIndicatorLabel.setText("On");
-                    //SmartDeviceImageView.setImage(new javafx.scene.image.Image("/GUI/Images/light Icon.png"));
-                    ToggleLightStatusButton.setText("Turn Off");
-                }
-                else{
-                    StatusIndicatorLabel.setText("Off");
-                    ToggleLightStatusButton.setText("Turn On");
-                }
-                SmartDeviceImageView.setImage(new javafx.scene.image.Image("/GUI/Images/light_Icon_off.png"));
-                lightColour.setStyle("-fx-background-color: #" + message.getColour());
-                System.out.println("colour: " + message.getColour());
-                BrightnessSlider.setValue(message.getBrightness());
-                brightnessLabel.setText(message.getBrightness() + "%");
-
+        Platform.runLater(() -> {
+            LightMessage message = (LightMessage) msg;
+            SmartDeviceNameLabel.setText(message.getName());
+            deviceID = message.getDeviceID();
+            if(message.getLightStatus()){
+                StatusIndicatorLabel.setText("On");
+                //SmartDeviceImageView.setImage(new javafx.scene.image.Image("/GUI/Images/light Icon.png"));
+                ToggleLightStatusButton.setText("Turn Off");
             }
+            else{
+                StatusIndicatorLabel.setText("Off");
+                ToggleLightStatusButton.setText("Turn On");
+            }
+            SmartDeviceImageView.setImage(new javafx.scene.image.Image("/GUI/Images/light_Icon_off.png"));
+            lightColour.setStyle("-fx-background-color: #" + message.getColour());
+            System.out.println("colour: " + message.getColour());
+            BrightnessSlider.setValue(message.getBrightness());
+            brightnessLabel.setText(message.getBrightness() + "%");
+            colourPicker.setValue(javafx.scene.paint.Color.valueOf(message.getColour()));
+
         });
 
     }
