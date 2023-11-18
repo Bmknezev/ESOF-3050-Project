@@ -14,8 +14,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import messages.AbstractDeviceMessage;
+import messages.automations.LightAutomationMessage;
 import messages.server.LightMessage;
 
+import java.util.Date;
 import java.util.Objects;
 
 
@@ -130,7 +132,10 @@ public class SmartLightMenuController extends AbstractDeviceController {
     }
 
     public void CreateAutomationButtonPressed(ActionEvent actionEvent) {
-
+        Date date = new Date();
+        date.setTime(date.getTime() + 10000);
+        LightAutomationMessage message = new LightAutomationMessage(deviceID, lightColour.getStyle().substring(23), (int) BrightnessSlider.getValue(), true, date);
+        client.UpdateServer(message);
     }
 
     public void EditAutomationsButtonPressed(ActionEvent actionEvent) {

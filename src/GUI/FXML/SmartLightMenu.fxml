@@ -51,7 +51,7 @@
         </rowConstraints>
          <children>
             <Button fx:id="ToggleLightStatusButton" mnemonicParsing="false" onAction="#ToggleLightStatusButtonPressed" prefWidth="150.0" text="Turn On / Turn Off" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <Button fx:id="CreateAutomationButton" mnemonicParsing="false" prefWidth="150.0" text="Create Light Schedule" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+            <Button fx:id="CreateAutomationButton" mnemonicParsing="false"  onAction="#CreateAutomationButtonPressed" prefWidth="150.0" text="Create Light Schedule" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
             <Button fx:id="EditAutomationsButton" mnemonicParsing="false" prefWidth="150.0" text="Edit Light Schedules" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
             <Label text="Brightness:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <padding>

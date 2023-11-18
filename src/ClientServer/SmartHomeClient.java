@@ -66,7 +66,7 @@ private int currentDeviceID = -1;
         Send(msg);
     }
 
-    public void UpdateServer(AbstractDeviceMessage msg){
+    public void UpdateServer(AbstractMessage msg){
         //just used by devices to update the server
         Send(msg);
     }
