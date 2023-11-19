@@ -5,6 +5,8 @@ public class LoginMessage extends AbstractMessage{
     private String password;
     private boolean loginStatus;
 
+    private boolean admin;
+
     public LoginMessage(String username, String password) {
         super(5);
         this.username = username;
@@ -26,5 +28,13 @@ public class LoginMessage extends AbstractMessage{
 
     public void setLoginStatus(boolean loginStatus) {
         this.loginStatus = loginStatus;
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
+    }
+
+    public boolean getAdmin() {
+        return admin;
     }
 }

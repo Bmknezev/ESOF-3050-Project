@@ -11,6 +11,7 @@ private AbstractDeviceController deviceController;
 private DeviceSelectionMenuController mainMenuController;
 private int clientID = -1;
 private int currentDeviceID = -1;
+private boolean admin;
 
 private LoginMenuController loginMenuController;
     /**
@@ -47,6 +48,7 @@ private LoginMenuController loginMenuController;
             case 5:
                 //login details received
                 System.out.println("Login details received.");
+                admin = ((LoginMessage)msg).getAdmin();
                 loginMenuController.login((LoginMessage)msg);
                 break;
             default:
