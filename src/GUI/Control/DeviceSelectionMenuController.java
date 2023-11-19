@@ -23,7 +23,13 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
     private Button backButton;
 
     @FXML
+    private Label welcomeUserLabel;
+
+    @FXML
     private VBox deviceVBox;
+
+    @FXML
+    private HBox adminManagementHBox;
 
     private Scene previous;
 
