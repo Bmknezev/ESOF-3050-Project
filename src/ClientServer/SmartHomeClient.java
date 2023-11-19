@@ -3,16 +3,16 @@ package ClientServer;
 
 import GUI.Control.Abstract.AbstractDeviceController;
 import GUI.Control.DeviceSelectionMenuController;
-import messages.AbstractDeviceMessage;
-import messages.AbstractMessage;
-import messages.NewDeviceMessage;
-import messages.StartupMessage;
+import GUI.Control.LoginMenuController;
+import messages.*;
 
 public class SmartHomeClient extends ClientServer.AbstractClient {
 private AbstractDeviceController deviceController;
 private DeviceSelectionMenuController mainMenuController;
 private int clientID = -1;
 private int currentDeviceID = -1;
+
+private LoginMenuController loginMenuController;
     /**
      * Constructs the client.
      *
@@ -43,6 +43,11 @@ private int currentDeviceID = -1;
             case 3:
                 //client id received
                 clientID = ((StartupMessage)msg).getClientID();
+                break;
+            case 5:
+                //login details received
+                System.out.println("Login details received.");
+                loginMenuController.login((LoginMessage)msg);
                 break;
             default:
                 System.out.println("Unknown message type received.");
@@ -82,6 +87,10 @@ private int currentDeviceID = -1;
 
     public void setCurrentDeviceID(int id){
         currentDeviceID = id;
+    }
+
+    public void setLoginMenuController(LoginMenuController loginMenuController){
+        this.loginMenuController = loginMenuController;
     }
 
 }

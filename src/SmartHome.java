@@ -71,7 +71,7 @@ public class SmartHome extends Application {
 
         // injecting device selection scene into the controller of the login scene as the next scene
         LoginMenuController loginPaneController = loginPaneLoader.getController();
-        loginPaneController.setNextScene(deviceSelectionScene);
+        loginPaneController.setNextScene(deviceSelectionScene, primaryStage);
 
         // injecting the device selection scene into the controller of the light device scene as the previous scene
         SmartLightMenuController lightDevicePaneController = lightDevicePaneLoader.getController();
@@ -122,6 +122,10 @@ public class SmartHome extends Application {
         garageDoorOpenerDevicePaneController.addServer(s);
         smokeDetectorDevicePaneController.addServer(s);
         deviceSelectionPaneController.addServer(s);
+        loginPaneController.addServer(s);
+
+
+
 
         //making list of device scenes to enable switching scenes
         Scene[] sceneList = new Scene[6];
@@ -147,7 +151,9 @@ public class SmartHome extends Application {
 
 
         if (!guiTest){
+            s.setLoginMenuController(loginPaneController);
             s.getDevices(deviceSelectionPaneController);
+
         }
 
         primaryStage.setTitle("Smart Home");

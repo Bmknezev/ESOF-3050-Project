@@ -15,6 +15,7 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import messages.AbstractDeviceMessage;
 import messages.NewDeviceMessage;
+import messages.StartupMessage;
 
 public class DeviceSelectionMenuController extends AbstractDeviceController {
 
