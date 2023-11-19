@@ -28,11 +28,6 @@
    <top>
       <StackPane BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER_LEFT" spacing="8.0">
-               <children>
-                  <Button fx:id="backButton" cancelButton="true" mnemonicParsing="false" onAction="#backButtonPressed" text="Back to Log In" />
-               </children>
-            </HBox>
             <HBox alignment="CENTER">
                <children>
                   <Label fx:id="welcomeUserLabel" text="Welcome, user X">
@@ -46,4 +41,11 @@
          </children>
       </StackPane>
    </top>
+   <bottom>
+      <HBox alignment="CENTER_LEFT" spacing="8.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="backButton" cancelButton="true" mnemonicParsing="false" onAction="#backButtonPressed" text="Back to Log In" />
+         </children>
+      </HBox>
+   </bottom>
 </BorderPane>
