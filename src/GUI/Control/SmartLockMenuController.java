@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import messages.AbstractDeviceMessage;
@@ -49,6 +50,13 @@ public class SmartLockMenuController extends AbstractDeviceController {
     // this is just a default object to test the GUI
 
     private int deviceID;
+    TextInputDialog td = new TextInputDialog("");
+    private String pin;
+
+
+
+
+
 
 
     public void setPreviousScene(Scene previousScene) {
@@ -57,7 +65,6 @@ public class SmartLockMenuController extends AbstractDeviceController {
     public void BackButtonPressed(ActionEvent actionEvent) {
         Stage stage = (Stage) backButton.getScene().getWindow();
         stage.setScene(previous);
-
     }
 
     @Override
@@ -68,6 +75,7 @@ public class SmartLockMenuController extends AbstractDeviceController {
                 LockMessage message = (LockMessage) msg;
                 SmartDeviceNameLabel.setText(message.getName());
                 deviceID = message.getDeviceID();
+                pin = message.getPIN();
                 if(message.getLockStatus()){
                     StatusIndicatorLabel.setText("Locked");
                     SmartDeviceImageView.setImage(new javafx.scene.image.Image("/GUI/Images/Lock Icon.png"));
@@ -107,9 +115,12 @@ public class SmartLockMenuController extends AbstractDeviceController {
     @FXML
     void ToggleLockStatusButtonPressed(ActionEvent event) {
         if(StatusIndicatorLabel.getText().equals("Locked")){
-            StatusIndicatorLabel.setText("Unlocked");
-            SmartDeviceImageView.setImage(new javafx.scene.image.Image("/GUI/Images/Lock Icon.png"));
-            UpdateServer();
+            td.setHeaderText("Enter PIN");
+            td.setTitle("Enter PIN");
+            td.getEditor().setText("");
+            td.showAndWait();
+
+            PINEntered();
         }
         else{
             StatusIndicatorLabel.setText("Locked");
@@ -119,8 +130,19 @@ public class SmartLockMenuController extends AbstractDeviceController {
 
     }
 
+    public void PINEntered() {
+        if(td.getEditor().getText().equals("1234")){
+            StatusIndicatorLabel.setText("Unlocked");
+        }
+        else{
+            StatusIndicatorLabel.setText("Locked");
+        }
+        SmartDeviceImageView.setImage(new javafx.scene.image.Image("/GUI/Images/Lock Icon.png"));
+        UpdateServer();
+    }
+
     private void UpdateServer(){
-        LockMessage message = new LockMessage(deviceID,SmartDeviceNameLabel.getText(), StatusIndicatorLabel.getText().equals("Locked"), 0, 0);
+        LockMessage message = new LockMessage(deviceID,SmartDeviceNameLabel.getText(), StatusIndicatorLabel.getText().equals("Locked"), 0, 0, pin);
         client.UpdateServer(message);
     }
 
