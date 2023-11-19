@@ -14,8 +14,6 @@ import messages.server.CoffeeMessage;
 
 import java.io.IOException;
 
-import static java.lang.Thread.sleep;
-
 public class SmartCoffeeMakerMenuController extends AbstractDeviceController {
 
     public ProgressBar waterLevel;
@@ -74,23 +72,23 @@ public class SmartCoffeeMakerMenuController extends AbstractDeviceController {
 
     @Override
     public void update(AbstractDeviceMessage msg) {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                CoffeeMessage message = (CoffeeMessage) msg;
-                SmartDeviceNameLabel.setText(message.getName());
-                StatusIndicatorLabel.setText(message.getReadyToBrew() ? "Ready to Brew" : "Not Ready to Brew");
-                waterLevel.setProgress(message.getWaterLevel());
-                coffeeLevel.setProgress(message.getCoffeeLevel());
-                //coffeeLevel.setStyle("-fx-accent: rgba(255,255,128,0.5)");
-                coffeeBeanLevel.setProgress(message.getCoffeeBeanLevel());
-            }
+        Platform.runLater(() -> {
+            deviceID = msg.getDeviceID();
+            CoffeeMessage message = (CoffeeMessage) msg;
+            SmartDeviceNameLabel.setText(message.getName());
+            StatusIndicatorLabel.setText(message.getReadyToBrew() ? "Ready to Brew" : "Not Ready to Brew");
+            waterLevel.setProgress(message.getWaterLevel());
+            coffeeLevel.setProgress(message.getCoffeeLevel());
+            coffeeLevel.setStyle("-fx-accent: rgb(77,44,1)");
+            coffeeBeanLevel.setProgress(message.getCoffeeBeanLevel());
+            coffeeBeanLevel.setStyle("-fx-accent: rgb(70,44,11)");
         });
 
     }
 
     private void UpdateServer(){
-        CoffeeMessage msg = new CoffeeMessage(deviceID, SmartDeviceNameLabel.getText(), false, 0.5, 0.5, "Coffee", false, 0.5);
+        boolean ready = StatusIndicatorLabel.getText().equals("Ready to Brew");
+        CoffeeMessage msg = new CoffeeMessage(deviceID, SmartDeviceNameLabel.getText(), false, waterLevel.getProgress(), coffeeBeanLevel.getProgress(), "Coffee", ready, 0.5);
         client.UpdateServer(msg);
     }
 
@@ -100,7 +98,7 @@ public class SmartCoffeeMakerMenuController extends AbstractDeviceController {
         try {
             client.sendToServer(new BrewCoffeeMessage(SmartDeviceNameLabel.getText(), deviceID, ((ToggleButton) Size.getSelectedToggle()).getText(), ((ToggleButton) Strength.getSelectedToggle()).getText(), waterLevel.getProgress(), coffeeBeanLevel.getProgress(), coffeeLevel.getProgress(), ((ToggleButton) Temperature.getSelectedToggle()).getText()));
         }catch (IOException e){
-
+            System.out.println("Error sending message to server.");
         }
     }
 }
