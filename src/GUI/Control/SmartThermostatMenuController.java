@@ -68,30 +68,27 @@ public class SmartThermostatMenuController extends AbstractDeviceController {
     @Override
     public void update(AbstractDeviceMessage msg) {
         //take input string and update GUI
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                ThermostatMessage message = (ThermostatMessage) msg;
-                switch(((ThermostatMessage) msg).getMode()){
-                    case 0:
-                        HeatingCoolingStatusLabel.setText("Off");
-                        break;
-                    case 1:
-                        HeatingCoolingStatusLabel.setText("Heating");
-                        break;
-                    case 2:
-                        HeatingCoolingStatusLabel.setText("Cooling");
-                        break;
-
-                }
-                SmartDeviceNameLabel.setText(message.getName());
-                deviceID = message.getDeviceID();
-                TemperatureStatusLabel.setText(message.getTemperature() + " °C");
-                SetpointStatusLabel.setText(message.getSetpoint() + " °C");
-                heatingEnableButton.setText(message.getHeatEnabled() ? "Disable Heating" : "Enable Heating");
-                coolingEnableButton.setText(message.getCoolEnabled() ? "Disable Cooling" : "Enable Cooling");
+        Platform.runLater(() -> {
+            ThermostatMessage message = (ThermostatMessage) msg;
+            switch(((ThermostatMessage) msg).getMode()){
+                case 0:
+                    HeatingCoolingStatusLabel.setText("Off");
+                    break;
+                case 1:
+                    HeatingCoolingStatusLabel.setText("Heating");
+                    break;
+                case 2:
+                    HeatingCoolingStatusLabel.setText("Cooling");
+                    break;
 
             }
+            SmartDeviceNameLabel.setText(message.getName());
+            deviceID = message.getDeviceID();
+            TemperatureStatusLabel.setText(message.getTemperature() + " °C");
+            SetpointStatusLabel.setText(message.getSetpoint() + " °C");
+            heatingEnableButton.setText(message.getHeatEnabled() ? "Disable Heating" : "Enable Heating");
+            coolingEnableButton.setText(message.getCoolEnabled() ? "Disable Cooling" : "Enable Cooling");
+
         });
 
     }
@@ -108,6 +105,21 @@ public class SmartThermostatMenuController extends AbstractDeviceController {
 
     //change temperature when button pressed, request new values from server
     public void ChangeTempButtonPressed(ActionEvent actionEvent) {
+        if(ChangeTempTextField.getText().isEmpty()){
+            ChangeTempButton.setText("Please enter a value");
+            return;
+        }
+        if(!ChangeTempTextField.getText().matches("[0-9]+")){
+            System.out.println("[" + ChangeTempTextField.getText() + "]");
+            ChangeTempButton.setText("invalid temperature, contains space");
+            return;
+        }
+        if(Float.parseFloat(ChangeTempTextField.getText()) < 15 || Float.parseFloat(ChangeTempTextField.getText()) > 35){
+            ChangeTempButton.setText("invalid temperature, to high or low");
+            return;
+        }
+
+        ChangeTempButton.setText("Change Temperature");
         SetpointStatusLabel.setText(ChangeTempTextField.getText());
         UpdateServer();
     }
