@@ -280,4 +280,14 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
         client.UpdateServer(msg);
     }
 
+    public void error(UserListMessage msg) {
+        System.out.println("User already exists.");
+        Platform.runLater(() ->{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("User already exists");
+            alert.setContentText("The user " + msg.getUsername() + " already exists.");
+            alert.showAndWait();
+        });
+    }
 }
