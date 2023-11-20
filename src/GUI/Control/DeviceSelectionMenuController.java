@@ -214,7 +214,6 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
     }
 
     public void updateUserList(UserListMessage msg) {
-        System.out.println("User added.");
             // this creates a new label for the users username
         Label usernameLabel = new Label();
             // these set the parameters of the label
@@ -231,7 +230,7 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
         Button manageUserButton = new Button("Manage User");
             // this sets the button to open a new window when pressed
         manageUserButton.setOnAction(event ->{
-            manageUserMenu.setHeaderText("Manage User");
+            manageUserMenu.setHeaderText(msg.getUsername() + " settings");
             DialogPane dp = manageUserMenu.getDialogPane();
             Label userLabel = new Label("Username: ");
             Label passLabel = new Label("Password: ");
