@@ -50,7 +50,7 @@ public class SmartLockMenuController extends AbstractDeviceController {
     // this is just a default object to test the GUI
 
     private int deviceID;
-    TextInputDialog td = new TextInputDialog("");
+    private TextInputDialog td = new TextInputDialog("");
     private String pin;
 
 
