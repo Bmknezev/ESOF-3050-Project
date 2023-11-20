@@ -44,10 +44,8 @@
             <MenuButton fx:id="settingsMenuButton" mnemonicParsing="false" text="Device Settings" StackPane.alignment="BOTTOM_RIGHT">
               <items>
                 <MenuItem fx:id="toggleUserListMenuItem" mnemonicParsing="false" onAction="#toggleUserListSelected" text="View User List" />
-                <MenuItem fx:id="addNewElementMenuItem" mnemonicParsing="false" onAction="#addNewElementSelected" text="Add New Device" />
-                  <MenuItem fx:id="deleteElementMenuItem" mnemonicParsing="false" onAction="#deleteElementSelected" text="Delete Existing Device" />
-                  <MenuItem fx:id="promoteUserMenuItem" disable="true" mnemonicParsing="false" onAction="#promoteUserSelected" text="Promote User" visible="false" />
-                  <MenuItem fx:id="demoteUserMenuItem" disable="true" mnemonicParsing="false" onAction="#demoteUserSelected" text="Demote Admin User" visible="false" />
+                <MenuItem fx:id="addNewDeviceMenuItem" mnemonicParsing="false" onAction="#addNewDeviceSelected" text="Add New Device" />
+                  <MenuItem fx:id="deleteDeviceMenuItem" mnemonicParsing="false" onAction="#deleteDeviceSelected" text="Delete Existing Device" />
               </items>
             </MenuButton>
          </children>

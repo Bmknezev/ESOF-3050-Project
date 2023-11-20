@@ -165,7 +165,7 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
         userListActive = !userListActive;
         if(!userListActive){
             System.out.println("Device List Active");
-                // changes the names of these labels to represent the new list
+                // changes the names of these to represent their new functions
             settingsMenuButton.setText("Device Settings");
             elementListIndicatorLabel.setText("Connected Devices:");
                 // changes the names of these menu items to represent their new functions
@@ -183,7 +183,7 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
         }
         else{
             System.out.println("User list selected");
-                // changes the names of these labels to represent the new list
+                // changes the names of these to represent their new functions
             settingsMenuButton.setText("User Settings");
             elementListIndicatorLabel.setText("User Accounts:");
                 // changes the names of these menu items to represent their new functions
