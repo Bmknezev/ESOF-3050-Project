@@ -1,15 +1,11 @@
 package GUI.Control;
 
-import ClientServer.SmartHomeClient;
 import GUI.Control.Abstract.AbstractDeviceController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -36,31 +32,31 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
     @FXML
     private VBox deviceVBox;
 
+    @FXML
+    private MenuButton settingsMenuButton;
+
+    @FXML
+    private MenuItem toggleUserListMenuItem;
+    @FXML
+    private MenuItem addNewElementMenuItem;
+    @FXML
+    private MenuItem deleteElementMenuItem;
+    @FXML
+    private MenuItem promoteUserMenuItem;
+    @FXML
+    private MenuItem demoteUserMenuItem;
+
     private Scene previous;
-
-    @FXML
-    MenuButton settingsMenuButton = new MenuButton();
-
-    @FXML
-    MenuItem toggleUserListMenuItem = new MenuItem();
-    @FXML
-    MenuItem addNewElementMenuItem = new MenuItem();
-    @FXML
-    MenuItem deleteElementMenuItem = new MenuItem();
-    @FXML
-    public MenuItem promoteUserMenuItem;
-    @FXML
-    public MenuItem demoteUserMenuItem;
-
     private Scene[] sceneList = new Scene[5];
     private AbstractDeviceController[] Controller;
+
+    private TextInputDialog manageUserMenu = new TextInputDialog("");
 
     private boolean userListActive = false;
 
     public void setPreviousScene(Scene previousScene) {
         previous = previousScene;
     }
-
 
     public void addNewDevice(NewDeviceMessage newDevice) {
             // this creates a new label for the device name
@@ -152,7 +148,7 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
     }
 
     public void addScene(Scene[] scenelist, AbstractDeviceController[] controller) {
-        //lists of all the device scenes and thier controllers
+        //lists of all the device scenes and their controllers
         sceneList = scenelist;
         Controller = controller;
     }
@@ -180,7 +176,8 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
             demoteUserMenuItem.setVisible(false);
             demoteUserMenuItem.setDisable(true);
 
-
+            deviceVBox.getChildren().clear();
+            client.getDevices(this);
         }
         else{
                 // changes the names of these labels to represent the new list
@@ -196,7 +193,8 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
             demoteUserMenuItem.setVisible(true);
             demoteUserMenuItem.setDisable(false);
 
-
+            deviceVBox.getChildren().clear();
+            client.getUsers(this);
         }
     }
 
@@ -213,8 +211,42 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
     }
 
     public void updateUserList(UserListMessage msg) {
-        //recieves a single user from the server and adds it to the user list
-        client.getUsers(this);
+            // this creates a new label for the users username
+        Label usernameLabel = new Label();
 
+            // these set the parameters of the label
+        usernameLabel.setText(msg.getUsername());
+        usernameLabel.setWrapText(true);
+        usernameLabel.setFont(Font.font("System", FontWeight.BOLD, 15));
+
+            // this creates a new label that shows the type of the new device
+        Label userPermisionsLabel = new Label();
+            // this sets the test of the label depending on the permissions of the user
+        userPermisionsLabel.setText(msg.getAdmin() ? "Admin User" : "User");
+
+            // this creates a new button that is linked to the new device
+        Button manageUserButton = new Button("Manage User");
+        // this sets the button to change the scene when pressed
+        manageUserButton.setOnAction(event ->{
+            manageUserMenu.setHeaderText(msg.getUsername() + "");
+            DialogPane dp = manageUserMenu.getDialogPane();
+            dp.setContent(new VBox(8,new TextField(), new TextField(), new Button()));
+        });
+
+        // this creates a new hbox to contain the new elements created
+        HBox deviceControlHBox = new HBox();
+        // these set the parameters of the hbox
+        deviceControlHBox.setSpacing(15);
+        deviceControlHBox.setAlignment(Pos.CENTER_RIGHT);
+        // this adds the elements to the hbox
+        deviceControlHBox.getChildren().addAll(userPermisionsLabel, manageUserButton);
+        // this adds the hbox to the vbox
+
+        StackPane deviceStackPane = new StackPane();
+        deviceStackPane.setAlignment(Pos.CENTER_LEFT);
+
+        deviceStackPane.getChildren().addAll(usernameLabel, deviceControlHBox);
+
+        deviceVBox.getChildren().add(deviceStackPane);
     }
 }
