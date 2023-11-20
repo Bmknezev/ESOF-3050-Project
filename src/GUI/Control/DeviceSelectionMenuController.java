@@ -24,6 +24,9 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
     private Button backButton;
 
     @FXML
+    private Button toggleUserListButton;
+
+    @FXML
     private Label welcomeUserLabel;
 
     @FXML
@@ -33,10 +36,8 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
     private VBox deviceVBox;
 
     @FXML
-    private MenuButton settingsMenuButton;
+    private MenuButton deviceListMenuButton;
 
-    @FXML
-    private MenuItem toggleUserListMenuItem;
     @FXML
     private MenuItem addNewDeviceMenuItem;
     @FXML
@@ -123,18 +124,29 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
     }
 
     public void enableAdminControls(){
-        settingsMenuButton.setVisible(true);
-        settingsMenuButton.setDisable(false);
-
         welcomeUserLabel.setText("Welcome, Admin Y");
 
+        if (userListActive){
+            toggleUserList();
+        }
+
+        deviceListMenuButton.setVisible(true);
+        deviceListMenuButton.setDisable(false);
+        toggleUserListButton.setVisible(true);
+        toggleUserListButton.setDisable(false);
     }
 
     public void disableAdminControls(){
-        settingsMenuButton.setVisible(false);
-        settingsMenuButton.setDisable(true);
-
         welcomeUserLabel.setText("Welcome, X");
+
+        if (userListActive){
+            toggleUserList();
+        }
+
+        deviceListMenuButton.setVisible(false);
+        deviceListMenuButton.setDisable(true);
+        toggleUserListButton.setVisible(false);
+        toggleUserListButton.setDisable(true);
     }
 
     @FXML
@@ -157,34 +169,32 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
         //dont worry about this, im doing bad programming practices, but it works
     }
 
-    public void toggleUserListSelected(ActionEvent actionEvent) {
+    public void toggleUserListButtonPressed(ActionEvent actionEvent) {
+        toggleUserList();
+    }
+
+    private void toggleUserList(){
         userListActive = !userListActive;
         if(!userListActive){
             System.out.println("Device List Active");
-                // changes the names of these to represent their new functions
-            settingsMenuButton.setText("Device Settings");
+            // changes the names of these to represent their new functions
             elementListIndicatorLabel.setText("Connected Devices:");
-            toggleUserListMenuItem.setText("View User List");
+            toggleUserListButton.setText("View User List");
 
-            addNewDeviceMenuItem.setVisible(true);
-            addNewDeviceMenuItem.setDisable(false);
-            deleteDeviceMenuItem.setVisible(true);
-            deleteDeviceMenuItem.setDisable(false);
+            deviceListMenuButton.setVisible(true);
+            deviceListMenuButton.setDisable(false);
 
             deviceVBox.getChildren().clear();
             client.getDevices(this);
         }
         else{
             System.out.println("User list selected");
-                // changes the names of these to represent their new functions
-            settingsMenuButton.setText("User Settings");
+            // changes the names of these to represent their new functions
             elementListIndicatorLabel.setText("User Accounts:");
-            toggleUserListMenuItem.setText("View Device List");
+            toggleUserListButton.setText("View Device List");
 
-            addNewDeviceMenuItem.setVisible(false);
-            addNewDeviceMenuItem.setDisable(true);
-            deleteDeviceMenuItem.setVisible(false);
-            deleteDeviceMenuItem.setDisable(true);
+            deviceListMenuButton.setVisible(false);
+            deviceListMenuButton.setDisable(true);
 
             deviceVBox.getChildren().clear();
             client.getUsers(this);
@@ -198,10 +208,8 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
     }
 
     public void updateUserList(UserListMessage msg) {
-
             // this creates a new label for the users username
         Label usernameLabel = new Label();
-
             // these set the parameters of the label
         usernameLabel.setText(msg.getUsername());
         usernameLabel.setWrapText(true);
@@ -214,11 +222,12 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
 
             // this creates a new button that is linked to the new device
         Button manageUserButton = new Button("Manage User");
-        // this sets the button to change the scene when pressed
+            // this sets the button to open a new window when pressed
         manageUserButton.setOnAction(event ->{
-            manageUserMenu.setHeaderText(msg.getUsername() + "");
+            manageUserMenu.setHeaderText(msg.getUsername() + " settings");
             DialogPane dp = manageUserMenu.getDialogPane();
             dp.setContent(new VBox(8,new TextField(), new TextField(), new Button()));
+
             manageUserMenu.show();
         });
 
