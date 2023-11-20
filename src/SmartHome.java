@@ -3,6 +3,7 @@ import GUI.Control.*;
 
 import GUI.Control.Abstract.AbstractDeviceController;
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -41,10 +42,22 @@ public class SmartHome extends Application {
         }
         if(!connectionFailed)
             launch(args);
-    }
 
+
+    }
+    @FXML
+    public void stop(){
+        System.out.println("Closing connection to server.");
+        try {
+            s.closeConnection();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
     @Override
     public void start(Stage primaryStage) throws Exception {
+
+
 
         primaryStage.setOnCloseRequest(event -> {
             //runs when the window is closed
