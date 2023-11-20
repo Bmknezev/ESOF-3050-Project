@@ -84,6 +84,12 @@ private LoginMenuController loginMenuController;
         Send(msg);
     }
 
+    public void getUsers(DeviceSelectionMenuController deviceSelectionPaneController) {
+        //request all devices from server, also gets client id
+        mainMenuController = deviceSelectionPaneController;
+        Send(new UserListMessage());
+    }
+
     public void UpdateServer(AbstractMessage msg){
         //just used by devices to update the server
         Send(msg);
