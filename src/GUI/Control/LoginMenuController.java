@@ -14,6 +14,7 @@ import static java.lang.Thread.sleep;
 
 public class LoginMenuController {
 
+    public Button quitButton;
     @FXML
     private TextField emailTextField;
 
@@ -79,5 +80,8 @@ public class LoginMenuController {
         //stage.setScene(next);
     }
 
+    public void quitButtonPressed(ActionEvent actionEvent) {
+        Platform.exit();
+    }
 }
 

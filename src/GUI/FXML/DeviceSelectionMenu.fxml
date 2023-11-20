@@ -26,7 +26,7 @@
       </ScrollPane>
    </center>
    <top>
-      <StackPane prefHeight="75.0" BorderPane.alignment="CENTER">
+      <StackPane prefHeight="80.0" BorderPane.alignment="CENTER">
          <children>
             <HBox fx:id="adminManagementHBox" alignment="BOTTOM_RIGHT" spacing="8.0" StackPane.alignment="BOTTOM_CENTER" />
             <Label fx:id="welcomeUserLabel" text="Welcome, user X" StackPane.alignment="TOP_CENTER">
