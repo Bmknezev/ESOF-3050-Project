@@ -184,7 +184,6 @@ public class SmartHome extends Application {
         if (!guiTest){
             s.setLoginMenuController(loginPaneController);
             s.getDevices(deviceSelectionPaneController);
-            s.getUsers(deviceSelectionPaneController);
         }
 
         primaryStage.setTitle("Smart Home");
