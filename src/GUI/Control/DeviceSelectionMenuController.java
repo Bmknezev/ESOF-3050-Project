@@ -214,6 +214,7 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
     }
 
     public void updateUserList(UserListMessage msg) {
+        System.out.println("User added.");
             // this creates a new label for the users username
         Label usernameLabel = new Label();
             // these set the parameters of the label
@@ -230,9 +231,25 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
         Button manageUserButton = new Button("Manage User");
             // this sets the button to open a new window when pressed
         manageUserButton.setOnAction(event ->{
-            manageUserMenu.setHeaderText(msg.getUsername() + " settings");
+            manageUserMenu.setHeaderText("Manage User");
             DialogPane dp = manageUserMenu.getDialogPane();
-            dp.setContent(new VBox(8,new TextField(), new TextField(), new Button()));
+            Label userLabel = new Label("Username: ");
+            Label passLabel = new Label("Password: ");
+            TextField userField = new TextField();
+            TextField passField = new TextField();
+            CheckBox adminCheckBox = new CheckBox("Admin");
+
+            userField.setText(msg.getUsername());
+            passField.setText(msg.getPassword());
+            adminCheckBox.setSelected(msg.getAdmin());
+            manageUserMenu.setResultConverter((ButtonType button) -> {
+                if (button == ButtonType.OK) {
+                    deviceVBox.getChildren().clear();
+                    modifyUser(msg.getUserID(), userField.getText(), passField.getText(), adminCheckBox.isSelected());
+                }
+                return null;
+            });
+            dp.setContent(new VBox(8,new HBox(2, userLabel, userField), new HBox(2, passLabel, passField), adminCheckBox));
 
             manageUserMenu.show();
         });
@@ -255,6 +272,11 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
 
     }
 
+    private void modifyUser(int id, String text, String text1, boolean selected) {
+        UserListMessage msg = new UserListMessage(id,text, text1, selected, false);
+        client.UpdateServer(msg);
+    }
+
     public void addUserButtonPressed(ActionEvent actionEvent) {
         addUserMenu.setHeaderText("Add new user");
         DialogPane dp = addUserMenu.getDialogPane();
@@ -263,9 +285,9 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
         TextField usernameField = new TextField();
         TextField passwordField = new TextField();
         CheckBox adminCheckBox = new CheckBox("Admin");
-        //dp.getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
         addUserMenu.setResultConverter((ButtonType button) -> {
             if (button == ButtonType.OK) {
+                deviceVBox.getChildren().clear();
                 addUser(usernameField.getText(), passwordField.getText(), adminCheckBox.isSelected());
             }
             return null;
@@ -276,7 +298,7 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
     }
 
     private void addUser(String text, String text1, boolean selected) {
-        UserListMessage msg = new UserListMessage(text, text1, selected, true);
+        UserListMessage msg = new UserListMessage(-2,text, text1, selected, true);
         client.UpdateServer(msg);
     }
 
