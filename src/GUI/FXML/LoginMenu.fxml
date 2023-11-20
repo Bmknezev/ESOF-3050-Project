@@ -33,7 +33,7 @@
             </Label>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <children>
-                  <VBox alignment="CENTER_RIGHT">
+                  <VBox alignment="CENTER_RIGHT" spacing="8.0">
                      <children>
                         <Label prefHeight="25.0" text="Email: ">
                            <font>
@@ -47,7 +47,7 @@
                         </Label>
                      </children>
                   </VBox>
-                  <VBox alignment="CENTER_LEFT">
+                  <VBox alignment="CENTER_LEFT" spacing="8.0">
                      <children>
                         <TextField fx:id="emailTextField" />
                         <TextField fx:id="passwordTextField" />

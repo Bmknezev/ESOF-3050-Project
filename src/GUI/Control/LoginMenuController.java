@@ -49,7 +49,6 @@ public class LoginMenuController {
             Platform.runLater(() -> {
                 enterButton.setText("Invalid Credentials");
                 enterButton.setStyle("-fx-text-fill: red;");
-                // change font to be red
 
             });
             try {
@@ -59,7 +58,6 @@ public class LoginMenuController {
             }
             Platform.runLater(() -> enterButton.setText("Enter"));
             enterButton.setStyle("-fx-text-fill: black;");
-            // change font back to black
         }
     }
 

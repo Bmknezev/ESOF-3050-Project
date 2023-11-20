@@ -50,10 +50,10 @@ private LoginMenuController loginMenuController;
                 System.out.println("Login details received.");
                 admin = ((LoginMessage)msg).getAdmin();
                 if (admin){
-                    mainMenuController.createAdminControls();
+                    mainMenuController.enableAdminControls();
                 }
                 else{
-                    mainMenuController.removeAdminControls();
+                    mainMenuController.disableAdminControls();
                 }
                 loginMenuController.login((LoginMessage)msg);
                 break;

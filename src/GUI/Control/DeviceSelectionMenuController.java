@@ -30,14 +30,20 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
     @FXML
     private VBox deviceVBox;
 
-    @FXML
-    private HBox adminManagementHBox;
-
     private Scene previous;
+
+    @FXML
+    MenuButton settingsMenuButton = new MenuButton("Settings");
+
+    @FXML
+    MenuItem addNewDeviceMenuItem = new MenuItem("Add New Device");
+    @FXML
+    MenuItem deleteDeviceMenuItem = new MenuItem("Delete Existing Device");
+    @FXML
+    MenuItem toggleUserListMenuItem = new MenuItem("View User List");
 
     private Scene[] sceneList = new Scene[5];
     AbstractDeviceController[] Controller;
-
 
     public void setPreviousScene(Scene previousScene) {
         previous = previousScene;
@@ -110,32 +116,19 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
         deviceVBox.getChildren().add(deviceStackPane);
     }
 
-    public void createAdminControls(){
+    public void enableAdminControls(){
+        settingsMenuButton.setVisible(true);
+        settingsMenuButton.setDisable(false);
 
-        MenuButton settingsMenuButton = new MenuButton("Settings");
+        welcomeUserLabel.setText("Welcome, Admin Y");
 
-        MenuItem addNewDeviceMenuItem = new MenuItem("Add New Device");
-        addNewDeviceMenuItem.setOnAction(event -> {
-            createNewDevice();
-        });
-
-        MenuItem deleteDeviceMenuItem = new MenuItem("Delete Existing Device");
-        deleteDeviceMenuItem.setOnAction(event -> {
-            deleteExistingDevice();
-        });
-
-        MenuItem toggleUserListMenuItem = new MenuItem("View User List");
-        toggleUserListMenuItem.setOnAction(event -> {
-            toggleUserList();
-        });
-
-        settingsMenuButton.getItems().addAll(toggleUserListMenuItem, addNewDeviceMenuItem, deleteDeviceMenuItem);
-
-        adminManagementHBox.getChildren().add(settingsMenuButton);
     }
 
-    public void removeAdminControls(){
-        adminManagementHBox.getChildren().clear();
+    public void disableAdminControls(){
+        settingsMenuButton.setVisible(false);
+        settingsMenuButton.setDisable(true);
+
+        welcomeUserLabel.setText("Welcome, X");
     }
 
     @FXML
@@ -158,15 +151,12 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
         //dont worry about this, im doing bad programming practices, but it works
     }
 
-    public void createNewDevice(){
-
+    public void toggleUserListSelected(ActionEvent actionEvent) {
     }
 
-    public void deleteExistingDevice(){
-
+    public void addNewDeviceSelected(ActionEvent actionEvent) {
     }
 
-    public void toggleUserList(){
-
+    public void deleteDeviceSelected(ActionEvent actionEvent) {
     }
 }
