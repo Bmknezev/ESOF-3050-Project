@@ -4,35 +4,43 @@ import java.util.List;
 
 public class UserListMessage extends AbstractMessage{
 
-    List<String> usernames = new java.util.ArrayList<>();
-    List<String> passwords = new java.util.ArrayList<>();
-    List<Boolean> admin = new java.util.ArrayList<>();
+    private String username;
+    private String password;
+    private boolean admin;
 
     public UserListMessage() {
         super(7);
     }
 
-    public void setPasswords(List<String> passwords){
-        this.passwords = passwords;
-    }
-
-    public void setUsernames(List<String> usernames){
-        this.usernames = usernames;
-    }
-
-    public void setAdmin(List<Boolean> admin){
+    public UserListMessage(String username, String password, boolean admin) {
+        super(7);
+        this.username = username;
+        this.password = password;
         this.admin = admin;
     }
 
-    public List<String> getUsernames(){
-        return usernames;
+    public void setUsername(String username){
+        this.username = username;
     }
 
-    public List<String> getPasswords(){
-        return passwords;
+    public void setPassword(String password){
+        this.password = password;
     }
 
-    public List<Boolean> getAdmin(){
+    public void setAdmin(boolean admin){
+        this.admin = admin;
+    }
+
+    public String getUsername(){
+        return username;
+    }
+
+    public String getPassword(){
+        return password;
+    }
+
+    public boolean getAdmin(){
         return admin;
     }
+
 }

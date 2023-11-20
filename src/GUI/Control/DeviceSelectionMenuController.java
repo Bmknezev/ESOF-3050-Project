@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import messages.AbstractDeviceMessage;
 import messages.NewDeviceMessage;
 import messages.StartupMessage;
+import messages.UserListMessage;
 
 public class DeviceSelectionMenuController extends AbstractDeviceController {
 
@@ -158,5 +159,11 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
     }
 
     public void deleteDeviceSelected(ActionEvent actionEvent) {
+    }
+
+    public void updateUserList(UserListMessage msg) {
+        //recieves a single user from the server and adds it to the user list
+
+
     }
 }

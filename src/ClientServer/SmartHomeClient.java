@@ -59,7 +59,7 @@ private LoginMenuController loginMenuController;
                 break;
             case 7:
                 //user list received
-                System.out.println("User list received.");
+                System.out.println("User received.");
                 mainMenuController.updateUserList((UserListMessage)msg);
                 break;
             default:
