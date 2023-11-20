@@ -69,25 +69,22 @@ public class SmartLockMenuController extends AbstractDeviceController {
 
     @Override
     public void update(AbstractDeviceMessage msg) {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                LockMessage message = (LockMessage) msg;
-                SmartDeviceNameLabel.setText(message.getName());
-                deviceID = message.getDeviceID();
-                pin = message.getPIN();
-                if(message.getLockStatus()){
-                    StatusIndicatorLabel.setText("Locked");
-                    SmartDeviceImageView.setImage(new javafx.scene.image.Image("/GUI/Images/Lock Icon.png"));
-                    ToggleLockStatusButton.setText("Unlock");
-                }
-                else{
-                    StatusIndicatorLabel.setText("Unlocked");
-                    SmartDeviceImageView.setImage(new javafx.scene.image.Image("/GUI/Images/Lock Icon.png"));
-                    ToggleLockStatusButton.setText("Lock");
-                }
-
+        Platform.runLater(() -> {
+            LockMessage message = (LockMessage) msg;
+            SmartDeviceNameLabel.setText(message.getName());
+            deviceID = message.getDeviceID();
+            pin = message.getPIN();
+            if(message.getLockStatus()){
+                StatusIndicatorLabel.setText("Locked");
+                SmartDeviceImageView.setImage(new javafx.scene.image.Image("/GUI/Images/Lock Icon.png"));
+                ToggleLockStatusButton.setText("Unlock");
             }
+            else{
+                StatusIndicatorLabel.setText("Unlocked");
+                SmartDeviceImageView.setImage(new javafx.scene.image.Image("/GUI/Images/Lock Icon.png"));
+                ToggleLockStatusButton.setText("Lock");
+            }
+
         });
 
     }
