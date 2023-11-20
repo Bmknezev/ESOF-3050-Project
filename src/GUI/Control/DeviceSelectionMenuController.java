@@ -61,9 +61,6 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
         previous = previousScene;
     }
 
-    public void setClient(SmartHomeClient client) {
-        this.client = client;
-    }
 
     public void addNewDevice(NewDeviceMessage newDevice) {
             // this creates a new label for the device name
