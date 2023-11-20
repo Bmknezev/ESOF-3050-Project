@@ -6,24 +6,41 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+
+import static javafx.application.Platform.runLater;
 
 public class SmartHome extends Application {
     static SmartHomeClient s = new SmartHomeClient("127.0.0.1", 19920);
 
     static boolean guiTest = false;
+
     public static void main(String[] args) {
+        boolean connectionFailed = false;
 
         if (!guiTest){
             try {
                 s.openConnection();
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                connectionFailed = true;
+                //throw new RuntimeException(e);
+                //create new stage and display error message
+                runLater(() -> {
+                    Parent errorRoot = new Pane(new Label("Connection to server failed."));
+                    Scene errorScene = new Scene(errorRoot, 600,575);
+                    Stage errorStage = new Stage();
+                    errorStage.setTitle("Connection Error");
+                    errorStage.setScene(errorScene);
+                    errorStage.show();
+                });
             }
         }
-        launch(args);
+        if(!connectionFailed)
+            launch(args);
     }
 
     @Override
