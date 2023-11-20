@@ -61,21 +61,17 @@ public class SmartSmokeDetectorMenuController extends AbstractDeviceController {
 
     @Override
     public void update(AbstractDeviceMessage msg) {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                SmokeDetectorMessage message = (SmokeDetectorMessage) msg;
-                SmartDeviceNameLabel.setText(message.getName());
-                deviceID = message.getDeviceID();
-                if (message.getAlarmStatus()) {
-                    StatusIndicatorLabel.setText("Active");
-                } else {
-                    StatusIndicatorLabel.setText("Inactive");
-                }
-                //PreviousTestDateLabel.setText(message.getPreviousTestDate());
-
-
+        Platform.runLater(() -> {
+            SmokeDetectorMessage message = (SmokeDetectorMessage) msg;
+            SmartDeviceNameLabel.setText(message.getName());
+            deviceID = message.getDeviceID();
+            if (message.getAlarmStatus()) {
+                StatusIndicatorLabel.setText("Active");
+            } else {
+                StatusIndicatorLabel.setText("Inactive");
             }
+            //PreviousTestDateLabel.setText(message.getPreviousTestDate());
+
         });
 
     }

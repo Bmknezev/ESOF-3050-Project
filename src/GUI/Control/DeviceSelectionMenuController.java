@@ -20,6 +20,7 @@ import messages.UserListMessage;
 public class DeviceSelectionMenuController extends AbstractDeviceController {
 
 
+    public Button addUserButton;
     @FXML
     private Button backButton;
 
@@ -48,6 +49,7 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
     private AbstractDeviceController[] Controller;
 
     private TextInputDialog manageUserMenu = new TextInputDialog("");
+    private TextInputDialog addUserMenu = new TextInputDialog("");
 
     private boolean userListActive = false;
 
@@ -183,6 +185,8 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
 
             deviceListMenuButton.setVisible(true);
             deviceListMenuButton.setDisable(false);
+            addUserButton.setVisible(false);
+            addUserButton.setDisable(true);
 
             deviceVBox.getChildren().clear();
             client.getDevices(this);
@@ -195,6 +199,8 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
 
             deviceListMenuButton.setVisible(false);
             deviceListMenuButton.setDisable(true);
+            addUserButton.setVisible(true);
+            addUserButton.setDisable(false);
 
             deviceVBox.getChildren().clear();
             client.getUsers(this);
@@ -248,4 +254,30 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
         Platform.runLater(() -> deviceVBox.getChildren().add(deviceStackPane));
 
     }
+
+    public void addUserButtonPressed(ActionEvent actionEvent) {
+        addUserMenu.setHeaderText("Add new user");
+        DialogPane dp = addUserMenu.getDialogPane();
+        Label usernameLabel = new Label("Username: ");
+        Label passwordLabel = new Label("Password: ");
+        TextField usernameField = new TextField();
+        TextField passwordField = new TextField();
+        CheckBox adminCheckBox = new CheckBox("Admin");
+        //dp.getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+        addUserMenu.setResultConverter((ButtonType button) -> {
+            if (button == ButtonType.OK) {
+                addUser(usernameField.getText(), passwordField.getText(), adminCheckBox.isSelected());
+            }
+            return null;
+        });
+        dp.setContent(new VBox(8,new HBox(2, usernameLabel, usernameField), new HBox(2, passwordLabel, passwordField), adminCheckBox));
+
+        addUserMenu.show();
+    }
+
+    private void addUser(String text, String text1, boolean selected) {
+        UserListMessage msg = new UserListMessage(text, text1, selected, true);
+        client.UpdateServer(msg);
+    }
+
 }
