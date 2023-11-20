@@ -59,6 +59,7 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
     }
 
     public void addNewDevice(NewDeviceMessage newDevice) {
+        System.out.println("New device received");
             // this creates a new label for the device name
         Label deviceNameLabel = new Label();
             // these set the parameters of the label
@@ -163,6 +164,7 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
     public void toggleUserListSelected(ActionEvent actionEvent) {
         userListActive = !userListActive;
         if(!userListActive){
+            System.out.println("Device List Active");
                 // changes the names of these labels to represent the new list
             settingsMenuButton.setText("Device Settings");
             elementListIndicatorLabel.setText("Connected Devices:");
@@ -176,10 +178,11 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
             demoteUserMenuItem.setVisible(false);
             demoteUserMenuItem.setDisable(true);
 
-            deviceVBox.getChildren().clear();
+            //deviceVBox.getChildren().clear();
             client.getDevices(this);
         }
         else{
+            System.out.println("User list selected");
                 // changes the names of these labels to represent the new list
             settingsMenuButton.setText("User Settings");
             elementListIndicatorLabel.setText("User Accounts:");
@@ -193,7 +196,7 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
             demoteUserMenuItem.setVisible(true);
             demoteUserMenuItem.setDisable(false);
 
-            deviceVBox.getChildren().clear();
+            //deviceVBox.getChildren().clear();
             client.getUsers(this);
         }
     }

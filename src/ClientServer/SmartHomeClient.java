@@ -27,12 +27,10 @@ private LoginMenuController loginMenuController;
     @Override
     protected void handleMessageFromServer(Object msg) {
         //this line is used for testing
-        System.out.println("Message received: " + msg.toString());
 
            //check message type
         switch (((AbstractMessage)msg).getType()){
             case 1:
-                System.out.println("Device details received.");
                 //device details received
                 if(currentDeviceID == ((AbstractDeviceMessage)msg).getDeviceID())
                     deviceController.update((AbstractDeviceMessage)msg);
@@ -47,7 +45,6 @@ private LoginMenuController loginMenuController;
                 break;
             case 5:
                 //login details received
-                System.out.println("Login details received.");
                 admin = ((LoginMessage)msg).getAdmin();
                 if (admin){
                     mainMenuController.enableAdminControls();
@@ -59,7 +56,6 @@ private LoginMenuController loginMenuController;
                 break;
             case 7:
                 //user list received
-                System.out.println("User received.");
                 mainMenuController.updateUserList((UserListMessage)msg);
                 break;
             default:
