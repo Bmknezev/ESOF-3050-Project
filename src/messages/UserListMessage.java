@@ -8,17 +8,19 @@ public class UserListMessage extends AbstractMessage{
     private String password;
     private boolean admin;
     private boolean newUser;
+    private int userID;
 
     public UserListMessage() {
         super(7);
     }
 
-    public UserListMessage(String username, String password, boolean admin, boolean newUser) {
+    public UserListMessage(int id, String username, String password, boolean admin, boolean newUser) {
         super(7);
         this.username = username;
         this.password = password;
         this.admin = admin;
         this.newUser = newUser;
+        this.userID = id;
     }
 
     public void setUsername(String username){
@@ -47,6 +49,10 @@ public class UserListMessage extends AbstractMessage{
 
     public boolean getNewUser() {
         return newUser;
+    }
+
+    public int getUserID() {
+        return userID;
     }
 
 }

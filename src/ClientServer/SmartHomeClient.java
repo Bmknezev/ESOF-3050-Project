@@ -25,7 +25,6 @@ private LoginMenuController loginMenuController;
 
     @Override
     protected void handleMessageFromServer(Object msg) {
-        //this line is used for testing
 
            //check message type
         switch (((AbstractMessage)msg).getType()){
@@ -85,7 +84,7 @@ private LoginMenuController loginMenuController;
     public void getUsers(DeviceSelectionMenuController deviceSelectionPaneController) {
         //request all devices from server, also gets client id
         mainMenuController = deviceSelectionPaneController;
-        Send(new UserListMessage());
+        Send(new UserListMessage(-1, "", "", false, false));
     }
 
     public void UpdateServer(AbstractMessage msg){
