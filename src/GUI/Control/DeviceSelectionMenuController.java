@@ -7,6 +7,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -108,6 +110,34 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
         deviceVBox.getChildren().add(deviceStackPane);
     }
 
+    public void createAdminControls(){
+
+        MenuButton settingsMenuButton = new MenuButton("Settings");
+
+        MenuItem addNewDeviceMenuItem = new MenuItem("Add New Device");
+        addNewDeviceMenuItem.setOnAction(event -> {
+            createNewDevice();
+        });
+
+        MenuItem deleteDeviceMenuItem = new MenuItem("Delete Existing Device");
+        deleteDeviceMenuItem.setOnAction(event -> {
+            deleteExistingDevice();
+        });
+
+        MenuItem toggleUserListMenuItem = new MenuItem("View User List");
+        toggleUserListMenuItem.setOnAction(event -> {
+            toggleUserList();
+        });
+
+        settingsMenuButton.getItems().addAll(toggleUserListMenuItem, addNewDeviceMenuItem, deleteDeviceMenuItem);
+
+        adminManagementHBox.getChildren().add(settingsMenuButton);
+    }
+
+    public void removeAdminControls(){
+        adminManagementHBox.getChildren().clear();
+    }
+
     @FXML
     void backButtonPressed(ActionEvent event) {
             // these change the scene when the back button is pressed
@@ -126,5 +156,17 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
     @Override
     public void update(AbstractDeviceMessage msg) {
         //dont worry about this, im doing bad programming practices, but it works
+    }
+
+    public void createNewDevice(){
+
+    }
+
+    public void deleteExistingDevice(){
+
+    }
+
+    public void toggleUserList(){
+
     }
 }

@@ -26,16 +26,19 @@
       </ScrollPane>
    </center>
    <top>
-      <StackPane BorderPane.alignment="CENTER">
+      <StackPane prefHeight="75.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox fx:id="adminManagementHBox" alignment="CENTER_RIGHT" spacing="8.0" />
-            <Label fx:id="welcomeUserLabel" text="Welcome, user X">
+            <HBox fx:id="adminManagementHBox" alignment="BOTTOM_RIGHT" spacing="8.0" StackPane.alignment="BOTTOM_CENTER" />
+            <Label fx:id="welcomeUserLabel" text="Welcome, user X" StackPane.alignment="TOP_CENTER">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
             <Button fx:id="backButton" cancelButton="true" mnemonicParsing="false" onAction="#backButtonPressed" text="Back to Log In" StackPane.alignment="TOP_LEFT" />
          </children>
+         <padding>
+            <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+         </padding>
       </StackPane>
    </top>
    <bottom>

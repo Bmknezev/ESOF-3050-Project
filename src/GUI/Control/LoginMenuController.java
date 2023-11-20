@@ -10,6 +10,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import messages.LoginMessage;
 
+import static java.lang.Thread.sleep;
+
 public class LoginMenuController {
 
     @FXML
@@ -43,7 +45,17 @@ public class LoginMenuController {
         if (msg.getLoginStatus())
             openNextScene();
         else{
-            Platform.runLater(() -> enterButton.setText("Invalid Credentials"));
+            Platform.runLater(() -> {
+                enterButton.setText("Invalid Credentials");
+
+
+            });
+            try {
+                sleep(2000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            Platform.runLater(() -> enterButton.setText("Enter"));
         }
     }
 

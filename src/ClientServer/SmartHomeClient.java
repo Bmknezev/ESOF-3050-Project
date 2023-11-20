@@ -49,6 +49,12 @@ private LoginMenuController loginMenuController;
                 //login details received
                 System.out.println("Login details received.");
                 admin = ((LoginMessage)msg).getAdmin();
+                if (admin){
+                    mainMenuController.createAdminControls();
+                }
+                else{
+                    mainMenuController.removeAdminControls();
+                }
                 loginMenuController.login((LoginMessage)msg);
                 break;
             default:
