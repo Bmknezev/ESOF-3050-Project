@@ -157,6 +157,7 @@ public class SmartHome extends Application {
 
 
 
+
         //making list of device scenes to enable switching scenes
         Scene[] sceneList = new Scene[6];
         sceneList[0] = lightDeviceScene;

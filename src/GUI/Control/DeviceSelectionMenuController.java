@@ -1,5 +1,6 @@
 package GUI.Control;
 
+import ClientServer.SmartHomeClient;
 import GUI.Control.Abstract.AbstractDeviceController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -52,12 +53,16 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
     public MenuItem demoteUserMenuItem;
 
     private Scene[] sceneList = new Scene[5];
-    AbstractDeviceController[] Controller;
+    private AbstractDeviceController[] Controller;
 
-    boolean userListActive = false;
+    private boolean userListActive = false;
 
     public void setPreviousScene(Scene previousScene) {
         previous = previousScene;
+    }
+
+    public void setClient(SmartHomeClient client) {
+        this.client = client;
     }
 
     public void addNewDevice(NewDeviceMessage newDevice) {
@@ -212,7 +217,7 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
 
     public void updateUserList(UserListMessage msg) {
         //recieves a single user from the server and adds it to the user list
-
+        client.getUsers(this);
 
     }
 }
