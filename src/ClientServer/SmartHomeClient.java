@@ -57,6 +57,11 @@ private LoginMenuController loginMenuController;
                 }
                 loginMenuController.login((LoginMessage)msg);
                 break;
+            case 7:
+                //user list received
+                System.out.println("User list received.");
+                mainMenuController.updateUserList((UserListMessage)msg);
+                break;
             default:
                 System.out.println("Unknown message type received.");
                 break;
