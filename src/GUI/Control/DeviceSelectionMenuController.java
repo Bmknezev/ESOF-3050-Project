@@ -38,13 +38,9 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
     @FXML
     private MenuItem toggleUserListMenuItem;
     @FXML
-    private MenuItem addNewElementMenuItem;
+    private MenuItem addNewDeviceMenuItem;
     @FXML
-    private MenuItem deleteElementMenuItem;
-    @FXML
-    private MenuItem promoteUserMenuItem;
-    @FXML
-    private MenuItem demoteUserMenuItem;
+    private MenuItem deleteDeviceMenuItem;
 
     private Scene previous;
     private Scene[] sceneList = new Scene[5];
@@ -163,51 +159,39 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
     public void toggleUserListSelected(ActionEvent actionEvent) {
         userListActive = !userListActive;
         if(!userListActive){
-                // changes the names of these labels to represent the new list
+                // changes the names of these to represent their new functions
             settingsMenuButton.setText("Device Settings");
             elementListIndicatorLabel.setText("Connected Devices:");
-                // changes the names of these menu items to represent their new functions
             toggleUserListMenuItem.setText("View User List");
-            addNewElementMenuItem.setText("Add New Device");
-            deleteElementMenuItem.setText("Delete Existing Device");
-                // disables the now irrelevant menu items
-            promoteUserMenuItem.setVisible(false);
-            promoteUserMenuItem.setDisable(true);
-            demoteUserMenuItem.setVisible(false);
-            demoteUserMenuItem.setDisable(true);
+                // enables the now relevant menu items
+            addNewDeviceMenuItem.setVisible(true);
+            addNewDeviceMenuItem.setDisable(false);
+            deleteDeviceMenuItem.setVisible(true);
+            deleteDeviceMenuItem.setDisable(false);
 
             deviceVBox.getChildren().clear();
             client.getDevices(this);
         }
         else{
-                // changes the names of these labels to represent the new list
+                // changes the names of these to represent their new functions
             settingsMenuButton.setText("User Settings");
             elementListIndicatorLabel.setText("User Accounts:");
-                // changes the names of these menu items to represent their new functions
             toggleUserListMenuItem.setText("View Device List");
-            addNewElementMenuItem.setText("Add New User");
-            deleteElementMenuItem.setText("Delete Existing User");
-                // enables the now relevant menu items
-            promoteUserMenuItem.setVisible(true);
-            promoteUserMenuItem.setDisable(false);
-            demoteUserMenuItem.setVisible(true);
-            demoteUserMenuItem.setDisable(false);
+                // disables the now irrelevant menu items
+            addNewDeviceMenuItem.setVisible(false);
+            addNewDeviceMenuItem.setDisable(true);
+            deleteDeviceMenuItem.setVisible(false);
+            deleteDeviceMenuItem.setDisable(true);
 
             deviceVBox.getChildren().clear();
             client.getUsers(this);
         }
     }
 
-    public void addNewElementSelected(ActionEvent actionEvent) {
+    public void addNewDeviceSelected(ActionEvent actionEvent) {
     }
 
-    public void deleteElementSelected(ActionEvent actionEvent) {
-    }
-
-    public void promoteUserSelected(ActionEvent actionEvent) {
-    }
-
-    public void demoteUserSelected(ActionEvent actionEvent) {
+    public void deleteDeviceSelected(ActionEvent actionEvent) {
     }
 
     public void updateUserList(UserListMessage msg) {
