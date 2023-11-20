@@ -9,36 +9,55 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Control.SmartThermostatMenuController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="494.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Control.SmartThermostatMenuController">
    <center>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" prefHeight="298.0" prefWidth="580.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
             <ImageView fx:id="SmartDeviceImageView" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Images/Thermostat%20Icon.png" />
                </image>
             </ImageView>
-            <Label fx:id="TemperatureStatusLabel" text="(Current Temperature)" />
-            <Label fx:id="SetpointStatusLabel" text="(Cuurent Setpoint)" />
-            <Label fx:id="HeatingCoolingStatusLabel" text="(Heating / Cooling Status)" />
+            <GridPane>
+              <columnConstraints>
+                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label fx:id="TemperatureStatusLabel" text="(Current Temperature)" GridPane.columnIndex="1" />
+                  <Label fx:id="SetpointStatusLabel" text="(Curent Setpoint)" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label fx:id="HeatingCoolingStatusLabel" text="(Heating / Cooling Status)" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label text="Temp: " />
+                  <Label text="System Mode: " GridPane.rowIndex="2" />
+                  <Label text="Setpoint: " GridPane.rowIndex="1" />
+               </children>
+            </GridPane>
          </children>
       </VBox>
    </center>
    <bottom>
-      <GridPane alignment="CENTER" BorderPane.alignment="CENTER">
+      <GridPane alignment="CENTER" prefHeight="151.0" prefWidth="580.0" BorderPane.alignment="CENTER">
         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="178.0" minWidth="10.0" prefWidth="153.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="238.0" minWidth="10.0" prefWidth="238.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="189.0" minWidth="10.0" prefWidth="177.0" />
         </columnConstraints>
         <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <Button fx:id="ChangeTempButton" mnemonicParsing="false" onAction="#ChangeTempButtonPressed" prefWidth="150.0" text="Change" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
@@ -54,7 +73,12 @@
                   <Insets right="8.0" />
                </padding>
             </Label>
-            <Button fx:id="backButton" cancelButton="true" mnemonicParsing="false" onAction="#backButtonPressed" text="Back" GridPane.rowIndex="2" />
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <children>
+                  <Button fx:id="coolingEnableButton" mnemonicParsing="false" onAction="#coolingEnableButtonPressed" text="Enable Cooling" />
+                  <Button fx:id="heatingEnableButton" mnemonicParsing="false" onAction="#heatingEnableButtonPressed" text="Enable Heating" />
+               </children>
+            </HBox>
          </children>
       </GridPane>
    </bottom>
@@ -62,15 +86,20 @@
       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
    </padding>
    <top>
-      <VBox alignment="BOTTOM_CENTER" BorderPane.alignment="CENTER">
+      <StackPane BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="SmartDeviceNameLabel" text="(Smart Thermostat Name)">
-               <font>
-                  <Font name="System Bold" size="20.0" />
-               </font>
-            </Label>
-            <Label text="Smart Thermostat" />
+            <VBox alignment="BOTTOM_CENTER">
+               <children>
+                  <Label fx:id="SmartDeviceNameLabel" text="(Smart Thermostat Name)">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label text="Smart Thermostat" />
+               </children>
+            </VBox>
+            <Button fx:id="backButton" cancelButton="true" mnemonicParsing="false" onAction="#backButtonPressed" text="Back" StackPane.alignment="TOP_LEFT" />
          </children>
-      </VBox>
+      </StackPane>
    </top>
 </BorderPane>

@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
@@ -12,31 +13,27 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Control.SmartCoffeeMakerMenuController">
-   <top>
-      <VBox alignment="BOTTOM_CENTER" BorderPane.alignment="CENTER">
-         <children>
-            <Label fx:id="SmartDeviceNameLabel" text="(Smart Coffee Maker Name)">
-               <font>
-                  <Font name="System Bold" size="20.0" />
-               </font>
-            </Label>
-            <Label text="Smart Coffee Maker" />
-         </children>
-      </VBox>
-   </top>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Control.SmartCoffeeMakerMenuController">
    <center>
       <VBox alignment="CENTER" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="SmartDeviceImageView" fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Images/Coffee%20Icon.png" />
-               </image>
-            </ImageView>
+            <StackPane>
+               <children>
+                  <ProgressBar fx:id="coffeeLevel" prefHeight="64.0" prefWidth="57.0" progress="0.0" rotate="-90.0" scaleY="1.2" translateX="-8.0" translateY="11.0" />
+                  <ImageView fx:id="SmartDeviceImageView" fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/Coffee_Icon.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </StackPane>
             <Label fx:id="StatusIndicatorLabel" text="(Current Status)" />
+            <ProgressBar fx:id="waterLevel" prefWidth="200.0" progress="0.0" />
+            <ProgressBar fx:id="coffeeBeanLevel" prefWidth="200.0" progress="0.62" />
          </children>
       </VBox>
    </center>
@@ -56,7 +53,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="BrewCoffeeButton" mnemonicParsing="false" prefWidth="150.0" text="Brew Coffee" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Button fx:id="BrewCoffeeButton" mnemonicParsing="false" onAction="#BrewCoffeeButtonPressed" prefWidth="150.0" text="Brew Coffee" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
             <Button fx:id="CreateAutomationButton" mnemonicParsing="false" prefWidth="150.0" text="Create Coffee Schedule" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
             <Button fx:id="EditAutomationsButton" mnemonicParsing="false" prefWidth="150.0" text="Edit Coffee Schedules" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
             <Label text="Size:" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
@@ -66,13 +63,13 @@
             </Label>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="8.0" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
                <children>
-                  <RadioButton mnemonicParsing="false" text="Small">
+                  <RadioButton fx:id="smallButton" mnemonicParsing="false" text="Small">
                      <toggleGroup>
                         <ToggleGroup fx:id="Size" />
                      </toggleGroup></RadioButton>
-                  <RadioButton mnemonicParsing="false" selected="true" text="Medium" toggleGroup="$Size" />
-                  <RadioButton mnemonicParsing="false" text="Large" toggleGroup="$Size" />
-                  <RadioButton mnemonicParsing="false" text="Extra Large" toggleGroup="$Size" />
+                  <RadioButton fx:id="mediumButton" mnemonicParsing="false" selected="true" text="Medium" toggleGroup="$Size" />
+                  <RadioButton fx:id="largeButton" mnemonicParsing="false" text="Large" toggleGroup="$Size" />
+                  <RadioButton fx:id="extraLargeButton" mnemonicParsing="false" text="Extra Large" toggleGroup="$Size" />
                </children>
                <opaqueInsets>
                   <Insets />
@@ -88,13 +85,13 @@
             </Label>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="8.0" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <children>
-                  <RadioButton mnemonicParsing="false" text="Weak">
+                  <RadioButton fx:id="weakButton" mnemonicParsing="false" text="Weak">
                      <toggleGroup>
                         <ToggleGroup fx:id="Strength" />
                      </toggleGroup>
                   </RadioButton>
-                  <RadioButton mnemonicParsing="false" selected="true" text="Medium Strength" toggleGroup="$Strength" />
-                  <RadioButton mnemonicParsing="false" text="Strong" toggleGroup="$Strength" HBox.hgrow="ALWAYS" />
+                  <RadioButton fx:id="medStrengthButton" mnemonicParsing="false" selected="true" text="Medium Strength" toggleGroup="$Strength" />
+                  <RadioButton fx:id="strongButton" mnemonicParsing="false" text="Strong" toggleGroup="$Strength" HBox.hgrow="ALWAYS" />
                </children>
                <padding>
                   <Insets left="8.0" />
@@ -119,11 +116,27 @@
                   <Insets left="8.0" />
                </padding>
             </HBox>
-            <Button fx:id="backButton" cancelButton="true" mnemonicParsing="false" onAction="#backButtonPressed" text="Back" GridPane.rowIndex="5" />
          </children>
       </GridPane>
    </bottom>
    <padding>
       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
    </padding>
+   <top>
+      <StackPane BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="BOTTOM_CENTER">
+               <children>
+                  <Label fx:id="SmartDeviceNameLabel" text="(Smart Coffee Maker Name)">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label text="Smart Coffee Maker" />
+               </children>
+            </VBox>
+            <Button fx:id="backButton" cancelButton="true" mnemonicParsing="false" onAction="#backButtonPressed" text="Back" StackPane.alignment="TOP_LEFT" />
+         </children>
+      </StackPane>
+   </top>
 </BorderPane>

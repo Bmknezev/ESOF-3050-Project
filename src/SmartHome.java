@@ -3,31 +3,61 @@ import GUI.Control.*;
 
 import GUI.Control.Abstract.AbstractDeviceController;
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+
+import static javafx.application.Platform.runLater;
 
 public class SmartHome extends Application {
     static SmartHomeClient s = new SmartHomeClient("127.0.0.1", 19920);
 
     static boolean guiTest = false;
+
     public static void main(String[] args) {
+        boolean connectionFailed = false;
 
         if (!guiTest){
             try {
                 s.openConnection();
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                connectionFailed = true;
+                //throw new RuntimeException(e);
+                //create new stage and display error message
+                runLater(() -> {
+                    Parent errorRoot = new Pane(new Label("Connection to server failed."));
+                    Scene errorScene = new Scene(errorRoot, 600,575);
+                    Stage errorStage = new Stage();
+                    errorStage.setTitle("Connection Error");
+                    errorStage.setScene(errorScene);
+                    errorStage.show();
+                });
             }
         }
-        launch(args);
-    }
+        if(!connectionFailed)
+            launch(args);
 
+
+    }
+    @FXML
+    public void stop(){
+        System.out.println("Closing connection to server.");
+        try {
+            s.closeConnection();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
     @Override
     public void start(Stage primaryStage) throws Exception {
+
+
         // getting loader and a pane for the login scene
         FXMLLoader loginPaneLoader = new FXMLLoader(getClass().getResource("/GUI/FXML/LoginMenu.fxml"));
         Parent loginPane = loginPaneLoader.load();
@@ -71,7 +101,7 @@ public class SmartHome extends Application {
 
         // injecting device selection scene into the controller of the login scene as the next scene
         LoginMenuController loginPaneController = loginPaneLoader.getController();
-        loginPaneController.setNextScene(deviceSelectionScene);
+        loginPaneController.setNextScene(deviceSelectionScene, primaryStage);
 
         // injecting the device selection scene into the controller of the light device scene as the previous scene
         SmartLightMenuController lightDevicePaneController = lightDevicePaneLoader.getController();
@@ -118,7 +148,15 @@ public class SmartHome extends Application {
         lightDevicePaneController.addServer(s);
         lockDevicePaneController.addServer(s);
         thermostatDevicePaneController.addServer(s);
+        coffeeMakerDevicePaneController.addServer(s);
+        garageDoorOpenerDevicePaneController.addServer(s);
+        smokeDetectorDevicePaneController.addServer(s);
         deviceSelectionPaneController.addServer(s);
+        loginPaneController.addServer(s);
+
+
+
+
 
         //making list of device scenes to enable switching scenes
         Scene[] sceneList = new Scene[6];
@@ -144,6 +182,7 @@ public class SmartHome extends Application {
 
 
         if (!guiTest){
+            s.setLoginMenuController(loginPaneController);
             s.getDevices(deviceSelectionPaneController);
         }
 

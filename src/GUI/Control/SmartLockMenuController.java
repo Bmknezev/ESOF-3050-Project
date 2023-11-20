@@ -8,8 +8,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import messages.AbstractDeviceMessage;
+import messages.server.LockMessage;
 
 public class SmartLockMenuController extends AbstractDeviceController {
 
@@ -47,6 +50,13 @@ public class SmartLockMenuController extends AbstractDeviceController {
     // this is just a default object to test the GUI
 
     private int deviceID;
+    private TextInputDialog td = new TextInputDialog("");
+    private String pin;
+
+
+
+
+
 
 
     public void setPreviousScene(Scene previousScene) {
@@ -55,19 +65,26 @@ public class SmartLockMenuController extends AbstractDeviceController {
     public void BackButtonPressed(ActionEvent actionEvent) {
         Stage stage = (Stage) backButton.getScene().getWindow();
         stage.setScene(previous);
-
     }
 
     @Override
-    public void update(String[] s) {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                deviceID = Integer.parseInt(s[0]);
-                SmartDeviceNameLabel.setText(s[1]);
-                SmartDeviceImageView.setImage(Boolean.parseBoolean(s[2]) ? new javafx.scene.image.Image("/GUI/Images/Lock Icon.png") : new javafx.scene.image.Image("/GUI/Images/Lock Icon.png"));
-                StatusIndicatorLabel.setText(Boolean.parseBoolean(s[2]) ? "Locked" : "Unlocked");
+    public void update(AbstractDeviceMessage msg) {
+        Platform.runLater(() -> {
+            LockMessage message = (LockMessage) msg;
+            SmartDeviceNameLabel.setText(message.getName());
+            deviceID = message.getDeviceID();
+            pin = message.getPIN();
+            if(message.getLockStatus()){
+                StatusIndicatorLabel.setText("Locked");
+                SmartDeviceImageView.setImage(new javafx.scene.image.Image("/GUI/Images/Lock Icon.png"));
+                ToggleLockStatusButton.setText("Unlock");
             }
+            else{
+                StatusIndicatorLabel.setText("Unlocked");
+                SmartDeviceImageView.setImage(new javafx.scene.image.Image("/GUI/Images/Lock Icon.png"));
+                ToggleLockStatusButton.setText("Lock");
+            }
+
         });
 
     }
@@ -95,25 +112,35 @@ public class SmartLockMenuController extends AbstractDeviceController {
     @FXML
     void ToggleLockStatusButtonPressed(ActionEvent event) {
         if(StatusIndicatorLabel.getText().equals("Locked")){
-            StatusIndicatorLabel.setText("Unlocked");
-            SmartDeviceImageView.setImage(new javafx.scene.image.Image("/GUI/Images/Lock Icon.png"));
-            UpdateServer("lockStatus|false");
+            td.setHeaderText("Enter PIN");
+            td.setTitle("Enter PIN");
+            td.getEditor().setText("");
+            td.showAndWait();
+
+            PINEntered();
         }
         else{
             StatusIndicatorLabel.setText("Locked");
             SmartDeviceImageView.setImage(new javafx.scene.image.Image("/GUI/Images/Lock Icon.png"));
-            UpdateServer("lockStatus|true");
+            UpdateServer();
         }
 
     }
 
-    private void UpdateServer(String msg){
-        String message = 0 + "@" + deviceID + "@" + msg;
-        try {
-            super.client.sendToServer(message);
-        }catch (Exception e){
-            throw new RuntimeException(e);
+    public void PINEntered() {
+        if(td.getEditor().getText().equals("1234")){
+            StatusIndicatorLabel.setText("Unlocked");
         }
+        else{
+            StatusIndicatorLabel.setText("Locked");
+        }
+        SmartDeviceImageView.setImage(new javafx.scene.image.Image("/GUI/Images/Lock Icon.png"));
+        UpdateServer();
+    }
+
+    private void UpdateServer(){
+        LockMessage message = new LockMessage(deviceID,SmartDeviceNameLabel.getText(), StatusIndicatorLabel.getText().equals("Locked"), 0, 0, pin);
+        client.UpdateServer(message);
     }
 
     @FXML

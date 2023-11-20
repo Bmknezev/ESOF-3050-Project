@@ -3,12 +3,16 @@ package ClientServer;
 
 import GUI.Control.Abstract.AbstractDeviceController;
 import GUI.Control.DeviceSelectionMenuController;
-
-import java.io.IOException;
+import GUI.Control.LoginMenuController;
+import messages.*;
 
 public class SmartHomeClient extends ClientServer.AbstractClient {
-private AbstractDeviceController tmp;
-private DeviceSelectionMenuController tmp2;
+private AbstractDeviceController deviceController;
+private DeviceSelectionMenuController mainMenuController;
+private int currentDeviceID = -1;
+private boolean admin;
+
+private LoginMenuController loginMenuController;
     /**
      * Constructs the client.
      *
@@ -21,36 +25,88 @@ private DeviceSelectionMenuController tmp2;
 
     @Override
     protected void handleMessageFromServer(Object msg) {
-        System.out.println("Message received: " + msg.toString());
-        String[] s1 = msg.toString().split("@");
-        if(s1[0].equals("1")){
-            String[] s = s1[1].split("~");
-            for (String string : s) {
-                tmp2.addNewDevice(string);
-            }
-        }else {
-            String[] s = s1[1].split("\\|");
-            tmp.update(s);
+
+           //check message type
+        switch (((AbstractMessage)msg).getType()){
+            case 1:
+                //device details received
+                if(currentDeviceID == ((AbstractDeviceMessage)msg).getDeviceID())
+                    deviceController.update((AbstractDeviceMessage)msg);
+                break;
+            case 2:
+                //new device received
+                mainMenuController.addNewDevice((NewDeviceMessage)msg);
+                break;
+            case 3:
+                //client id received
+                //clientID = ((StartupMessage)msg).getClientID();
+                break;
+            case 5:
+                //login details received
+                admin = ((LoginMessage)msg).getAdmin();
+                if (admin){
+                    mainMenuController.enableAdminControls();
+                }
+                else{
+                    mainMenuController.disableAdminControls();
+                }
+                loginMenuController.login((LoginMessage)msg);
+                break;
+            case 7:
+                //user list received
+                if(((UserListMessage)msg).getNewUser())
+                    mainMenuController.updateUserList((UserListMessage)msg);
+                else
+                    mainMenuController.error((UserListMessage)msg);
+                break;
+            default:
+                System.out.println("Unknown message type received.");
+                break;
         }
     }
 
     public void request(int i, AbstractDeviceController c) {
-        tmp = c;
-        String s = true + "@" + i;
+        //request a device from server with device id i
+        //c is the controller for the device
+        deviceController = c;
+        setCurrentDeviceID(i);
+        NewDeviceMessage msg = new NewDeviceMessage(i);
+        Send(msg);
+    }
+
+    public void getDevices(DeviceSelectionMenuController deviceSelectionPaneController) {
+        //request all devices from server, also gets client id
+        mainMenuController = deviceSelectionPaneController;
+        StartupMessage msg = new StartupMessage( -1);
+        Send(msg);
+    }
+
+    public void getUsers(DeviceSelectionMenuController deviceSelectionPaneController) {
+        //request all devices from server, also gets client id
+        mainMenuController = deviceSelectionPaneController;
+        Send(new UserListMessage(-1, "", "", false, false));
+    }
+
+    public void UpdateServer(AbstractMessage msg){
+        //just used by devices to update the server
+        Send(msg);
+    }
+
+    private void Send(Object msg){
+        //general send method, just used to clean up code
         try {
-            sendToServer(s);
-        } catch (IOException e) {
+            sendToServer(msg);
+        }catch (Exception e){
             throw new RuntimeException(e);
         }
     }
 
-    public void getDevices(DeviceSelectionMenuController deviceSelectionPaneController) {
-        tmp2 = deviceSelectionPaneController;
-        String s = true + "@" + -1;
-        try {
-            sendToServer(s);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public void setCurrentDeviceID(int id){
+        currentDeviceID = id;
     }
+
+    public void setLoginMenuController(LoginMenuController loginMenuController){
+        this.loginMenuController = loginMenuController;
+    }
+
 }
