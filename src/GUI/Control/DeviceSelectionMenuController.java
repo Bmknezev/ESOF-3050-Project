@@ -22,6 +22,7 @@ import messages.UserListMessage;
 
 public class DeviceSelectionMenuController extends AbstractDeviceController {
 
+
     @FXML
     private Button backButton;
 
@@ -29,22 +30,31 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
     private Label welcomeUserLabel;
 
     @FXML
+    private Label elementListIndicatorLabel;
+
+    @FXML
     private VBox deviceVBox;
 
     private Scene previous;
 
     @FXML
-    MenuButton settingsMenuButton = new MenuButton("Settings");
+    MenuButton settingsMenuButton = new MenuButton();
 
     @FXML
-    MenuItem addNewDeviceMenuItem = new MenuItem("Add New Device");
+    MenuItem toggleUserListMenuItem = new MenuItem();
     @FXML
-    MenuItem deleteDeviceMenuItem = new MenuItem("Delete Existing Device");
+    MenuItem addNewElementMenuItem = new MenuItem();
     @FXML
-    MenuItem toggleUserListMenuItem = new MenuItem("View User List");
+    MenuItem deleteElementMenuItem = new MenuItem();
+    @FXML
+    public MenuItem promoteUserMenuItem;
+    @FXML
+    public MenuItem demoteUserMenuItem;
 
     private Scene[] sceneList = new Scene[5];
     AbstractDeviceController[] Controller;
+
+    boolean userListActive = false;
 
     public void setPreviousScene(Scene previousScene) {
         previous = previousScene;
@@ -153,12 +163,51 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
     }
 
     public void toggleUserListSelected(ActionEvent actionEvent) {
+        userListActive = !userListActive;
+        if(!userListActive){
+                // changes the names of these labels to represent the new list
+            settingsMenuButton.setText("Device Settings");
+            elementListIndicatorLabel.setText("Connected Devices:");
+                // changes the names of these menu items to represent their new functions
+            toggleUserListMenuItem.setText("View User List");
+            addNewElementMenuItem.setText("Add New Device");
+            deleteElementMenuItem.setText("Delete Existing Device");
+                // disables the now irrelevant menu items
+            promoteUserMenuItem.setVisible(false);
+            promoteUserMenuItem.setDisable(true);
+            demoteUserMenuItem.setVisible(false);
+            demoteUserMenuItem.setDisable(true);
+
+
+        }
+        else{
+                // changes the names of these labels to represent the new list
+            settingsMenuButton.setText("User Settings");
+            elementListIndicatorLabel.setText("User Accounts:");
+                // changes the names of these menu items to represent their new functions
+            toggleUserListMenuItem.setText("View Device List");
+            addNewElementMenuItem.setText("Add New User");
+            deleteElementMenuItem.setText("Delete Existing User");
+                // enables the now relevant menu items
+            promoteUserMenuItem.setVisible(true);
+            promoteUserMenuItem.setDisable(false);
+            demoteUserMenuItem.setVisible(true);
+            demoteUserMenuItem.setDisable(false);
+
+
+        }
     }
 
-    public void addNewDeviceSelected(ActionEvent actionEvent) {
+    public void addNewElementSelected(ActionEvent actionEvent) {
     }
 
-    public void deleteDeviceSelected(ActionEvent actionEvent) {
+    public void deleteElementSelected(ActionEvent actionEvent) {
+    }
+
+    public void promoteUserSelected(ActionEvent actionEvent) {
+    }
+
+    public void demoteUserSelected(ActionEvent actionEvent) {
     }
 
     public void updateUserList(UserListMessage msg) {

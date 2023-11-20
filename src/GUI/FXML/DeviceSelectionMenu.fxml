@@ -30,17 +30,24 @@
    <top>
       <StackPane prefHeight="80.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="welcomeUserLabel" prefHeight="40.0" text="Welcome, user X" StackPane.alignment="TOP_CENTER">
+            <Label fx:id="welcomeUserLabel" prefHeight="40.0" text="Welcome, X" StackPane.alignment="TOP_CENTER">
                <font>
-                  <Font name="System Bold" size="16.0" />
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="elementListIndicatorLabel" text="Connected Devices:" StackPane.alignment="BOTTOM_LEFT">
+               <font>
+                  <Font name="System Bold" size="14.0" />
                </font>
             </Label>
             <Button fx:id="backButton" cancelButton="true" mnemonicParsing="false" onAction="#backButtonPressed" text="Back to Log In" StackPane.alignment="TOP_LEFT" />
-            <MenuButton fx:id="settingsMenuButton" mnemonicParsing="false" text="Settings" StackPane.alignment="BOTTOM_RIGHT">
+            <MenuButton fx:id="settingsMenuButton" mnemonicParsing="false" text="Device Settings" StackPane.alignment="BOTTOM_RIGHT">
               <items>
                 <MenuItem fx:id="toggleUserListMenuItem" mnemonicParsing="false" onAction="#toggleUserListSelected" text="View User List" />
-                <MenuItem fx:id="addNewDeviceMenuItem" mnemonicParsing="false" onAction="#addNewDeviceSelected" text="Add New Device" />
-                  <MenuItem fx:id="deleteDeviceMenuItem" mnemonicParsing="false" onAction="#deleteDeviceSelected" text="Delete Existing Device" />
+                <MenuItem fx:id="addNewElementMenuItem" mnemonicParsing="false" onAction="#addNewElementSelected" text="Add New Device" />
+                  <MenuItem fx:id="deleteElementMenuItem" mnemonicParsing="false" onAction="#deleteElementSelected" text="Delete Existing Device" />
+                  <MenuItem fx:id="promoteUserMenuItem" disable="true" mnemonicParsing="false" onAction="#promoteUserSelected" text="Promote User" visible="false" />
+                  <MenuItem fx:id="demoteUserMenuItem" disable="true" mnemonicParsing="false" onAction="#demoteUserSelected" text="Demote Admin User" visible="false" />
               </items>
             </MenuButton>
          </children>
