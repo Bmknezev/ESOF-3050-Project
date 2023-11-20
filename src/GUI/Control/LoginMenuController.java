@@ -47,7 +47,7 @@ public class LoginMenuController {
         else{
             Platform.runLater(() -> {
                 enterButton.setText("Invalid Credentials");
-
+                // change font to be red
 
             });
             try {
@@ -56,6 +56,7 @@ public class LoginMenuController {
                 throw new RuntimeException(e);
             }
             Platform.runLater(() -> enterButton.setText("Enter"));
+            // change font back to black
         }
     }
 
