@@ -68,7 +68,6 @@
                   <Insets left="8.0" right="8.0" />
                </padding>
             </Slider>
-            <Button fx:id="backButton" cancelButton="true" mnemonicParsing="false" onAction="#BackButtonPressed" text="Back" GridPane.rowIndex="4" />
             <ColorPicker fx:id="colourPicker" onAction="#changeColour" prefWidth="150.0" promptText="Change Colour" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                <value>
                   <Color red="1.0" green="1.0" />
@@ -81,15 +80,20 @@
       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
    </padding>
    <top>
-      <VBox alignment="BOTTOM_CENTER" BorderPane.alignment="CENTER">
+      <StackPane BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="SmartDeviceNameLabel" text="(Smart Light Name)">
-               <font>
-                  <Font name="System Bold" size="20.0" />
-               </font>
-            </Label>
-            <Label text="Smart Light" />
+            <VBox alignment="BOTTOM_CENTER">
+               <children>
+                  <Label fx:id="SmartDeviceNameLabel" text="(Smart Light Name)">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label text="Smart Light" />
+               </children>
+            </VBox>
+            <Button fx:id="backButton" cancelButton="true" mnemonicParsing="false" onAction="#BackButtonPressed" text="Back" StackPane.alignment="TOP_LEFT" />
          </children>
-      </VBox>
+      </StackPane>
    </top>
 </BorderPane>

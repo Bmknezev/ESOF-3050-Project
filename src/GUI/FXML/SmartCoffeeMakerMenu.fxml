@@ -18,18 +18,6 @@
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Control.SmartCoffeeMakerMenuController">
-   <top>
-      <VBox alignment="BOTTOM_CENTER" BorderPane.alignment="CENTER">
-         <children>
-            <Label fx:id="SmartDeviceNameLabel" text="(Smart Coffee Maker Name)">
-               <font>
-                  <Font name="System Bold" size="20.0" />
-               </font>
-            </Label>
-            <Label text="Smart Coffee Maker" />
-         </children>
-      </VBox>
-   </top>
    <center>
       <VBox alignment="CENTER" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
@@ -128,11 +116,27 @@
                   <Insets left="8.0" />
                </padding>
             </HBox>
-            <Button fx:id="backButton" cancelButton="true" mnemonicParsing="false" onAction="#backButtonPressed" text="Back" GridPane.rowIndex="5" />
          </children>
       </GridPane>
    </bottom>
    <padding>
       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
    </padding>
+   <top>
+      <StackPane BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="BOTTOM_CENTER">
+               <children>
+                  <Label fx:id="SmartDeviceNameLabel" text="(Smart Coffee Maker Name)">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label text="Smart Coffee Maker" />
+               </children>
+            </VBox>
+            <Button fx:id="backButton" cancelButton="true" mnemonicParsing="false" onAction="#backButtonPressed" text="Back" StackPane.alignment="TOP_LEFT" />
+         </children>
+      </StackPane>
+   </top>
 </BorderPane>

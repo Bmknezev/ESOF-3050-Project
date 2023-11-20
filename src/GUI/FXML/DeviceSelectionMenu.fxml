@@ -28,24 +28,17 @@
    <top>
       <StackPane BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER">
-               <children>
-                  <Label fx:id="welcomeUserLabel" text="Welcome, user X">
-                     <font>
-                        <Font name="System Bold" size="16.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
             <HBox fx:id="adminManagementHBox" alignment="CENTER_RIGHT" spacing="8.0" />
+            <Label fx:id="welcomeUserLabel" text="Welcome, user X">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Button fx:id="backButton" cancelButton="true" mnemonicParsing="false" onAction="#backButtonPressed" text="Back to Log In" StackPane.alignment="TOP_LEFT" />
          </children>
       </StackPane>
    </top>
    <bottom>
-      <HBox alignment="CENTER_LEFT" spacing="8.0" BorderPane.alignment="CENTER">
-         <children>
-            <Button fx:id="backButton" cancelButton="true" mnemonicParsing="false" onAction="#backButtonPressed" text="Back to Log In" />
-         </children>
-      </HBox>
+      <HBox alignment="CENTER_LEFT" spacing="8.0" BorderPane.alignment="CENTER" />
    </bottom>
 </BorderPane>
