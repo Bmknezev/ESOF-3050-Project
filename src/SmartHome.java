@@ -28,6 +28,17 @@ public class SmartHome extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+
+        primaryStage.setOnCloseRequest(event -> {
+            //runs when the window is closed
+            System.out.println("Closing connection to server.");
+            try {
+                s.closeConnection();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
         // getting loader and a pane for the login scene
         FXMLLoader loginPaneLoader = new FXMLLoader(getClass().getResource("/GUI/FXML/LoginMenu.fxml"));
         Parent loginPane = loginPaneLoader.load();
