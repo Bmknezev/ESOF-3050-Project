@@ -9,7 +9,6 @@ import messages.*;
 public class SmartHomeClient extends ClientServer.AbstractClient {
 private AbstractDeviceController deviceController;
 private DeviceSelectionMenuController mainMenuController;
-private int clientID = -1;
 private int currentDeviceID = -1;
 private boolean admin;
 
@@ -41,7 +40,7 @@ private LoginMenuController loginMenuController;
                 break;
             case 3:
                 //client id received
-                clientID = ((StartupMessage)msg).getClientID();
+                //clientID = ((StartupMessage)msg).getClientID();
                 break;
             case 5:
                 //login details received

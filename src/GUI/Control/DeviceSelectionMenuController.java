@@ -1,6 +1,7 @@
 package GUI.Control;
 
 import GUI.Control.Abstract.AbstractDeviceController;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -54,7 +55,6 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
     }
 
     public void addNewDevice(NewDeviceMessage newDevice) {
-        System.out.println("New device received");
             // this creates a new label for the device name
         Label deviceNameLabel = new Label();
             // these set the parameters of the label
@@ -118,7 +118,8 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
 
         deviceStackPane.getChildren().addAll(deviceNameLabel, deviceControlHBox);
 
-        deviceVBox.getChildren().add(deviceStackPane);
+        Platform.runLater(() -> deviceVBox.getChildren().add(deviceStackPane));
+
     }
 
     public void enableAdminControls(){
@@ -218,6 +219,7 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
             manageUserMenu.setHeaderText(msg.getUsername() + "");
             DialogPane dp = manageUserMenu.getDialogPane();
             dp.setContent(new VBox(8,new TextField(), new TextField(), new Button()));
+            manageUserMenu.show();
         });
 
         // this creates a new hbox to contain the new elements created
@@ -234,6 +236,7 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
 
         deviceStackPane.getChildren().addAll(usernameLabel, deviceControlHBox);
 
-        deviceVBox.getChildren().add(deviceStackPane);
+        Platform.runLater(() -> deviceVBox.getChildren().add(deviceStackPane));
+
     }
 }
