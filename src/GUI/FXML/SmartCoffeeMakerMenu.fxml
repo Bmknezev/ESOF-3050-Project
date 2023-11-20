@@ -17,13 +17,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Control.SmartCoffeeMakerMenuController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Control.SmartCoffeeMakerMenuController">
    <center>
       <VBox alignment="CENTER" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
             <StackPane>
                <children>
-                  <ProgressBar fx:id="coffeeLevel" prefHeight="64.0" prefWidth="57.0" progress="0.0" />
+                  <ProgressBar fx:id="coffeeLevel" prefHeight="64.0" prefWidth="57.0" progress="0.0" rotate="-90.0" scaleY="1.2" translateX="-8.0" translateY="11.0" />
                   <ImageView fx:id="SmartDeviceImageView" fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Images/Coffee_Icon.png" />
