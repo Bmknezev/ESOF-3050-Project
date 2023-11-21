@@ -1,3 +1,4 @@
+    // this is for testing
 package GUI.Control;
 
 import GUI.Control.Abstract.AbstractDeviceController;
@@ -16,6 +17,7 @@ import javafx.stage.Stage;
 import messages.AbstractDeviceMessage;
 import messages.NewDeviceMessage;
 import messages.UserListMessage;
+import messages.client.Listable;
 
 public class DeviceSelectionMenuController extends AbstractDeviceController {
 
@@ -57,72 +59,79 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
         previous = previousScene;
     }
 
+    public Button createNewListItem(Listable listableItem){
+
+        Label nameLabel = new Label();
+
+        nameLabel.setText(listableItem.getNameListable());
+        nameLabel.setWrapText(true);
+        nameLabel.setFont(Font.font("System", FontWeight.BOLD, 15));
+
+        Label categoryLabel = new Label();
+
+        categoryLabel.setText(listableItem.getCategoryListable());
+
+        Button managementButton = new Button();
+
+        // this creates a new hbox to contain the new elements created
+        HBox listableItemControlHBox = new HBox();
+        // these set the parameters of the hbox
+        listableItemControlHBox.setSpacing(15);
+        listableItemControlHBox.setAlignment(Pos.CENTER_RIGHT);
+        // this adds the elements to the hbox
+        listableItemControlHBox.getChildren().addAll(categoryLabel, managementButton);
+        // this adds the hbox to the vbox
+
+        StackPane listableItemStackPane = new StackPane();
+        listableItemStackPane.setAlignment(Pos.CENTER_LEFT);
+
+        listableItemStackPane.getChildren().addAll(nameLabel, listableItemControlHBox);
+
+        Platform.runLater(() -> deviceVBox.getChildren().add(listableItemStackPane));
+
+
+        return managementButton;
+    }
+
     public void addNewDevice(NewDeviceMessage newDevice) {
-            // this creates a new label for the device name
-        Label deviceNameLabel = new Label();
-            // these set the parameters of the label
-        deviceNameLabel.setText(newDevice.getDeviceName());
-        deviceNameLabel.setWrapText(true);
-        deviceNameLabel.setFont(Font.font("System", FontWeight.BOLD, 15));
+        Button deviceManagementButton = createNewListItem(newDevice);
+        deviceManagementButton.setText("Manage Device");
 
-            // this creates a new label that shows the type of the new device
-        Label deviceTypeLabel = new Label();
-            // these set the parameters of the label
-        deviceTypeLabel.setText(newDevice.getDeviceType());
+        deviceManagementButton.setOnAction(event ->{
+            Stage stage = (Stage) deviceManagementButton.getScene().getWindow();
 
-            // this creates a new button that is linked to the new device
-        Button manageDeviceButton = new Button("Manage Device");
-            // this sets the button to change the scene when pressed
-        manageDeviceButton.setOnAction(event ->{
-            Stage stage = (Stage) manageDeviceButton.getScene().getWindow();
-            //this switch statement changes the scene based on the device type and requests the values for that device from the server
-            switch (newDevice.getDeviceType()) {
-                case "Smart Light":
-                    client.request(newDevice.getDeviceID(), Controller[0]);
-                    stage.setScene(sceneList[0]);
-                    break;
-                case "Smart Lock":
-                    client.request(newDevice.getDeviceID(), Controller[1]);
-                    stage.setScene(sceneList[1]);
-                    break;
-                case "Smart Thermostat":
-                    client.request(newDevice.getDeviceID(), Controller[2]);
-                    stage.setScene(sceneList[2]);
-                    break;
-                case "Smart Coffee Machine":
-                    client.request(newDevice.getDeviceID(), Controller[3]);
-                    stage.setScene(sceneList[3]);
-                    break;
-                case "Smart Garage Door":
-                    client.request(newDevice.getDeviceID(), Controller[4]);
-                    stage.setScene(sceneList[4]);
-                    break;
-                case "Smart Smoke Detector":
-                    client.request(newDevice.getDeviceID(), Controller[5]);
-                    stage.setScene(sceneList[5]);
-                    break;
-                default:
-                    System.out.println("Error: Device type not found");
-                    break;
-            }
+            client.request(newDevice.getDeviceID(), Controller[newDevice.getCategoryNumberListable()]);
+            stage.setScene(sceneList[newDevice.getCategoryNumberListable()]);
         });
+    }
 
-            // this creates a new hbox to contain the new elements created
-        HBox deviceControlHBox = new HBox();
-            // these set the parameters of the hbox
-        deviceControlHBox.setSpacing(15);
-        deviceControlHBox.setAlignment(Pos.CENTER_RIGHT);
-            // this adds the elements to the hbox
-        deviceControlHBox.getChildren().addAll(deviceTypeLabel, manageDeviceButton);
-            // this adds the hbox to the vbox
+    public void updateUserList(UserListMessage newUser) {
+        Button userManagementButton = createNewListItem(newUser);
+        userManagementButton.setText("Manage User");
 
-        StackPane deviceStackPane = new StackPane();
-        deviceStackPane.setAlignment(Pos.CENTER_LEFT);
+        userManagementButton.setOnAction(event ->{
+            manageUserMenu.setHeaderText(newUser.getUsername() + " settings");
+            DialogPane dp = manageUserMenu.getDialogPane();
+            Label userLabel = new Label("Username: ");
+            Label passLabel = new Label("Password: ");
+            TextField userField = new TextField();
+            TextField passField = new TextField();
+            CheckBox adminCheckBox = new CheckBox("Admin");
 
-        deviceStackPane.getChildren().addAll(deviceNameLabel, deviceControlHBox);
+            userField.setText(newUser.getUsername());
+            passField.setText(newUser.getPassword());
+            adminCheckBox.setSelected(newUser.getAdmin());
+            manageUserMenu.setResultConverter((ButtonType button) -> {
+                if (button == ButtonType.OK) {
+                    deviceVBox.getChildren().clear();
+                    modifyUser(newUser.getUserID(), userField.getText(), passField.getText(), adminCheckBox.isSelected());
+                }
+                return null;
+            });
+            dp.setContent(new VBox(8,new HBox(2, userLabel, userField), new HBox(2, passLabel, passField), adminCheckBox));
 
-        Platform.runLater(() -> deviceVBox.getChildren().add(deviceStackPane));
-
+            manageUserMenu.show();
+        });
     }
 
     public void enableAdminControls(){
@@ -211,64 +220,6 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
     }
 
     public void deleteDeviceSelected(ActionEvent actionEvent) {
-    }
-
-    public void updateUserList(UserListMessage msg) {
-            // this creates a new label for the users username
-        Label usernameLabel = new Label();
-            // these set the parameters of the label
-        usernameLabel.setText(msg.getUsername());
-        usernameLabel.setWrapText(true);
-        usernameLabel.setFont(Font.font("System", FontWeight.BOLD, 15));
-
-            // this creates a new label that shows the type of the new device
-        Label userPermisionsLabel = new Label();
-            // this sets the test of the label depending on the permissions of the user
-        userPermisionsLabel.setText(msg.getAdmin() ? "Admin User" : "User");
-
-            // this creates a new button that is linked to the new device
-        Button manageUserButton = new Button("Manage User");
-            // this sets the button to open a new window when pressed
-        manageUserButton.setOnAction(event ->{
-            manageUserMenu.setHeaderText(msg.getUsername() + " settings");
-            DialogPane dp = manageUserMenu.getDialogPane();
-            Label userLabel = new Label("Username: ");
-            Label passLabel = new Label("Password: ");
-            TextField userField = new TextField();
-            TextField passField = new TextField();
-            CheckBox adminCheckBox = new CheckBox("Admin");
-
-            userField.setText(msg.getUsername());
-            passField.setText(msg.getPassword());
-            adminCheckBox.setSelected(msg.getAdmin());
-            manageUserMenu.setResultConverter((ButtonType button) -> {
-                if (button == ButtonType.OK) {
-                    deviceVBox.getChildren().clear();
-                    modifyUser(msg.getUserID(), userField.getText(), passField.getText(), adminCheckBox.isSelected());
-                }
-                return null;
-            });
-            dp.setContent(new VBox(8,new HBox(2, userLabel, userField), new HBox(2, passLabel, passField), adminCheckBox));
-
-            manageUserMenu.show();
-        });
-
-        // this creates a new hbox to contain the new elements created
-        HBox deviceControlHBox = new HBox();
-        // these set the parameters of the hbox
-        deviceControlHBox.setSpacing(15);
-        deviceControlHBox.setAlignment(Pos.CENTER_RIGHT);
-        // this adds the elements to the hbox
-        deviceControlHBox.getChildren().addAll(userPermisionsLabel, manageUserButton);
-        // this adds the hbox to the vbox
-
-        StackPane deviceStackPane = new StackPane();
-        deviceStackPane.setAlignment(Pos.CENTER_LEFT);
-
-        deviceStackPane.getChildren().addAll(usernameLabel, deviceControlHBox);
-
-        Platform.runLater(() -> deviceVBox.getChildren().add(deviceStackPane));
-
     }
 
     private void modifyUser(int id, String text, String text1, boolean selected) {
