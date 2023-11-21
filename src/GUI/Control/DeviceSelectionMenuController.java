@@ -100,8 +100,8 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
         deviceManagementButton.setOnAction(event ->{
             Stage stage = (Stage) deviceManagementButton.getScene().getWindow();
 
-            client.request(newDevice.getDeviceID(), Controller[newDevice.getCategoryNumberListable()]);
-            stage.setScene(sceneList[newDevice.getCategoryNumberListable()]);
+            client.request(newDevice.getDeviceID(), Controller[newDevice.getDeviceTypeNumber()]);
+            stage.setScene(sceneList[newDevice.getDeviceTypeNumber()]);
         });
     }
 
