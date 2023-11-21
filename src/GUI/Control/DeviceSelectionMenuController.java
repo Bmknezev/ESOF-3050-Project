@@ -253,15 +253,12 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
     }
 
     public void error(UserListMessage msg) {
+        System.out.println("User already exists.");
         Platform.runLater(() ->{
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
-            if(msg.getUserID() == -1)
-                alert.setHeaderText("User does not exist");
-            else if(msg.getUserID() == -3){
-                alert.setHeaderText("Cannot remove last admin");
-                alert.setContentText("The user " + msg.getUsername() + " is the only admin on the system.");
-            }
+            alert.setHeaderText("User already exists");
+            alert.setContentText("The user " + msg.getUsername() + " already exists.");
             alert.showAndWait();
         });
     }
