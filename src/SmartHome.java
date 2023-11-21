@@ -23,8 +23,6 @@ public class SmartHome extends Application {
     public static void main(String[] args) {
         boolean connectionFailed = false;
 
-
-        //comeent
         if (!guiTest){
             try {
                 s.openConnection();
