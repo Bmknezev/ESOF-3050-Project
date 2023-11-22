@@ -19,7 +19,9 @@ import messages.NewDeviceMessage;
 import messages.UserListMessage;
 import messages.client.Listable;
 
-public class DeviceSelectionMenuController extends AbstractDeviceController {
+import java.util.concurrent.atomic.AtomicInteger;
+
+    public class DeviceSelectionMenuController extends AbstractDeviceController {
 
 
     public Button addUserButton;
@@ -52,6 +54,7 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
 
     private TextInputDialog manageUserMenu = new TextInputDialog("");
     private TextInputDialog addUserMenu = new TextInputDialog("");
+    private TextInputDialog newDeviceMenu = new TextInputDialog("");
 
     private boolean userListActive = false;
 
@@ -94,15 +97,17 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
     }
 
     public void addNewDevice(NewDeviceMessage newDevice) {
-        Button deviceManagementButton = createNewListItem(newDevice);
-        deviceManagementButton.setText("Manage Device");
+        System.out.println("Adding new device" + newDevice.getDeviceName());
+            Button deviceManagementButton = createNewListItem(newDevice);
+            deviceManagementButton.setText("Manage Device");
 
-        deviceManagementButton.setOnAction(event ->{
-            Stage stage = (Stage) deviceManagementButton.getScene().getWindow();
+            deviceManagementButton.setOnAction(event -> {
+                Stage stage = (Stage) deviceManagementButton.getScene().getWindow();
 
-            client.request(newDevice.getDeviceID(), Controller[newDevice.getDeviceTypeNumber()]);
-            stage.setScene(sceneList[newDevice.getDeviceTypeNumber()]);
-        });
+                client.request(newDevice.getDeviceID(), Controller[newDevice.getDeviceTypeNumber()]);
+                stage.setScene(sceneList[newDevice.getDeviceTypeNumber()]);
+            });
+
     }
 
     public void updateUserList(UserListMessage newUser) {
@@ -217,6 +222,162 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
     }
 
     public void addNewDeviceSelected(ActionEvent actionEvent) {
+        newDeviceMenu.setHeaderText("Select a device type");
+        newDeviceMenu.setTitle("Add new device");
+        DialogPane dp = newDeviceMenu.getDialogPane();
+        RadioButton lightButton = new RadioButton("Smart Light");
+        RadioButton lockButton = new RadioButton("Smart Lock");
+        RadioButton thermostatButton = new RadioButton("Smart Thermostat");
+        RadioButton coffeeMakerButton = new RadioButton("Smart Coffee Maker");
+        RadioButton garageDoorButton = new RadioButton("Smart Garage Door");
+        RadioButton smokeDetectorButton = new RadioButton("Smart Smoke Detector");
+        ToggleGroup deviceTypeGroup = new ToggleGroup();
+        lightButton.setToggleGroup(deviceTypeGroup);
+        lockButton.setToggleGroup(deviceTypeGroup);
+        thermostatButton.setToggleGroup(deviceTypeGroup);
+        coffeeMakerButton.setToggleGroup(deviceTypeGroup);
+        garageDoorButton.setToggleGroup(deviceTypeGroup);
+        smokeDetectorButton.setToggleGroup(deviceTypeGroup);
+
+
+        newDeviceMenu.setResultConverter((ButtonType button) -> {
+            int deviceType ;
+            if (button == ButtonType.OK) {
+                if(lightButton.isSelected())
+                    deviceType = 1;
+                else if(lockButton.isSelected())
+                    deviceType = 2;
+                else if(thermostatButton.isSelected())
+                    deviceType = 3;
+                else if(coffeeMakerButton.isSelected())
+                    deviceType = 4;
+                else if(garageDoorButton.isSelected())
+                    deviceType = 5;
+                else if(smokeDetectorButton.isSelected())
+                    deviceType = 6;
+                else
+                    deviceType = 0;
+                nextMenu(deviceType);
+            }
+
+            return null;
+        });
+
+        dp.setContent(new VBox(8, lightButton, lockButton, thermostatButton, coffeeMakerButton, garageDoorButton, smokeDetectorButton));
+        newDeviceMenu.show();
+
+    }
+
+    private void nextMenu(int deviceType){
+        Platform.runLater(() -> {
+        switch (deviceType){
+            case 1:
+                //light
+                newDeviceMenu.setHeaderText("Add new light");
+                newDeviceMenu.setTitle("Add new light");
+                DialogPane dp = newDeviceMenu.getDialogPane();
+                Label nameLabel = new Label("Name: ");
+                TextField nameField = new TextField();
+                newDeviceMenu.setResultConverter((ButtonType button) -> {
+                    if (button == ButtonType.OK) {
+                        deviceVBox.getChildren().clear();
+                        client.UpdateServer(new NewDeviceMessage(-1, nameField.getText(), "Smart Light"));
+                    }
+                    return null;
+                });
+                dp.setContent(new VBox(8,new HBox(2, nameLabel, nameField)));
+                newDeviceMenu.show();
+                break;
+            case 2:
+                //lock
+                newDeviceMenu.setHeaderText("Add new lock");
+                newDeviceMenu.setTitle("Add new lock");
+                DialogPane dp2 = newDeviceMenu.getDialogPane();
+                Label nameLabel2 = new Label("Name: ");
+                TextField nameField2 = new TextField();
+                newDeviceMenu.setResultConverter((ButtonType button) -> {
+                    if (button == ButtonType.OK) {
+                        deviceVBox.getChildren().clear();
+                        client.UpdateServer(new NewDeviceMessage(-1, nameField2.getText(), "Smart Lock"));
+                    }
+                    return null;
+                });
+                dp2.setContent(new VBox(8,new HBox(2, nameLabel2, nameField2)));
+                newDeviceMenu.show();
+                break;
+            case 3:
+                //thermostat
+                newDeviceMenu.setHeaderText("Add new thermostat");
+                newDeviceMenu.setTitle("Add new thermostat");
+                DialogPane dp3 = newDeviceMenu.getDialogPane();
+                Label nameLabel3 = new Label("Name: ");
+                TextField nameField3 = new TextField();
+                newDeviceMenu.setResultConverter((ButtonType button) -> {
+                    if (button == ButtonType.OK) {
+                        deviceVBox.getChildren().clear();
+                        client.UpdateServer(new NewDeviceMessage(-1, nameField3.getText(), "Smart Thermostat"));
+                    }
+                    return null;
+                });
+                dp3.setContent(new VBox(8,new HBox(2, nameLabel3, nameField3)));
+                newDeviceMenu.show();
+                break;
+            case 4:
+                //coffee maker
+                newDeviceMenu.setHeaderText("Add new coffee maker");
+                newDeviceMenu.setTitle("Add new coffee maker");
+                DialogPane dp4 = newDeviceMenu.getDialogPane();
+                Label nameLabel4 = new Label("Name: ");
+                TextField nameField4 = new TextField();
+                newDeviceMenu.setResultConverter((ButtonType button) -> {
+                    if (button == ButtonType.OK) {
+                        deviceVBox.getChildren().clear();
+                        client.UpdateServer(new NewDeviceMessage(-1, nameField4.getText(), "Smart Coffee Maker"));
+                    }
+                    return null;
+                });
+                dp4.setContent(new VBox(8,new HBox(2, nameLabel4, nameField4)));
+                newDeviceMenu.show();
+                break;
+            case 5:
+                //garage door
+                newDeviceMenu.setHeaderText("Add new garage door");
+                newDeviceMenu.setTitle("Add new garage door");
+                DialogPane dp5 = newDeviceMenu.getDialogPane();
+                Label nameLabel5 = new Label("Name: ");
+                TextField nameField5 = new TextField();
+                newDeviceMenu.setResultConverter((ButtonType button) -> {
+                    if (button == ButtonType.OK) {
+                        deviceVBox.getChildren().clear();
+                        client.UpdateServer(new NewDeviceMessage(-1, nameField5.getText(), "Smart Garage Door"));
+                    }
+                    return null;
+                });
+                dp5.setContent(new VBox(8,new HBox(2, nameLabel5, nameField5)));
+                newDeviceMenu.show();
+                break;
+            case 6:
+                //smoke detector
+                newDeviceMenu.setHeaderText("Add new smoke detector");
+                newDeviceMenu.setTitle("Add new smoke detector");
+                DialogPane dp6 = newDeviceMenu.getDialogPane();
+                Label nameLabel6 = new Label("Name: ");
+                TextField nameField6 = new TextField();
+                newDeviceMenu.setResultConverter((ButtonType button) -> {
+                    if (button == ButtonType.OK) {
+                        deviceVBox.getChildren().clear();
+                        client.UpdateServer(new NewDeviceMessage(-1, nameField6.getText(), "Smart Smoke Detector"));
+                    }
+                    return null;
+                });
+                dp6.setContent(new VBox(8,new HBox(2, nameLabel6, nameField6)));
+                newDeviceMenu.show();
+                break;
+            default:
+                System.out.println("Error: Device type not found");
+                break;
+        }
+        });
     }
 
     public void deleteDeviceSelected(ActionEvent actionEvent) {

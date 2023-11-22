@@ -27,6 +27,7 @@ private LoginMenuController loginMenuController;
     protected void handleMessageFromServer(Object msg) {
         System.out.println("Message received from server.");
 
+
            //check message type
         switch (((AbstractMessage)msg).getType()){
             case 1:
