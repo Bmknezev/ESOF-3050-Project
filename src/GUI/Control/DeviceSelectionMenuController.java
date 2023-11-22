@@ -140,11 +140,14 @@ import java.util.concurrent.atomic.AtomicInteger;
     }
 
     public void setWelcomeLabel(boolean admin, String username) {
-        Platform.runLater(() -> welcomeUserLabel.setText("Welcome, " + (admin ? "Admin " + username : username)));
+        Platform.runLater(() ->{
+
+            welcomeUserLabel.setText("Welcome, " + (admin ? "Admin " + username : username));
+        });
     }
 
     public void enableAdminControls(){
-        welcomeUserLabel.setText("Welcome, Admin Y");
+        //welcomeUserLabel.setText("Welcome, Admin Y");
 
         if (userListActive){
             toggleUserList();
@@ -157,7 +160,7 @@ import java.util.concurrent.atomic.AtomicInteger;
     }
 
     public void disableAdminControls(){
-        welcomeUserLabel.setText("Welcome, X");
+        //welcomeUserLabel.setText("Welcome, X");
 
         if (userListActive){
             toggleUserList();
