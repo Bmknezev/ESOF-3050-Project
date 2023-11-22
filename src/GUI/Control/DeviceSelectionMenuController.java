@@ -134,6 +134,10 @@ public class DeviceSelectionMenuController extends AbstractDeviceController {
         });
     }
 
+    public void setWelcomeLabel(boolean admin, String username) {
+        Platform.runLater(() -> welcomeUserLabel.setText("Welcome, " + (admin ? "Admin " + username : username)));
+    }
+
     public void enableAdminControls(){
         welcomeUserLabel.setText("Welcome, Admin Y");
 

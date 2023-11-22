@@ -45,6 +45,7 @@ private LoginMenuController loginMenuController;
             case 5:
                 //login details received
                 admin = ((LoginMessage)msg).getAdmin();
+                mainMenuController.setWelcomeLabel(((LoginMessage)msg).getAdmin(),((LoginMessage) msg).getUsername());
                 if (admin){
                     mainMenuController.enableAdminControls();
                 }

@@ -45,7 +45,7 @@
                   <Button fx:id="toggleUserListButton" mnemonicParsing="false" onAction="#toggleUserListButtonPressed" text="View User List" />
                   <StackPane alignment="BOTTOM_RIGHT" prefHeight="26.0" prefWidth="515.0">
                      <children>
-                        <MenuButton fx:id="deviceListMenuButton" mnemonicParsing="false" text="Device List">
+                        <MenuButton fx:id="deviceListMenuButton" mnemonicParsing="false" text="Manage Device List">
                           <items>
                             <MenuItem fx:id="addNewDeviceMenuItem" mnemonicParsing="false" onAction="#addNewDeviceSelected" text="Add New Device" />
                               <MenuItem fx:id="deleteDeviceMenuItem" mnemonicParsing="false" onAction="#deleteDeviceSelected" text="Delete Existing Device" />
