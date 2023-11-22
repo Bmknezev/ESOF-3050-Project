@@ -30,11 +30,7 @@ public class LoginMenuController {
 
     public void LoginButtonPressed(ActionEvent actionEvent) {
 
-        try {
-            client.sendToServer(new messages.LoginMessage(emailTextField.getText(), passwordTextField.getText()));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        client.UpdateServer(new messages.LoginMessage(emailTextField.getText(), passwordTextField.getText()));
     }
 
     public void addServer(SmartHomeClient server){

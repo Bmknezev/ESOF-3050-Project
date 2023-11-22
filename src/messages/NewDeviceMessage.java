@@ -65,10 +65,6 @@ public class NewDeviceMessage extends AbstractMessage implements Listable {
         return deviceTypeNumber;
     }
 
-    public String getName() {
-        return deviceName;
-    }
-
 
     public String getDeviceType() {
         return deviceType;

@@ -25,6 +25,7 @@ private LoginMenuController loginMenuController;
 
     @Override
     protected void handleMessageFromServer(Object msg) {
+        System.out.println("Message received from server.");
 
            //check message type
         switch (((AbstractMessage)msg).getType()){
@@ -109,4 +110,9 @@ private LoginMenuController loginMenuController;
         this.loginMenuController = loginMenuController;
     }
 
+    @Override
+    protected void connectionClosed() {
+        super.connectionClosed();
+        System.out.println("Connection closed.");
+    }
 }
