@@ -133,7 +133,7 @@ import java.util.concurrent.atomic.AtomicInteger;
                 }
                 return null;
             });
-            dp.setContent(new VBox(8,new HBox(2, userLabel, userField), new HBox(2, passLabel, passField), adminCheckBox));
+            dp.setContent(new VBox(8,new HBox(2, userLabel, userField), new HBox(4, passLabel, passField), adminCheckBox));
 
             manageUserMenu.show();
         });
