@@ -4,6 +4,8 @@ package ClientServer;
 import GUI.Control.Abstract.AbstractDeviceController;
 import GUI.Control.DeviceSelectionMenuController;
 import GUI.Control.LoginMenuController;
+import javafx.application.Platform;
+import javafx.scene.control.Alert;
 import messages.*;
 
 public class SmartHomeClient extends ClientServer.AbstractClient {
@@ -114,7 +116,14 @@ private LoginMenuController loginMenuController;
 
     @Override
     protected void connectionClosed() {
-        super.connectionClosed();
-        System.out.println("Connection closed.");
+        Platform.runLater(() ->{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Connection to server lost.");
+            alert.setContentText("Please check your internet connection and ensure the server is still online.");
+            alert.showAndWait();
+Platform.exit();
+        });
+
     }
 }
