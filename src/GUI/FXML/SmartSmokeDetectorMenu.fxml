@@ -17,14 +17,14 @@
    <center>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="SmartDeviceImageView" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="smartDeviceImageView" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Images/Smoke%20Detector%20Icon.png" />
                </image>
             </ImageView>
-            <Label fx:id="StatusIndicatorLabel" text="(Current Status)" />
-            <Label fx:id="BatteryStatusLabel" text="(Battery Status)" />
-            <Label fx:id="PreviousTestDateLabel" text="(Date Last Tested)" />
+            <Label fx:id="statusIndicatorLabel" text="(Current Status)" />
+            <Label fx:id="batteryStatusLabel" text="(Battery Status)" />
+            <Label fx:id="previousTestDateLabel" text="(Date Last Tested)" />
          </children>
       </VBox>
    </center>
@@ -41,9 +41,9 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="TestAlarmButton" mnemonicParsing="false" prefWidth="170.0" text="Test Alarm" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <Button fx:id="CreateAutomationButton" mnemonicParsing="false" prefWidth="170.0" text="Create Auto Test Schedule" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Button fx:id="EditAutomationsButton" mnemonicParsing="false" prefWidth="170.0" text="Edit Auto Test Schedules" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+            <Button fx:id="testAlarmButton" mnemonicParsing="false" onAction="#testAlarmButtonPressed" prefWidth="170.0" text="Test Alarm" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Button fx:id="createAutomationButton" mnemonicParsing="false" prefWidth="170.0" text="Create Auto Test Schedule" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Button fx:id="editAutomationsButton" mnemonicParsing="false" prefWidth="170.0" text="Edit Auto Test Schedules" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
          </children>
       </GridPane>
    </bottom>
@@ -55,7 +55,7 @@
          <children>
             <VBox alignment="BOTTOM_CENTER">
                <children>
-                  <Label fx:id="SmartDeviceNameLabel" text="(Smart Smoke Detector Name)">
+                  <Label fx:id="smartDeviceNameLabel" text="(Smart Smoke Detector Name)">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
@@ -65,6 +65,9 @@
             </VBox>
             <Button fx:id="backButton" cancelButton="true" mnemonicParsing="false" onAction="#backButtonPressed" text="Back" StackPane.alignment="TOP_LEFT" />
          </children>
+         <padding>
+            <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+         </padding>
       </StackPane>
    </top>
 </BorderPane>

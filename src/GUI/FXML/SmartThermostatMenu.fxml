@@ -61,8 +61,8 @@
         </rowConstraints>
          <children>
             <Button fx:id="ChangeTempButton" mnemonicParsing="false" onAction="#ChangeTempButtonPressed" prefWidth="150.0" text="Change" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <Button fx:id="CreateAutomationButton" mnemonicParsing="false" prefWidth="180.0" text="Create Temperature Schedule" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Button fx:id="EditAutomationsButton" mnemonicParsing="false" prefWidth="180.0" text="Edit Temperature Schedules" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+            <Button fx:id="CreateAutomationButton" mnemonicParsing="false" prefWidth="180.0" text="Create Temperature Schedule" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+            <Button fx:id="EditAutomationsButton" mnemonicParsing="false" prefWidth="180.0" text="Edit Temperature Schedules" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
             <TextField fx:id="ChangeTempTextField" prefWidth="150.0" promptText="Enter a Target Temperature" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.valignment="CENTER" GridPane.vgrow="NEVER">
                <GridPane.margin>
                   <Insets left="8.0" right="8.0" />
@@ -73,7 +73,7 @@
                   <Insets right="8.0" />
                </padding>
             </Label>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
                   <Button fx:id="coolingEnableButton" mnemonicParsing="false" onAction="#coolingEnableButtonPressed" text="Enable Cooling" />
                   <Button fx:id="heatingEnableButton" mnemonicParsing="false" onAction="#heatingEnableButtonPressed" text="Enable Heating" />
@@ -100,6 +100,9 @@
             </VBox>
             <Button fx:id="backButton" cancelButton="true" mnemonicParsing="false" onAction="#backButtonPressed" text="Back" StackPane.alignment="TOP_LEFT" />
          </children>
+         <padding>
+            <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+         </padding>
       </StackPane>
    </top>
 </BorderPane>
