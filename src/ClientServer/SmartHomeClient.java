@@ -122,7 +122,7 @@ private LoginMenuController loginMenuController;
             alert.setHeaderText("Connection to server lost.");
             alert.setContentText("Please check your internet connection and ensure the server is still online.");
             alert.showAndWait();
-Platform.exit();
+            Platform.exit();
         });
 
     }

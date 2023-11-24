@@ -53,6 +53,7 @@ import messages.client.Listable;
     private TextInputDialog manageUserMenu = new TextInputDialog("");
     private TextInputDialog addUserMenu = new TextInputDialog("");
     private TextInputDialog newDeviceMenu = new TextInputDialog("");
+    private TextInputDialog deleteDeviceMenu = new TextInputDialog("");
 
     private boolean userListActive = false, delete = false;
 
@@ -248,7 +249,7 @@ import messages.client.Listable;
         deviceTypeSelectionButtons[0].setText("Smart Light");
         deviceTypeSelectionButtons[1].setText("Smart Lock");
         deviceTypeSelectionButtons[2].setText("Smart Thermostat");
-        deviceTypeSelectionButtons[3].setText("Smart Coffee Maker");
+        deviceTypeSelectionButtons[3].setText("Smart Coffee Machine");
         deviceTypeSelectionButtons[4].setText("Smart Garage Door");
         deviceTypeSelectionButtons[5].setText("Smart Smoke Detector");
 
@@ -310,6 +311,7 @@ import messages.client.Listable;
             newDeviceMenu.setResultConverter((ButtonType button) -> {
                 if (button == ButtonType.OK) {
                     deviceVBox.getChildren().clear();
+                    System.out.println("Adding new " + deviceTypeString);
                     client.UpdateServer(new NewDeviceMessage(-1, nameField.getText(), deviceTypeString));
                 }
                 return null;
@@ -321,6 +323,31 @@ import messages.client.Listable;
     }
 
     public void deleteDeviceSelected(ActionEvent actionEvent) {
+        deleteDeviceMenu.setHeaderText("Select devices to delete");
+        deleteDeviceMenu.setTitle("Delete device");
+        DialogPane dp = deleteDeviceMenu.getDialogPane();
+
+        VBox dpContent = new VBox(8);
+        CheckBox[] deviceSelectionCheckBoxes = new CheckBox[deviceVBox.getChildren().size()];
+        for(int i = 0; i < deviceSelectionCheckBoxes.length; i++) {
+            deviceSelectionCheckBoxes[i] = new CheckBox(((Label)((StackPane)deviceVBox.getChildren().get(i)).getChildren().get(0)).getText());
+            dpContent.getChildren().add(deviceSelectionCheckBoxes[i]);
+        }
+        deleteDeviceMenu.setResultConverter((ButtonType button) -> {
+            if (button == ButtonType.OK) {
+                for(int i = 0; i < deviceSelectionCheckBoxes.length; i++) {
+                    if(deviceSelectionCheckBoxes[i].isSelected()){
+                        client.UpdateServer(new NewDeviceMessage(i, deviceSelectionCheckBoxes[i].getText(), "delete"));
+                        deviceVBox.getChildren().clear();
+                    }
+                }
+            }
+            return null;
+        });
+        dp.setContent(dpContent);
+        deleteDeviceMenu.show();
+
+
 
     }
 
