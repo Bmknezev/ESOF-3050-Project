@@ -20,12 +20,12 @@
          <children>
             <VBox alignment="BOTTOM_CENTER">
                <children>
-                  <Label text="(Smart Device Name)">
+                  <Label fx:id="smartDeviceNameLabel" text="(Smart Device Name)">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Label>
-                  <Label text="(Smart Device)" />
+                  <Label fx:id="smartDeviceTypeLabel" text="(Smart Device)" />
                </children>
             </VBox>
             <Button fx:id="backButton" cancelButton="true" mnemonicParsing="false" onAction="#backButtonPressed" text="Back" StackPane.alignment="TOP_LEFT" />
@@ -45,7 +45,7 @@
                <children>
                   <Label text="Start Date:">
                      <font>
-                        <Font size="16.0" />
+                        <Font name="System Bold" size="16.0" />
                      </font>
                   </Label>
                   <DatePicker fx:id="startDatePicker" promptText="Start Date" />
