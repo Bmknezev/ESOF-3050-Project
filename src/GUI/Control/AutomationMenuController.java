@@ -3,27 +3,39 @@ package GUI.Control;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
 
 public class AutomationMenuController {
-        // back button
+
     @FXML
     private Button backButton;
-        // commit changes button
+
     @FXML
     private Button confirmAutomationButton;
 
     @FXML
-    private ToggleGroup frequencySelection;
+    private DatePicker endDatePicker;
 
-        // create buttons inside this vbox for the automatable actions
+    @FXML
+    private ToggleGroup endDateSelection;
+
+    @FXML
+    private ToggleGroup repeatFrequencySelection;
+
+    @FXML
+    private TextField repeatFrequencyTextField;
+
+    @FXML
+    private ToggleGroup repeatSelection;
+
     @FXML
     private VBox smartDeviceActionsVBox;
 
     @FXML
-    private TextField frequencyTextField;
+    private DatePicker startDatePicker;
 
     @FXML
     void backButtonPressed(ActionEvent event) {
