@@ -1,6 +1,7 @@
 package GUI.Control;
 
 import GUI.Control.Abstract.AbstractDeviceController;
+import GUI.Control.Interface.Updatable;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,7 +22,7 @@ import java.util.Date;
 import java.util.Objects;
 
 
-public class SmartLightMenuController extends AbstractDeviceController {
+public class SmartLightMenuController extends AbstractDeviceController implements Updatable {
 
     public Pane lightColour;
     public ColorPicker colourPicker;

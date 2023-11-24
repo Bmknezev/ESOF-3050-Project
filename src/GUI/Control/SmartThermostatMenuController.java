@@ -1,6 +1,7 @@
 package GUI.Control;
 
 import GUI.Control.Abstract.AbstractDeviceController;
+import GUI.Control.Interface.Updatable;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,7 +14,7 @@ import javafx.stage.Stage;
 import messages.AbstractDeviceMessage;
 import messages.server.ThermostatMessage;
 
-public class SmartThermostatMenuController extends AbstractDeviceController {
+public class SmartThermostatMenuController extends AbstractDeviceController implements Updatable {
 
     public Button coolingEnableButton;
     public Button heatingEnableButton;

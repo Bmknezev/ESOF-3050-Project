@@ -45,7 +45,7 @@
                <children>
                   <Label text="Start Date:">
                      <font>
-                        <Font name="System Bold" size="16.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
                   <DatePicker fx:id="startDatePicker" promptText="Start Date" />
@@ -56,49 +56,55 @@
                <children>
                   <Label text="Repeat:">
                      <font>
-                        <Font size="16.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
                   <HBox alignment="CENTER" spacing="40.0">
                      <children>
-                        <RadioButton mnemonicParsing="false" text="Yes">
+                        <RadioButton fx:id="yesRepeatRadioButton" mnemonicParsing="false" onAction="#yesRepeatPressed" text="Yes">
                            <toggleGroup>
                               <ToggleGroup fx:id="repeatSelection" />
                            </toggleGroup>
                         </RadioButton>
-                        <RadioButton mnemonicParsing="false" text="No" toggleGroup="$repeatSelection" />
+                        <RadioButton fx:id="noRepeatRadioButton" mnemonicParsing="false" onAction="#noRepeatPressed" text="No" toggleGroup="$repeatSelection" />
                      </children>
                   </HBox>
-                  <Label text="Repeat Frequency:" />
+                  <Label text="Repeat Frequency:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
                   <HBox alignment="CENTER" spacing="20.0">
                      <children>
-                        <TextField fx:id="repeatFrequencyTextField" prefWidth="150.0" promptText="Every #" />
+                        <TextField fx:id="repeatFrequencyTextField" disable="true" prefWidth="150.0" promptText="Every #" />
                         <VBox alignment="CENTER_LEFT" spacing="5.0">
                            <children>
-                              <RadioButton mnemonicParsing="false" text="Seconds">
+                              <RadioButton fx:id="secondsRadioButton" disable="true" mnemonicParsing="false" text="Seconds">
                                  <toggleGroup>
                                     <ToggleGroup fx:id="repeatFrequencySelection" />
                                  </toggleGroup>
                               </RadioButton>
-                              <RadioButton mnemonicParsing="false" text="Minutes" toggleGroup="$repeatFrequencySelection" />
-                              <RadioButton mnemonicParsing="false" text="Hours" toggleGroup="$repeatFrequencySelection" />
-                              <RadioButton mnemonicParsing="false" text="Days" toggleGroup="$repeatFrequencySelection" />
+                              <RadioButton fx:id="minutesRadioButton" disable="true" mnemonicParsing="false" text="Minutes" toggleGroup="$repeatFrequencySelection" />
+                              <RadioButton fx:id="hoursRadioButton" disable="true" mnemonicParsing="false" text="Hours" toggleGroup="$repeatFrequencySelection" />
+                              <RadioButton fx:id="daysRadioButton" disable="true" mnemonicParsing="false" text="Days" toggleGroup="$repeatFrequencySelection" />
                            </children>
                         </VBox>
                      </children>
                   </HBox>
-                  <Label text="End Date:" />
+                  <Label text="End Date:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
                   <HBox alignment="CENTER" spacing="40.0">
                      <children>
-                        <RadioButton mnemonicParsing="false" text="Yes">
+                        <RadioButton fx:id="yesEndDateRadioButton" disable="true" mnemonicParsing="false" onAction="#yesEndDatePressed" text="Yes">
                            <toggleGroup>
                               <ToggleGroup fx:id="endDateSelection" />
                            </toggleGroup>
                         </RadioButton>
-                        <RadioButton mnemonicParsing="false" text="No" toggleGroup="$endDateSelection" />
+                        <RadioButton fx:id="noEndDateRadioButton" disable="true" mnemonicParsing="false" onAction="#noEndDatePressed" text="No" toggleGroup="$endDateSelection" />
                      </children>
                   </HBox>
-                  <DatePicker fx:id="endDatePicker" promptText="End Date" />
+                  <DatePicker fx:id="endDatePicker" disable="true" promptText="End Date" />
                </children>
             </VBox>
             <Separator />
@@ -106,7 +112,7 @@
                <children>
                   <Label text="Automatable Actions:">
                      <font>
-                        <Font size="16.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
                </children>

@@ -1,6 +1,7 @@
 package GUI.Control;
 
 import GUI.Control.Abstract.AbstractDeviceController;
+import GUI.Control.Interface.Updatable;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,7 +15,7 @@ import javafx.stage.Stage;
 import messages.AbstractDeviceMessage;
 import messages.server.LockMessage;
 
-public class SmartLockMenuController extends AbstractDeviceController {
+public class SmartLockMenuController extends AbstractDeviceController implements Updatable {
 
     @FXML
     private Button ChangePINButton;

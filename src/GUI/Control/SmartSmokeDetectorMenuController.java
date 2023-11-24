@@ -1,6 +1,7 @@
 package GUI.Control;
 
 import GUI.Control.Abstract.AbstractDeviceController;
+import GUI.Control.Interface.Updatable;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,7 +15,7 @@ import messages.server.SmokeDetectorMessage;
 
 import java.util.Date;
 
-public class SmartSmokeDetectorMenuController extends AbstractDeviceController {
+public class SmartSmokeDetectorMenuController extends AbstractDeviceController implements Updatable {
 
     @FXML
     private Button backButton;

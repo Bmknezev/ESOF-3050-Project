@@ -3,6 +3,7 @@ package ClientServer;
 
 import GUI.Control.Abstract.AbstractDeviceController;
 import GUI.Control.DeviceSelectionMenuController;
+import GUI.Control.Interface.Updatable;
 import GUI.Control.LoginMenuController;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
@@ -10,6 +11,7 @@ import messages.*;
 
 public class SmartHomeClient extends ClientServer.AbstractClient {
 private AbstractDeviceController deviceController;
+private Updatable updatableDevice;
 private DeviceSelectionMenuController mainMenuController;
 private int currentDeviceID = -1;
 private boolean admin;
@@ -35,7 +37,7 @@ private LoginMenuController loginMenuController;
             case 1:
                 //device details received
                 if(currentDeviceID == ((AbstractDeviceMessage)msg).getDeviceID())
-                    deviceController.update((AbstractDeviceMessage)msg);
+                    updatableDevice.update((AbstractDeviceMessage)msg);
                 break;
             case 2:
                 //new device received
@@ -73,7 +75,8 @@ private LoginMenuController loginMenuController;
     public void request(int i, AbstractDeviceController c) {
         //request a device from server with device id i
         //c is the controller for the device
-        deviceController = c;
+        //deviceController = c;
+        updatableDevice = (Updatable)c;
         setCurrentDeviceID(i);
         NewDeviceMessage msg = new NewDeviceMessage(i);
         Send(msg);
