@@ -14,7 +14,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
-import messages.AbstractDeviceMessage;
 import messages.NewDeviceMessage;
 import messages.UserListMessage;
 import messages.client.Listable;
@@ -142,10 +141,7 @@ import messages.client.Listable;
     }
 
     public void setWelcomeLabel(boolean admin, String username) {
-        Platform.runLater(() ->{
-
-            welcomeUserLabel.setText("Welcome, " + (admin ? "Admin " + username : username));
-        });
+        Platform.runLater(() -> welcomeUserLabel.setText("Welcome, " + (admin ? "Admin " + username : username)));
     }
 
     public void enableAdminControls(){
@@ -238,7 +234,7 @@ import messages.client.Listable;
         VBox dpContent = new VBox(8);
 
         ToggleGroup deviceTypeGroup = new ToggleGroup();
-        RadioButton deviceTypeSelectionButtons[] = new RadioButton[6];
+        RadioButton[] deviceTypeSelectionButtons = new RadioButton[6];
 
         // these create all the radio buttons and add them to the toggle group
         for (int i = 0; i < deviceTypeSelectionButtons.length; i++) {
@@ -357,59 +353,62 @@ import messages.client.Listable;
 
     public void deleteItemSelected(ActionEvent actionEvent) {
         if (!userListActive) {
-            deleteDeviceMenu.setHeaderText("Select devices to delete");
-            deleteDeviceMenu.setTitle("Delete device");
-            DialogPane dp = deleteDeviceMenu.getDialogPane();
-
-            VBox dpContent = new VBox(8);
-            CheckBox[] deviceSelectionCheckBoxes = new CheckBox[deviceVBox.getChildren().size()];
-            for (int i = 0; i < deviceSelectionCheckBoxes.length; i++) {
-                deviceSelectionCheckBoxes[i] = new CheckBox(((Label) ((StackPane) deviceVBox.getChildren().get(i)).getChildren().get(0)).getText());
-                dpContent.getChildren().add(deviceSelectionCheckBoxes[i]);
-            }
-            deleteDeviceMenu.setResultConverter((ButtonType button) -> {
-                if (button == ButtonType.OK) {
-                    for (int i = 0; i < deviceSelectionCheckBoxes.length; i++) {
-                        if (deviceSelectionCheckBoxes[i].isSelected()) {
-                            client.UpdateServer(new NewDeviceMessage(i, deviceSelectionCheckBoxes[i].getText(), "delete"));
-                            deviceVBox.getChildren().clear();
-                        }
-                    }
-                }
-                return null;
-            });
-            dp.setContent(dpContent);
-            deleteDeviceMenu.show();
+            deleteDevice();
         }
-        else {
-
+        else{
+            deleteUser();
         }
+
+    }
+
+    private void deleteDevice(){
+        //set up dialog box
+        boolean empty = true;
         VBox dpContent = new VBox(8);
+        deleteDeviceMenu.setHeaderText("Select a device to delete");
+        deleteDeviceMenu.setTitle("Delete device");
+        //create radio buttons
         RadioButton[] deviceSelectionButton = new RadioButton[deviceVBox.getChildren().size()];
+        //create toggle group
         ToggleGroup deviceTypeGroup = new ToggleGroup();
+        //get dialog pane
+        DialogPane dp = deleteDeviceMenu.getDialogPane();
+
         for(int i = 0; i < deviceSelectionButton.length; i++) {
+            //create new radio buttons for each device that is currently added to the system, and add them to the toggle group
             deviceSelectionButton[i] = new RadioButton(((Label)((StackPane)deviceVBox.getChildren().get(i)).getChildren().get(0)).getText());
             deviceSelectionButton[i].setToggleGroup(deviceTypeGroup);
             dpContent.getChildren().add(deviceSelectionButton[i]);
+            empty = false;
         }
+
+        //set up check for when the user presses ok
         deleteDeviceMenu.setResultConverter((ButtonType button) -> {
             if (button == ButtonType.OK) {
                 for(int i = 0; i < deviceSelectionButton.length; i++) {
                     if(deviceSelectionButton[i].isSelected()){
+                        //get device id from the label of the stack pane
                         int id = Integer.parseInt(((Label)((StackPane)deviceVBox.getChildren().get(i)).getChildren().get(2)).getText());
+                        //send the delete message to the server
                         client.UpdateServer(new NewDeviceMessage(id, deviceSelectionButton[i].getText(), "delete"));
                     }
                 }
+                //clear the device list
                 deviceVBox.getChildren().clear();
             }
 
             return null;
         });
-        //dp.setContent(dpContent);
-        deleteDeviceMenu.show();
-    }
 
-    private void deleteDevice(){
+        //set the dialog pane content to the vbox containing the radio buttons
+        if(empty) {
+            dp.setContent(new Label("No devices to delete"));
+            deleteDeviceMenu.setHeaderText("No devices to delete");
+        }
+        else
+            dp.setContent(dpContent);
+        //show the dialog box
+        deleteDeviceMenu.show();
 
     }
 
