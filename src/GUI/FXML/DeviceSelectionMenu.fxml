@@ -47,8 +47,8 @@
                      <children>
                         <MenuButton fx:id="manageItemListMenuButton" mnemonicParsing="false" text="Manage Device List">
                           <items>
-                            <MenuItem fx:id="addNewDeviceMenuItem" mnemonicParsing="false" onAction="#addNewDeviceSelected" text="Add New Device" />
-                              <MenuItem fx:id="deleteDeviceMenuItem" mnemonicParsing="false" onAction="#deleteDeviceSelected" text="Delete Existing Device" />
+                            <MenuItem fx:id="addItemOption" mnemonicParsing="false" onAction="#addItemSelected" text="Add New Device" />
+                              <MenuItem fx:id="deleteItemOption" mnemonicParsing="false" onAction="#deleteItemSelected" text="Delete Existing Device" />
                           </items>
                         </MenuButton>
                         <Button fx:id="addUserButton" disable="true" mnemonicParsing="false" onAction="#addUserButtonPressed" prefHeight="26.0" prefWidth="94.5" text="Add User" visible="false" />

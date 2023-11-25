@@ -42,9 +42,9 @@ import messages.client.Listable;
     private MenuButton manageItemListMenuButton;
 
     @FXML
-    private MenuItem addNewDeviceMenuItem;
+    private MenuItem addItemOption;
     @FXML
-    private MenuItem deleteDeviceMenuItem;
+    private MenuItem deleteItemOption;
 
     private Scene previous;
     private Scene[] sceneList = new Scene[5];
@@ -220,7 +220,7 @@ import messages.client.Listable;
         }
     }
 
-    public void addNewDeviceSelected(ActionEvent actionEvent) {
+    public void addItemSelected(ActionEvent actionEvent) {
             // these give the user instructions
         newDeviceMenu.setHeaderText("Select a device type");
         newDeviceMenu.setTitle("Add new device");
@@ -318,7 +318,7 @@ import messages.client.Listable;
         });
     }
 
-    public void deleteDeviceSelected(ActionEvent actionEvent) {
+    public void deleteItemSelected(ActionEvent actionEvent) {
         deleteDeviceMenu.setHeaderText("Select devices to delete");
         deleteDeviceMenu.setTitle("Delete device");
         DialogPane dp = deleteDeviceMenu.getDialogPane();
