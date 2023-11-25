@@ -63,7 +63,7 @@
                   <Insets left="8.0" />
                </padding>
             </Label>
-            <Slider fx:id="BrightnessSlider" blockIncrement="1.0" onMouseDragged="#BrightnessSliderReleased" value="50.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <Slider fx:id="BrightnessSlider" blockIncrement="1.0" onMouseDragged="#BrightnessSliderDragged" onMouseReleased="#sendBrightnessUpdate" value="50.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <padding>
                   <Insets left="8.0" right="8.0" />
                </padding>
