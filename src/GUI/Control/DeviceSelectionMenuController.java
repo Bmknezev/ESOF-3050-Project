@@ -89,6 +89,11 @@ import messages.client.Listable;
 
         listableItemStackPane.getChildren().addAll(nameLabel, listableItemControlHBox);
 
+        Label idLabel = new Label();
+        idLabel.setText(Integer.toString(listableItem.getIDListable()));
+        idLabel.setVisible(false);
+        listableItemStackPane.getChildren().add(idLabel);
+
         Platform.runLater(() -> deviceVBox.getChildren().add(listableItemStackPane));
 
 
@@ -102,7 +107,6 @@ import messages.client.Listable;
 
             deviceManagementButton.setOnAction(event -> {
                 Stage stage = (Stage) deviceManagementButton.getScene().getWindow();
-
                 client.request(newDevice.getDeviceID(), Controller[newDevice.getDeviceTypeNumber()]);
                 stage.setScene(sceneList[newDevice.getDeviceTypeNumber()]);
             });
@@ -333,7 +337,8 @@ import messages.client.Listable;
             if (button == ButtonType.OK) {
                 for(int i = 0; i < deviceSelectionCheckBoxes.length; i++) {
                     if(deviceSelectionCheckBoxes[i].isSelected()){
-                        client.UpdateServer(new NewDeviceMessage(i, deviceSelectionCheckBoxes[i].getText(), "delete"));
+                        int id = Integer.parseInt(((Label)((StackPane)deviceVBox.getChildren().get(i)).getChildren().get(2)).getText());
+                        client.UpdateServer(new NewDeviceMessage(id, deviceSelectionCheckBoxes[i].getText(), "delete"));
                         deviceVBox.getChildren().clear();
                     }
                 }

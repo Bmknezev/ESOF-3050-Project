@@ -66,4 +66,9 @@ public class UserListMessage extends AbstractMessage implements Listable {
     public String getCategoryListable() {
         return admin ? "Admin User" : "User";
     }
+
+    @Override
+    public int getIDListable() {
+        return userID;
+    }
 }
