@@ -39,7 +39,7 @@ import messages.client.Listable;
     private VBox deviceVBox;
 
     @FXML
-    private MenuButton deviceListMenuButton;
+    private MenuButton manageItemListMenuButton;
 
     @FXML
     private MenuItem addNewDeviceMenuItem;
@@ -152,8 +152,8 @@ import messages.client.Listable;
             toggleUserList();
         }
 
-        deviceListMenuButton.setVisible(true);
-        deviceListMenuButton.setDisable(false);
+        manageItemListMenuButton.setVisible(true);
+        manageItemListMenuButton.setDisable(false);
         toggleUserListButton.setVisible(true);
         toggleUserListButton.setDisable(false);
     }
@@ -165,8 +165,8 @@ import messages.client.Listable;
             toggleUserList();
         }
 
-        deviceListMenuButton.setVisible(false);
-        deviceListMenuButton.setDisable(true);
+        manageItemListMenuButton.setVisible(false);
+        manageItemListMenuButton.setDisable(true);
         toggleUserListButton.setVisible(false);
         toggleUserListButton.setDisable(true);
     }
@@ -196,8 +196,8 @@ import messages.client.Listable;
             elementListIndicatorLabel.setText("Connected Devices:");
             toggleUserListButton.setText("View User List");
 
-            deviceListMenuButton.setVisible(true);
-            deviceListMenuButton.setDisable(false);
+            manageItemListMenuButton.setVisible(true);
+            manageItemListMenuButton.setDisable(false);
             addUserButton.setVisible(false);
             addUserButton.setDisable(true);
 
@@ -210,8 +210,8 @@ import messages.client.Listable;
             elementListIndicatorLabel.setText("User Accounts:");
             toggleUserListButton.setText("View Device List");
 
-            deviceListMenuButton.setVisible(false);
-            deviceListMenuButton.setDisable(true);
+            manageItemListMenuButton.setVisible(false);
+            manageItemListMenuButton.setDisable(true);
             addUserButton.setVisible(true);
             addUserButton.setDisable(false);
 
@@ -303,6 +303,9 @@ import messages.client.Listable;
 
             newDeviceMenu.setResultConverter((ButtonType button) -> {
                 if (button == ButtonType.OK) {
+                    if (nameField.getText().isEmpty()){
+                        nameField.setText("Untitled " + deviceTypeString);
+                    }
                     deviceVBox.getChildren().clear();
                     System.out.println("Adding new " + deviceTypeString);
                     client.UpdateServer(new NewDeviceMessage(-1, nameField.getText(), deviceTypeString));
@@ -339,9 +342,6 @@ import messages.client.Listable;
         });
         dp.setContent(dpContent);
         deleteDeviceMenu.show();
-
-
-
     }
 
     private void modifyUser(int id, String text, String text1, boolean selected) {

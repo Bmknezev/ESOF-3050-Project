@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="575.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Control.DeviceSelectionMenuController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="575.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Control.DeviceSelectionMenuController">
    <padding>
       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
    </padding>
@@ -45,7 +45,7 @@
                   <Button fx:id="toggleUserListButton" mnemonicParsing="false" onAction="#toggleUserListButtonPressed" text="View User List" />
                   <StackPane alignment="BOTTOM_RIGHT" prefHeight="26.0" prefWidth="515.0">
                      <children>
-                        <MenuButton fx:id="deviceListMenuButton" mnemonicParsing="false" text="Manage Device List">
+                        <MenuButton fx:id="manageItemListMenuButton" mnemonicParsing="false" text="Manage Device List">
                           <items>
                             <MenuItem fx:id="addNewDeviceMenuItem" mnemonicParsing="false" onAction="#addNewDeviceSelected" text="Add New Device" />
                               <MenuItem fx:id="deleteDeviceMenuItem" mnemonicParsing="false" onAction="#deleteDeviceSelected" text="Delete Existing Device" />
