@@ -161,8 +161,12 @@ public class SmartLightMenuController extends AbstractDeviceController implement
     }
 
     public void changeColour(ActionEvent actionEvent) {
-        //uses the built in colour picker to change the colour of the light
-        lightColour.setStyle("-fx-background-color: #" + Integer.toHexString(colourPicker.getValue().hashCode()));
+        //Integer colourInt = colourPicker.getValue().hashCode(), tempInt;
+        //String colour = String.format("%08x", colourPicker.getValue().hashCode());
+
+        //System.out.println("New Colour Is: #" + colour);
+            //uses the built in colour picker to change the colour of the light
+        lightColour.setStyle("-fx-background-color: #" + String.format("%08x", colourPicker.getValue().hashCode()));
         //updates the server with the new values
         UpdateServer();
     }
