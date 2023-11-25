@@ -79,4 +79,9 @@ public class NewDeviceMessage extends AbstractMessage implements Listable {
     public String getCategoryListable() {
         return deviceType;
     }
+
+    @Override
+    public int getIDListable() {
+        return deviceID;
+    }
 }

@@ -87,6 +87,11 @@ import messages.client.Listable;
 
         listableItemStackPane.getChildren().addAll(nameLabel, listableItemControlHBox);
 
+        Label idLabel = new Label();
+        idLabel.setText(Integer.toString(listableItem.getIDListable()));
+        idLabel.setVisible(false);
+        listableItemStackPane.getChildren().add(idLabel);
+
         Platform.runLater(() -> deviceVBox.getChildren().add(listableItemStackPane));
 
 
@@ -365,6 +370,26 @@ import messages.client.Listable;
         else {
 
         }
+        VBox dpContent = new VBox(8);
+        CheckBox[] deviceSelectionCheckBoxes = new CheckBox[deviceVBox.getChildren().size()];
+        for(int i = 0; i < deviceSelectionCheckBoxes.length; i++) {
+            deviceSelectionCheckBoxes[i] = new CheckBox(((Label)((StackPane)deviceVBox.getChildren().get(i)).getChildren().get(0)).getText());
+            dpContent.getChildren().add(deviceSelectionCheckBoxes[i]);
+        }
+        deleteDeviceMenu.setResultConverter((ButtonType button) -> {
+            if (button == ButtonType.OK) {
+                for(int i = 0; i < deviceSelectionCheckBoxes.length; i++) {
+                    if(deviceSelectionCheckBoxes[i].isSelected()){
+                        int id = Integer.parseInt(((Label)((StackPane)deviceVBox.getChildren().get(i)).getChildren().get(2)).getText());
+                        client.UpdateServer(new NewDeviceMessage(id, deviceSelectionCheckBoxes[i].getText(), "delete"));
+                        deviceVBox.getChildren().clear();
+                    }
+                }
+            }
+            return null;
+        });
+        dp.setContent(dpContent);
+        deleteDeviceMenu.show();
     }
 
     private void modifyUser(int id, String text, String text1, boolean selected) {

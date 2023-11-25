@@ -9,4 +9,6 @@ public interface Listable {
     public abstract String getCategoryListable();
     // user/admin - user/admin
     // device type - smart device
+
+    public abstract int getIDListable();
 }
