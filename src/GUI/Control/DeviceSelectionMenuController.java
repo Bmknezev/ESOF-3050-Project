@@ -371,21 +371,24 @@ import messages.client.Listable;
 
         }
         VBox dpContent = new VBox(8);
-        CheckBox[] deviceSelectionCheckBoxes = new CheckBox[deviceVBox.getChildren().size()];
-        for(int i = 0; i < deviceSelectionCheckBoxes.length; i++) {
-            deviceSelectionCheckBoxes[i] = new CheckBox(((Label)((StackPane)deviceVBox.getChildren().get(i)).getChildren().get(0)).getText());
-            dpContent.getChildren().add(deviceSelectionCheckBoxes[i]);
+        RadioButton[] deviceSelectionButton = new RadioButton[deviceVBox.getChildren().size()];
+        ToggleGroup deviceTypeGroup = new ToggleGroup();
+        for(int i = 0; i < deviceSelectionButton.length; i++) {
+            deviceSelectionButton[i] = new RadioButton(((Label)((StackPane)deviceVBox.getChildren().get(i)).getChildren().get(0)).getText());
+            deviceSelectionButton[i].setToggleGroup(deviceTypeGroup);
+            dpContent.getChildren().add(deviceSelectionButton[i]);
         }
         deleteDeviceMenu.setResultConverter((ButtonType button) -> {
             if (button == ButtonType.OK) {
-                for(int i = 0; i < deviceSelectionCheckBoxes.length; i++) {
-                    if(deviceSelectionCheckBoxes[i].isSelected()){
+                for(int i = 0; i < deviceSelectionButton.length; i++) {
+                    if(deviceSelectionButton[i].isSelected()){
                         int id = Integer.parseInt(((Label)((StackPane)deviceVBox.getChildren().get(i)).getChildren().get(2)).getText());
-                        client.UpdateServer(new NewDeviceMessage(id, deviceSelectionCheckBoxes[i].getText(), "delete"));
-                        deviceVBox.getChildren().clear();
+                        client.UpdateServer(new NewDeviceMessage(id, deviceSelectionButton[i].getText(), "delete"));
                     }
                 }
+                deviceVBox.getChildren().clear();
             }
+
             return null;
         });
         dp.setContent(dpContent);
