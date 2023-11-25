@@ -221,125 +221,139 @@ import messages.client.Listable;
 
     public void addItemSelected(ActionEvent actionEvent) {
         if (!userListActive) {
-            // these give the user instructions
-            newDeviceMenu.setHeaderText("Select a device type");
-            newDeviceMenu.setTitle("Add new device");
-
-            DialogPane dp = newDeviceMenu.getDialogPane();
-
-            VBox dpContent = new VBox(8);
-
-            ToggleGroup deviceTypeGroup = new ToggleGroup();
-            RadioButton deviceTypeSelectionButtons[] = new RadioButton[6];
-
-            // these create all the radio buttons and add them to the toggle group
-            for (int i = 0; i < deviceTypeSelectionButtons.length; i++) {
-                deviceTypeSelectionButtons[i] = new RadioButton();
-                deviceTypeSelectionButtons[i].setToggleGroup(deviceTypeGroup);
-                dpContent.getChildren().add(deviceTypeSelectionButtons[i]);
-            }
-            // these add the labels to all the radio buttons
-            deviceTypeSelectionButtons[0].setText("Smart Light");
-            deviceTypeSelectionButtons[1].setText("Smart Lock");
-            deviceTypeSelectionButtons[2].setText("Smart Thermostat");
-            deviceTypeSelectionButtons[3].setText("Smart Coffee Machine");
-            deviceTypeSelectionButtons[4].setText("Smart Garage Door");
-            deviceTypeSelectionButtons[5].setText("Smart Smoke Detector");
-
-            newDeviceMenu.setResultConverter((ButtonType button) -> {
-                int deviceType = 0;
-                String deviceTypeString = "";
-                if (button == ButtonType.OK) {
-                    for (int i = 0; i < deviceTypeSelectionButtons.length; i++) {
-                        if (deviceTypeSelectionButtons[i].isSelected()) {
-                            deviceType = i;
-                            deviceTypeString = deviceTypeSelectionButtons[i].getText();
-                            break;
-                        }
-                    }
-                    nextMenu(deviceType, deviceTypeString);
-                }
-
-                return null;
-            });
-
-            dp.setContent(dpContent);
-            newDeviceMenu.show();
+            createNewDeviceFirstMenu();
         }
         else{
-            addUserMenu.setHeaderText("Add new user");
-            DialogPane dp = addUserMenu.getDialogPane();
-            Label usernameLabel = new Label("Username: ");
-            Label passwordLabel = new Label("Password: ");
-            TextField usernameField = new TextField();
-            TextField passwordField = new TextField();
-            CheckBox adminCheckBox = new CheckBox("Admin");
-            addUserMenu.setResultConverter((ButtonType button) -> {
-                if (button == ButtonType.OK) {
-                    deviceVBox.getChildren().clear();
-                    addUser(usernameField.getText(), passwordField.getText(), adminCheckBox.isSelected());
-                }
-                return null;
-            });
-            dp.setContent(new VBox(8,new HBox(2, usernameLabel, usernameField), new HBox(2, passwordLabel, passwordField), adminCheckBox));
-
-            addUserMenu.show();
+            createNewUser();
         }
     }
 
-    private void nextMenu(int deviceType, String deviceTypeString){
-        Platform.runLater(() -> {
-                // this checks if there was an error in the previous menu
-            if (deviceType < 0 || deviceType > 5){
-                System.out.println("Error: Device type not found");
-                return;
+    private void createNewDeviceFirstMenu(){
+        // these give the user instructions
+        newDeviceMenu.setHeaderText("Select a device type");
+        newDeviceMenu.setTitle("Add new device");
+
+        DialogPane dp = newDeviceMenu.getDialogPane();
+
+        VBox dpContent = new VBox(8);
+
+        ToggleGroup deviceTypeGroup = new ToggleGroup();
+        RadioButton deviceTypeSelectionButtons[] = new RadioButton[6];
+
+        // these create all the radio buttons and add them to the toggle group
+        for (int i = 0; i < deviceTypeSelectionButtons.length; i++) {
+            deviceTypeSelectionButtons[i] = new RadioButton();
+            deviceTypeSelectionButtons[i].setToggleGroup(deviceTypeGroup);
+            dpContent.getChildren().add(deviceTypeSelectionButtons[i]);
+        }
+        // these add the labels to all the radio buttons
+        deviceTypeSelectionButtons[0].setText("Smart Light");
+        deviceTypeSelectionButtons[1].setText("Smart Lock");
+        deviceTypeSelectionButtons[2].setText("Smart Thermostat");
+        deviceTypeSelectionButtons[3].setText("Smart Coffee Machine");
+        deviceTypeSelectionButtons[4].setText("Smart Garage Door");
+        deviceTypeSelectionButtons[5].setText("Smart Smoke Detector");
+
+        newDeviceMenu.setResultConverter((ButtonType button) -> {
+            int deviceType = 0;
+            String deviceTypeString = "";
+            if (button == ButtonType.OK) {
+                for (int i = 0; i < deviceTypeSelectionButtons.length; i++) {
+                    if (deviceTypeSelectionButtons[i].isSelected()) {
+                        deviceType = i;
+                        deviceTypeString = deviceTypeSelectionButtons[i].getText();
+                        break;
+                    }
+                }
+                createNewDeviceSecondMenu(deviceType, deviceTypeString);
             }
+
+            return null;
+        });
+
+        dp.setContent(dpContent);
+        newDeviceMenu.show();
+    }
+
+    private void createNewDeviceSecondMenu(int deviceType, String deviceTypeString){
+            Platform.runLater(() -> {
+                // this checks if there was an error in the previous menu
+                if (deviceType < 0 || deviceType > 5){
+                    System.out.println("Error: Device type not found");
+                    return;
+                }
                 // these provide instruction to the user
-            newDeviceMenu.setHeaderText("Add new " + deviceTypeString);
-            newDeviceMenu.setTitle("Add new " + deviceTypeString);
+                newDeviceMenu.setHeaderText("Add new " + deviceTypeString);
+                newDeviceMenu.setTitle("Add new " + deviceTypeString);
 
-            DialogPane dp = newDeviceMenu.getDialogPane();
+                DialogPane dp = newDeviceMenu.getDialogPane();
                 // this creates a section for the user to enter their name
-            Label nameLabel = new Label("Name: ");
-            TextField nameField = new TextField();
+                Label nameLabel = new Label("Name: ");
+                TextField nameField = new TextField();
                 // this creates a section for the user to enther their pin
-            Label pinLabel = new Label("PIN: ");
-            TextField pinField = new TextField();
+                Label pinLabel = new Label("PIN: ");
+                TextField pinField = new TextField();
 
-            VBox labelVBox = new VBox(8, nameLabel),
-                    textFieldVBox = new VBox(8, nameField);
+                VBox labelVBox = new VBox(8, nameLabel),
+                        textFieldVBox = new VBox(8, nameField);
                 // this combines the label and textfield vboxes into one hbox
-            labelVBox.setAlignment(Pos.CENTER);
-            textFieldVBox.setAlignment(Pos.CENTER);
+                labelVBox.setAlignment(Pos.CENTER);
+                textFieldVBox.setAlignment(Pos.CENTER);
 
-            HBox inputHBox = new HBox(2, labelVBox, textFieldVBox);
-            inputHBox.setAlignment(Pos.CENTER);
+                HBox inputHBox = new HBox(2, labelVBox, textFieldVBox);
+                inputHBox.setAlignment(Pos.CENTER);
                 // this creates the vbox that will hold all the elements in the display box
-            VBox dpContent = new VBox(8, inputHBox);
-            dpContent.setAlignment(Pos.CENTER);
+                VBox dpContent = new VBox(8, inputHBox);
+                dpContent.setAlignment(Pos.CENTER);
 
                 // this adds the pin section to the display box only if necessary
-            if (deviceType == 1 || deviceType == 4){
-                labelVBox.getChildren().add(pinLabel);
-                textFieldVBox.getChildren().add(pinField);
-            }
-
-            newDeviceMenu.setResultConverter((ButtonType button) -> {
-                if (button == ButtonType.OK) {
-                    if (nameField.getText().isEmpty()){
-                        nameField.setText("Untitled " + deviceTypeString);
-                    }
-                    deviceVBox.getChildren().clear();
-                    System.out.println("Adding new " + deviceTypeString);
-                    client.UpdateServer(new NewDeviceMessage(-1, nameField.getText(), deviceTypeString));
+                if (deviceType == 1 || deviceType == 4){
+                    labelVBox.getChildren().add(pinLabel);
+                    textFieldVBox.getChildren().add(pinField);
                 }
-                return null;
-            });
 
-            dp.setContent(dpContent);
-            newDeviceMenu.show();
+                newDeviceMenu.setResultConverter((ButtonType button) -> {
+                    if (button == ButtonType.OK) {
+                        if (nameField.getText().isEmpty()){
+                            nameField.setText("Untitled " + deviceTypeString);
+                        }
+                        deviceVBox.getChildren().clear();
+                        System.out.println("Adding new " + deviceTypeString);
+                        client.UpdateServer(new NewDeviceMessage(-1, nameField.getText(), deviceTypeString));
+                    }
+                    return null;
+                });
+
+                dp.setContent(dpContent);
+                newDeviceMenu.show();
+            });
+        }
+
+    private void createNewUser(){
+        addUserMenu.setHeaderText("Add new user");
+        DialogPane dp = addUserMenu.getDialogPane();
+        Label usernameLabel = new Label("Username: ");
+        Label passwordLabel = new Label("Password: ");
+        TextField usernameField = new TextField();
+        TextField passwordField = new TextField();
+        CheckBox adminCheckBox = new CheckBox("Admin");
+        addUserMenu.setResultConverter((ButtonType button) -> {
+            if (button == ButtonType.OK) {
+                deviceVBox.getChildren().clear();
+                addUser(usernameField.getText(), passwordField.getText(), adminCheckBox.isSelected());
+            }
+            return null;
         });
+        dp.setContent(new VBox(8,new HBox(2, usernameLabel, usernameField), new HBox(2, passwordLabel, passwordField), adminCheckBox));
+
+        addUserMenu.show();
     }
+
+    private void addUser(String text, String text1, boolean selected) {
+        UserListMessage msg = new UserListMessage(-2,text, text1, selected, true);
+        client.UpdateServer(msg);
+    }
+
 
     public void deleteItemSelected(ActionEvent actionEvent) {
         if (!userListActive) {
@@ -391,20 +405,22 @@ import messages.client.Listable;
 
             return null;
         });
-        dp.setContent(dpContent);
+        //dp.setContent(dpContent);
         deleteDeviceMenu.show();
+    }
+
+    private void deleteDevice(){
+
+    }
+
+    private void deleteUser(){
+
     }
 
     private void modifyUser(int id, String text, String text1, boolean selected) {
         UserListMessage msg = new UserListMessage(id,text, text1, selected, false);
         client.UpdateServer(msg);
     }
-
-    private void addUser(String text, String text1, boolean selected) {
-        UserListMessage msg = new UserListMessage(-2,text, text1, selected, true);
-        client.UpdateServer(msg);
-    }
-
     public void error(UserListMessage msg) {
         Platform.runLater(() ->{
             Alert alert = new Alert(Alert.AlertType.ERROR);
