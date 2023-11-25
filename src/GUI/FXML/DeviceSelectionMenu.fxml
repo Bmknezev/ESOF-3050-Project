@@ -51,7 +51,6 @@
                               <MenuItem fx:id="deleteItemOption" mnemonicParsing="false" onAction="#deleteItemSelected" text="Delete Existing Device" />
                           </items>
                         </MenuButton>
-                        <Button fx:id="addUserButton" disable="true" mnemonicParsing="false" onAction="#addUserButtonPressed" prefHeight="26.0" prefWidth="94.5" text="Add User" visible="false" />
                      </children>
                   </StackPane>
                </children>
