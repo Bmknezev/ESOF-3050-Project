@@ -49,7 +49,6 @@ public class SmartHome extends Application {
         System.out.println("Closing connection to server.");
         try {
             s.closeConnection();
-            Platform.exit();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

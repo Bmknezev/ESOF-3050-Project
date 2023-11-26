@@ -440,8 +440,9 @@ import messages.client.Listable;
                     if(userSelectionButton[i].isSelected()){
                         //get device id from the label of the stack pane
                         int id = Integer.parseInt(((Label)((StackPane)listVBox.getChildren().get(i)).getChildren().get(2)).getText());
+                        String username = welcomeUserLabel.getText().substring(15);
                         //send the delete message to the server
-                        client.UpdateServer(new UserListMessage(id, "delete"));
+                        client.UpdateServer(new UserListMessage(id, username, "delete", false, false));
                     }
                 }
                 //clear the device list
@@ -471,11 +472,14 @@ import messages.client.Listable;
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             if(msg.getUserID() == -1)
-                alert.setHeaderText("User does not exist");
+                alert.setHeaderText("Username already taken");
+            else if(msg.getUserID() == -2)
+                alert.setHeaderText("Cannot delete current user");
             else if(msg.getUserID() == -3){
                 alert.setHeaderText("Cannot remove last admin");
                 alert.setContentText("The user " + msg.getUsername() + " is the only admin on the system.");
-            }
+            }else if(msg.getUserID() == -4)
+                alert.setHeaderText("Username and password cannot be empty");
             alert.showAndWait();
         });
     }
