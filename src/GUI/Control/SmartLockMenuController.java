@@ -101,7 +101,7 @@ public class SmartLockMenuController extends AbstractDeviceController implements
         td.setHeaderText("Change PIN");
         td.setTitle("Change PIN");
         td.setResultConverter(dialogButton -> {
-            if (dialogButton == ButtonType.OK) {
+            if (dialogButton == ButtonType.OK && !pinInput.getText().isEmpty() && !pinInput2.getText().isEmpty()) {
                 client.checkPIN(new PinMessage (deviceID, Integer.parseInt(pinInput.getText()), Integer.parseInt(pinInput2.getText()), false), this);
             }
             return null;
@@ -137,7 +137,7 @@ public class SmartLockMenuController extends AbstractDeviceController implements
             dialogPane.setContent(new VBox(8, new HBox(8, pinPrompt, pinInput)));
 
             td.setResultConverter(dialogButton -> {
-                if (dialogButton == ButtonType.OK) {
+                if (dialogButton == ButtonType.OK && !pinInput.getText().isEmpty()) {
                    client.checkPIN(new PinMessage(deviceID, Integer.parseInt(pinInput.getText()), -1, true), this);
                 }
                 return null;
@@ -163,12 +163,11 @@ public class SmartLockMenuController extends AbstractDeviceController implements
             SmartDeviceImageView.setImage(new javafx.scene.image.Image("/GUI/Images/Lock Icon.png"));
             UpdateServer();
         }else{
-            td.setHeaderText("Wrong PIN entered");
-            td.setTitle("Error");
-            DialogPane dialogPane = td.getDialogPane();
-            dialogPane.setContent(new VBox());
-
-            td.showAndWait();
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Incorrect PIN");
+            alert.setHeaderText("Incorrect PIN");
+            alert.setContentText("The PIN you entered was incorrect. Please try again.");
+            alert.showAndWait();
         }
         });
     }

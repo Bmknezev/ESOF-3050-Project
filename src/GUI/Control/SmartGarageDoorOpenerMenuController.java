@@ -103,7 +103,7 @@ public class SmartGarageDoorOpenerMenuController extends AbstractDeviceControlle
             dialogPane.setContent(new VBox(8, new HBox(8, pinPrompt, pinInput)));
 
             td.setResultConverter(dialogButton -> {
-                if (dialogButton == ButtonType.OK) {
+                if (dialogButton == ButtonType.OK && !pinInput.getText().isEmpty()) {
                     client.checkPIN(new PinMessage(deviceID, Integer.parseInt(pinInput.getText()), -1, true), this);
                 }
                 return null;
@@ -121,19 +121,17 @@ public class SmartGarageDoorOpenerMenuController extends AbstractDeviceControlle
 
     @Override
     public void response(PinMessage msg) {
-        System.out.println("PIN response received22" + msg.getPinStatus());
         Platform.runLater(() -> {
             if (msg.getPinStatus()) {
                 StatusIndicatorLabel.setText("Open");
                 SmartDeviceImageView.setImage(new javafx.scene.image.Image("/GUI/Images/Garage Door Opener Icon.png"));
                 UpdateServer();
             } else {
-                td.setHeaderText("Wrong PIN entered");
-                td.setTitle("Error");
-                DialogPane dialogPane = td.getDialogPane();
-                dialogPane.setContent(new VBox());
-
-                td.showAndWait();
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("PIN Error");
+                alert.setHeaderText("Incorrect PIN");
+                alert.setContentText("Please try again.");
+                alert.showAndWait();
             }
         });
     }
@@ -148,7 +146,7 @@ public class SmartGarageDoorOpenerMenuController extends AbstractDeviceControlle
         td.setHeaderText("Change PIN");
         td.setTitle("Change PIN");
         td.setResultConverter(dialogButton -> {
-            if (dialogButton == ButtonType.OK) {
+            if (dialogButton == ButtonType.OK && !pinInput.getText().isEmpty() && !pinInput2.getText().isEmpty()) {
                 client.checkPIN(new PinMessage (deviceID, Integer.parseInt(pinInput.getText()), Integer.parseInt(pinInput2.getText()), false), this);
             }
             return null;
