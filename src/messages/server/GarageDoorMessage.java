@@ -20,11 +20,12 @@ public class GarageDoorMessage extends AbstractDeviceMessage {
         this.passwordAttempts = passwordAttempts;
     }
 
-    public GarageDoorMessage(int id, String name, boolean usePassword, int password){
+    public GarageDoorMessage(int id, String name, boolean doorStatus, boolean usePassword, int password){
         super(name, id);
         this.usePassword = usePassword;
         this.password = password;
         this.passwordAttempts = 0;
+        this.doorStatus = doorStatus;
     }
 
     public boolean getSafteySwitch() {
@@ -51,4 +52,7 @@ public class GarageDoorMessage extends AbstractDeviceMessage {
         return passwordAttempts;
     }
 
+    public int getPIN() {
+        return password;
+    }
 }
