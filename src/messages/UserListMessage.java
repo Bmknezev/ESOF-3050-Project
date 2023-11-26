@@ -25,6 +25,12 @@ public class UserListMessage extends AbstractMessage implements Listable {
         this.userID = id;
     }
 
+    public UserListMessage(int id, String username){
+        super(7);
+        this.username = username;
+        this.userID = id;
+    }
+
     public void setUsername(String username){
         this.username = username;
     }
@@ -70,5 +76,9 @@ public class UserListMessage extends AbstractMessage implements Listable {
     @Override
     public int getIDListable() {
         return userID;
+    }
+
+    public void setNewUser(boolean newUser) {
+        this.newUser = newUser;
     }
 }

@@ -130,7 +130,9 @@ import messages.client.Listable;
             manageUserMenu.setResultConverter((ButtonType button) -> {
                 if (button == ButtonType.OK) {
                     listVBox.getChildren().clear();
+                    System.out.println("Modifying user " + newUser.getUsername() + " " + newUser.getUserID());
                     modifyUser(newUser.getUserID(), userField.getText(), passField.getText(), adminCheckBox.isSelected());
+                    System.out.println("User modified");
                 }
                 return null;
             });
@@ -439,7 +441,7 @@ import messages.client.Listable;
                         //get device id from the label of the stack pane
                         int id = Integer.parseInt(((Label)((StackPane)listVBox.getChildren().get(i)).getChildren().get(2)).getText());
                         //send the delete message to the server
-                        client.UpdateServer(new NewDeviceMessage(id, userSelectionButton[i].getText(), "delete"));
+                        client.UpdateServer(new UserListMessage(id, "delete"));
                     }
                 }
                 //clear the device list
