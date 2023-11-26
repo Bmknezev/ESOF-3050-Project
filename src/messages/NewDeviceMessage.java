@@ -7,6 +7,7 @@ public class NewDeviceMessage extends AbstractMessage implements Listable {
     private String deviceName;
     private int deviceID, deviceTypeNumber;
     private String deviceType;
+    private int pin;
 
     public NewDeviceMessage(int id, String name, String deviceType) {
         //constructor used by server
@@ -83,5 +84,13 @@ public class NewDeviceMessage extends AbstractMessage implements Listable {
     @Override
     public int getIDListable() {
         return deviceID;
+    }
+
+    public int getPIN() {
+        return pin;
+    }
+
+    public void setPIN(int pin) {
+        this.pin = pin;
     }
 }

@@ -5,15 +5,13 @@ import messages.AbstractDeviceMessage;
 public class LockMessage extends AbstractDeviceMessage {
 
         private boolean lockStatus;
-        private int password;
         private int timer;
-        private String pin;
+        private int pin;
 
 
-        public LockMessage(int id, String name, boolean lockStatus, int password, int timer, String pin){
+        public LockMessage(int id, String name, boolean lockStatus, int timer, int pin){
             super(name, id);
             this.lockStatus = lockStatus;
-            this.password = password;
             this.timer = timer;
             this.pin = pin;
         }
@@ -22,15 +20,11 @@ public class LockMessage extends AbstractDeviceMessage {
             return lockStatus;
         }
 
-        public int getPassword() {
-            return password;
-        }
-
         public int getTimer() {
             return timer;
         }
 
-    public String getPIN() {
-            return pin;
+    public int getPIN() {
+        return pin;
     }
 }

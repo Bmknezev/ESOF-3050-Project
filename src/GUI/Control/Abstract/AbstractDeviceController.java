@@ -1,7 +1,7 @@
 package GUI.Control.Abstract;
 
 import ClientServer.SmartHomeClient;
-import messages.AbstractDeviceMessage;
+import messages.PinMessage;
 
 public abstract class AbstractDeviceController {
     protected SmartHomeClient client;
@@ -12,4 +12,9 @@ public abstract class AbstractDeviceController {
         client = s;
     }
 
+    public void response(PinMessage msg) {
+    }
+
+    public void setPIN(int newPin) {
+    }
 }

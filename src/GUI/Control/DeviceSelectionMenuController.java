@@ -317,7 +317,12 @@ import messages.client.Listable;
                         }
                         listVBox.getChildren().clear();
                         System.out.println("Adding new " + deviceTypeString);
-                        client.UpdateServer(new NewDeviceMessage(-1, nameField.getText(), deviceTypeString));
+                        if(deviceType == 1 || deviceType == 4){
+                            NewDeviceMessage msg = new NewDeviceMessage(-1, nameField.getText(), deviceTypeString);
+                            msg.setPIN(Integer.parseInt(pinField.getText()));
+                            client.UpdateServer(msg);
+                        }else
+                            client.UpdateServer(new NewDeviceMessage(-1, nameField.getText(), deviceTypeString));
                     }
                     return null;
                 });

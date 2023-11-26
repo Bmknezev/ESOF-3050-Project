@@ -59,6 +59,33 @@ private LoginMenuController loginMenuController;
                 }
                 loginMenuController.login((LoginMessage)msg);
                 break;
+            case 6:
+                //PIN change response
+                if(((PinMessage)msg).getNewPin() == -1){
+                    System.out.println("PIN.");
+                    deviceController.response((PinMessage) msg);
+                    return;
+                }
+
+                if(((PinMessage)msg).getPinStatus()){
+                    deviceController.setPIN(((PinMessage)msg).getNewPin());
+                    Platform.runLater(() -> {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("PIN Change");
+                        alert.setHeaderText("PIN Changed Successfully");
+                        alert.setContentText("Your new PIN is: " + ((PinMessage)msg).getNewPin());
+                        alert.showAndWait();
+                    });
+                }
+                else{
+                    Platform.runLater(() -> {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("PIN Change");
+                        alert.setHeaderText("PIN Change Failed");
+                        alert.setContentText("Your PIN was not changed. Please ensure you entered the correct PIN.");
+                        alert.showAndWait();
+                    });
+                }
             case 7:
                 //user list received
                 if(((UserListMessage)msg).getNewUser())
@@ -115,6 +142,11 @@ private LoginMenuController loginMenuController;
 
     public void setLoginMenuController(LoginMenuController loginMenuController){
         this.loginMenuController = loginMenuController;
+    }
+
+    public void checkPIN(PinMessage msg, AbstractDeviceController c){
+        deviceController = c;
+        Send(msg);
     }
 
     @Override
