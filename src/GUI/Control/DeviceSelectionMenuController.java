@@ -490,6 +490,6 @@ import messages.client.Listable;
     }
 
     public void clearList(){
-        listVBox.getChildren().clear();
+        Platform.runLater(() -> listVBox.getChildren().clear());
     }
 }
