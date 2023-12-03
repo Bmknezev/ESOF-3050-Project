@@ -41,7 +41,10 @@ private LoginMenuController loginMenuController;
                 break;
             case 2:
                 //new device received
-                mainMenuController.addNewDevice((NewDeviceMessage)msg);
+                if(((NewDeviceMessage)msg).getDeviceID() == -5 )
+                    mainMenuController.clearList();
+                else
+                    mainMenuController.addNewDevice((NewDeviceMessage)msg);
                 break;
             case 3:
                 //client id received

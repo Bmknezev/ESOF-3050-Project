@@ -488,4 +488,8 @@ import messages.client.Listable;
             alert.showAndWait();
         });
     }
+
+    public void clearList(){
+        listVBox.getChildren().clear();
+    }
 }
