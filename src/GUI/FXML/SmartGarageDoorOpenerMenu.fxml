@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Control.SmartGarageDoorOpenerMenuController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Control.SmartGarageDoorOpenerMenuController">
    <center>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
@@ -42,11 +42,11 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="ToggleGarageDoorStatusButton" mnemonicParsing="false" prefWidth="150.0" text="Close / Open" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Button fx:id="ToggleGarageDoorStatusButton" mnemonicParsing="false" onAction="#ToggleGarageDoorButtonPressed" prefWidth="150.0" text="Close / Open" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
             <Button fx:id="TempOpenButton" mnemonicParsing="false" prefWidth="150.0" text="Open" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
             <Button fx:id="CreateAutomationButton" mnemonicParsing="false" prefWidth="150.0" text="Create Door Schedule" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
             <Button fx:id="EditAutomationsButton" mnemonicParsing="false" prefWidth="150.0" text="Edit Door Schedules" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-            <Button fx:id="ChangePINButton" mnemonicParsing="false" prefWidth="150.0" text="**Change PIN**" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+            <Button fx:id="ChangePINButton" mnemonicParsing="false" onAction="#ChangePINButtonPressed" prefWidth="150.0" text="**Change PIN**" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
             <Label text="Open Temporarily:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <padding>
                   <Insets right="8.0" />
@@ -78,6 +78,9 @@
             </VBox>
             <Button fx:id="backButton" cancelButton="true" mnemonicParsing="false" onAction="#backButtonPressed" text="Back" StackPane.alignment="TOP_LEFT" />
          </children>
+         <padding>
+            <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+         </padding>
       </StackPane>
    </top>
 </BorderPane>

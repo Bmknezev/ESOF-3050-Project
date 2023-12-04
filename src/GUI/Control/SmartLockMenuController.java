@@ -1,20 +1,21 @@
 package GUI.Control;
 
 import GUI.Control.Abstract.AbstractDeviceController;
+import GUI.Control.Interface.Updatable;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import messages.AbstractDeviceMessage;
+import messages.PinMessage;
 import messages.server.LockMessage;
 
-public class SmartLockMenuController extends AbstractDeviceController {
+public class SmartLockMenuController extends AbstractDeviceController implements Updatable {
 
     @FXML
     private Button ChangePINButton;
@@ -51,7 +52,7 @@ public class SmartLockMenuController extends AbstractDeviceController {
 
     private int deviceID;
     private TextInputDialog td = new TextInputDialog("");
-    private String pin;
+    private int pin;
 
 
 
@@ -91,7 +92,22 @@ public class SmartLockMenuController extends AbstractDeviceController {
 
     @FXML
     void ChangePINButtonPressed(ActionEvent event) {
+        DialogPane dialogPane = td.getDialogPane();
+        Label pinPrompt = new Label("Enter current PIN");
+        TextField pinInput = new TextField();
+        Label pinPrompt2 = new Label("Enter new PIN");
+        TextField pinInput2 = new TextField();
+        dialogPane.setContent(new VBox(8, new HBox(8, pinPrompt, pinInput), new HBox(8, pinPrompt2, pinInput2)));
+        td.setHeaderText("Change PIN");
+        td.setTitle("Change PIN");
+        td.setResultConverter(dialogButton -> {
+            if (dialogButton == ButtonType.OK && !pinInput.getText().isEmpty() && !pinInput2.getText().isEmpty()) {
+                client.checkPIN(new PinMessage (deviceID, Integer.parseInt(pinInput.getText()), Integer.parseInt(pinInput2.getText()), false), this);
+            }
+            return null;
+        });
 
+        td.showAndWait();
     }
 
     @FXML
@@ -111,15 +127,26 @@ public class SmartLockMenuController extends AbstractDeviceController {
 
     @FXML
     void ToggleLockStatusButtonPressed(ActionEvent event) {
-        if(StatusIndicatorLabel.getText().equals("Locked")){
+        if (StatusIndicatorLabel.getText().equals("Locked")) {
             td.setHeaderText("Enter PIN");
             td.setTitle("Enter PIN");
             td.getEditor().setText("");
+            DialogPane dialogPane = td.getDialogPane();
+            Label pinPrompt = new Label("Enter PIN");
+            TextField pinInput = new TextField();
+            dialogPane.setContent(new VBox(8, new HBox(8, pinPrompt, pinInput)));
+
+            td.setResultConverter(dialogButton -> {
+                if (dialogButton == ButtonType.OK && !pinInput.getText().isEmpty()) {
+                   client.checkPIN(new PinMessage(deviceID, Integer.parseInt(pinInput.getText()), -1, true), this);
+                }
+                return null;
+            });
+
             td.showAndWait();
 
-            PINEntered();
-        }
-        else{
+
+        } else {
             StatusIndicatorLabel.setText("Locked");
             SmartDeviceImageView.setImage(new javafx.scene.image.Image("/GUI/Images/Lock Icon.png"));
             UpdateServer();
@@ -127,19 +154,31 @@ public class SmartLockMenuController extends AbstractDeviceController {
 
     }
 
-    public void PINEntered() {
-        if(td.getEditor().getText().equals("1234")){
+    @Override
+    public void response(PinMessage msg) {
+        System.out.println("PIN response received");
+        Platform.runLater(() -> {
+        if(msg.getPinStatus()){
             StatusIndicatorLabel.setText("Unlocked");
+            SmartDeviceImageView.setImage(new javafx.scene.image.Image("/GUI/Images/Lock Icon.png"));
+            UpdateServer();
+        }else{
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Incorrect PIN");
+            alert.setHeaderText("Incorrect PIN");
+            alert.setContentText("The PIN you entered was incorrect. Please try again.");
+            alert.showAndWait();
         }
-        else{
-            StatusIndicatorLabel.setText("Locked");
-        }
-        SmartDeviceImageView.setImage(new javafx.scene.image.Image("/GUI/Images/Lock Icon.png"));
-        UpdateServer();
+        });
+    }
+
+    @Override
+    public void setPIN(int newPin) {
+        pin = newPin;
     }
 
     private void UpdateServer(){
-        LockMessage message = new LockMessage(deviceID,SmartDeviceNameLabel.getText(), StatusIndicatorLabel.getText().equals("Locked"), 0, 0, pin);
+        LockMessage message = new LockMessage(deviceID,SmartDeviceNameLabel.getText(), StatusIndicatorLabel.getText().equals("Locked"), 0,  pin);
         client.UpdateServer(message);
     }
 

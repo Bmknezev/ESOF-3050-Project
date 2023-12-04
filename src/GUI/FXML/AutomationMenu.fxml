@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Control.AutomationMenuController">
+   <top>
+      <StackPane BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="BOTTOM_CENTER">
+               <children>
+                  <Label fx:id="smartDeviceNameLabel" text="(Smart Device Name)">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="smartDeviceTypeLabel" text="(Smart Device)" />
+               </children>
+            </VBox>
+            <Button fx:id="backButton" cancelButton="true" mnemonicParsing="false" onAction="#backButtonPressed" text="Back" StackPane.alignment="TOP_LEFT" />
+         </children>
+         <padding>
+            <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+         </padding>
+      </StackPane>
+   </top>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+   <center>
+      <VBox alignment="BOTTOM_CENTER" spacing="10.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="CENTER" spacing="5.0">
+               <children>
+                  <Label text="Start Date:">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <DatePicker fx:id="startDatePicker" promptText="Start Date" />
+               </children>
+            </VBox>
+            <Separator />
+            <VBox alignment="CENTER" spacing="5.0">
+               <children>
+                  <Label text="Repeat:">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER" spacing="40.0">
+                     <children>
+                        <RadioButton fx:id="yesRepeatRadioButton" mnemonicParsing="false" onAction="#yesRepeatPressed" text="Yes">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="repeatSelection" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="noRepeatRadioButton" mnemonicParsing="false" onAction="#noRepeatPressed" text="No" toggleGroup="$repeatSelection" />
+                     </children>
+                  </HBox>
+                  <Label text="Repeat Frequency:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <HBox alignment="CENTER" spacing="20.0">
+                     <children>
+                        <TextField fx:id="repeatFrequencyTextField" disable="true" prefWidth="150.0" promptText="Every #" />
+                        <VBox alignment="CENTER_LEFT" spacing="5.0">
+                           <children>
+                              <RadioButton fx:id="secondsRadioButton" disable="true" mnemonicParsing="false" text="Seconds">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="repeatFrequencySelection" />
+                                 </toggleGroup>
+                              </RadioButton>
+                              <RadioButton fx:id="minutesRadioButton" disable="true" mnemonicParsing="false" text="Minutes" toggleGroup="$repeatFrequencySelection" />
+                              <RadioButton fx:id="hoursRadioButton" disable="true" mnemonicParsing="false" text="Hours" toggleGroup="$repeatFrequencySelection" />
+                              <RadioButton fx:id="daysRadioButton" disable="true" mnemonicParsing="false" text="Days" toggleGroup="$repeatFrequencySelection" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <Label text="End Date:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <HBox alignment="CENTER" spacing="40.0">
+                     <children>
+                        <RadioButton fx:id="yesEndDateRadioButton" disable="true" mnemonicParsing="false" onAction="#yesEndDatePressed" text="Yes">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="endDateSelection" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="noEndDateRadioButton" disable="true" mnemonicParsing="false" onAction="#noEndDatePressed" text="No" toggleGroup="$endDateSelection" />
+                     </children>
+                  </HBox>
+                  <DatePicker fx:id="endDatePicker" disable="true" promptText="End Date" />
+               </children>
+            </VBox>
+            <Separator />
+            <VBox fx:id="smartDeviceActionsVBox" alignment="CENTER">
+               <children>
+                  <Label text="Automatable Actions:">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <Button fx:id="confirmAutomationButton" alignment="BOTTOM_CENTER" mnemonicParsing="false" onAction="#confirmAutomationButtonPressed" text="Confirm Automation" />
+         </children>
+         <padding>
+            <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+         </padding>
+      </VBox>
+   </center>
+</BorderPane>

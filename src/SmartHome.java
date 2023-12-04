@@ -3,12 +3,12 @@ import GUI.Control.*;
 
 import GUI.Control.Abstract.AbstractDeviceController;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.Pane;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -26,17 +26,16 @@ public class SmartHome extends Application {
         if (!guiTest){
             try {
                 s.openConnection();
-            } catch (IOException e) {
+            } catch (IOException e){
                 connectionFailed = true;
                 //throw new RuntimeException(e);
                 //create new stage and display error message
                 runLater(() -> {
-                    Parent errorRoot = new Pane(new Label("Connection to server failed."));
-                    Scene errorScene = new Scene(errorRoot, 600,575);
-                    Stage errorStage = new Stage();
-                    errorStage.setTitle("Connection Error");
-                    errorStage.setScene(errorScene);
-                    errorStage.show();
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Connection Error");
+                    alert.setHeaderText("Connection to server failed.");
+                    alert.setContentText("Please check your internet connection and ensure the server is online.");
+                    alert.showAndWait();
                 });
             }
         }

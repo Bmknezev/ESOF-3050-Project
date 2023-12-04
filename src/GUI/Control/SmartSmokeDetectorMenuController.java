@@ -1,6 +1,7 @@
 package GUI.Control;
 
 import GUI.Control.Abstract.AbstractDeviceController;
+import GUI.Control.Interface.Updatable;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,34 +15,48 @@ import messages.server.SmokeDetectorMessage;
 
 import java.util.Date;
 
-public class SmartSmokeDetectorMenuController extends AbstractDeviceController {
-
-    @FXML
-    private Label BatteryStatusLabel;
-
-    @FXML
-    private Button CreateAutomationButton;
-
-    @FXML
-    private Button EditAutomationsButton;
-
-    @FXML
-    private Label PreviousTestDateLabel;
-
-    @FXML
-    private ImageView SmartDeviceImageView;
-
-    @FXML
-    private Label SmartDeviceNameLabel;
-
-    @FXML
-    private Label StatusIndicatorLabel;
-
-    @FXML
-    private Button TestAlarmButton;
+public class SmartSmokeDetectorMenuController extends AbstractDeviceController implements Updatable {
 
     @FXML
     private Button backButton;
+
+    @FXML
+    private Label batteryStatusLabel;
+
+    @FXML
+    private Button createAutomationButton;
+
+    @FXML
+    private Button editAutomationsButton;
+
+    @FXML
+    private Label previousTestDateLabel;
+
+    @FXML
+    private ImageView smartDeviceImageView;
+
+    @FXML
+    private Label smartDeviceNameLabel;
+
+    @FXML
+    private Label statusIndicatorLabel;
+
+    @FXML
+    private Button testAlarmButton;
+
+    @FXML
+    void backButtonPressed(ActionEvent event) {
+        Stage stage = (Stage) backButton.getScene().getWindow();
+        stage.setScene(previous);
+    }
+
+    @FXML
+    void testAlarmButtonPressed(ActionEvent event) {
+        SmokeDetectorMessage alarm = new SmokeDetectorMessage(
+                deviceID, smartDeviceNameLabel.getText(), new Date(), false, true
+        );
+        client.UpdateServer(alarm);
+    }
 
     private Scene previous;
     // this is just a default object to test the GUI
@@ -53,25 +68,21 @@ public class SmartSmokeDetectorMenuController extends AbstractDeviceController {
         previous = previousScene;
     }
 
-    public void backButtonPressed(ActionEvent actionEvent) {
-        Stage stage = (Stage) backButton.getScene().getWindow();
-        stage.setScene(previous);
-
-    }
-
     @Override
     public void update(AbstractDeviceMessage msg) {
         Platform.runLater(() -> {
             SmokeDetectorMessage message = (SmokeDetectorMessage) msg;
-            SmartDeviceNameLabel.setText(message.getName());
+            smartDeviceNameLabel.setText(message.getName());
             deviceID = message.getDeviceID();
             if (message.getAlarmStatus()) {
-                StatusIndicatorLabel.setText("Active");
+                statusIndicatorLabel.setText("Active");
             } else {
-                StatusIndicatorLabel.setText("Inactive");
+                statusIndicatorLabel.setText("Inactive");
             }
-            //PreviousTestDateLabel.setText(message.getPreviousTestDate());
-
+            if (message.getLastTested() == null)
+                previousTestDateLabel.setText("Never Tested");
+            else
+                previousTestDateLabel.setText(message.getLastTested().toString());
         });
 
     }

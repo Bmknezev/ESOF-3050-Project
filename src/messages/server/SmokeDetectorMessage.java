@@ -9,7 +9,7 @@ public class SmokeDetectorMessage extends AbstractDeviceMessage {
     private boolean testStatus; //true if need to test, false if dont need to test
     private boolean alarmStatus; //true if alarm is ready, false if alarm is not ready
 
-    public SmokeDetectorMessage(int id, String name,Date lastTested, boolean testStatus, boolean alarmStatus) {
+    public SmokeDetectorMessage(int id, String name, Date lastTested, boolean testStatus, boolean alarmStatus) {
         super(name, id);
         this.lastTested = lastTested;
         this.testStatus = testStatus;

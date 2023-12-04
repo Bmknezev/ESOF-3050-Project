@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import messages.LoginMessage;
@@ -22,7 +23,7 @@ public class LoginMenuController {
     private Button enterButton;
 
     @FXML
-    private TextField passwordTextField;
+    private PasswordField passwordTextField;
 
     private Scene next;
     private Stage stage;
@@ -30,11 +31,7 @@ public class LoginMenuController {
 
     public void LoginButtonPressed(ActionEvent actionEvent) {
 
-        try {
-            client.sendToServer(new messages.LoginMessage(emailTextField.getText(), passwordTextField.getText()));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        client.UpdateServer(new messages.LoginMessage(emailTextField.getText(), passwordTextField.getText()));
     }
 
     public void addServer(SmartHomeClient server){

@@ -1,6 +1,7 @@
 package GUI.Control;
 
 import GUI.Control.Abstract.AbstractDeviceController;
+import GUI.Control.Interface.Updatable;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,7 +22,7 @@ import java.util.Date;
 import java.util.Objects;
 
 
-public class SmartLightMenuController extends AbstractDeviceController {
+public class SmartLightMenuController extends AbstractDeviceController implements Updatable {
 
     public Pane lightColour;
     public ColorPicker colourPicker;
@@ -143,12 +144,9 @@ public class SmartLightMenuController extends AbstractDeviceController {
     }
 
 
-    public void BrightnessSliderReleased(MouseEvent mouseEvent) {
+    public void BrightnessSliderDragged(MouseEvent mouseEvent) {
         //change text on the brightness label to match the slider
         brightnessLabel.setText((int) BrightnessSlider.getValue() + "%");
-        //updates the server with the new values
-        //needs to be moved to a separate method
-        UpdateServer();
     }
 
     private void UpdateServer(){
@@ -163,8 +161,18 @@ public class SmartLightMenuController extends AbstractDeviceController {
     }
 
     public void changeColour(ActionEvent actionEvent) {
-        //uses the built in colour picker to change the colour of the light
-        lightColour.setStyle("-fx-background-color: #" + Integer.toHexString(colourPicker.getValue().hashCode()));
+        //Integer colourInt = colourPicker.getValue().hashCode(), tempInt;
+        //String colour = String.format("%08x", colourPicker.getValue().hashCode());
+
+        //System.out.println("New Colour Is: #" + colour);
+            //uses the built in colour picker to change the colour of the light
+        lightColour.setStyle("-fx-background-color: #" + String.format("%08x", colourPicker.getValue().hashCode()));
+        //updates the server with the new values
+        UpdateServer();
+    }
+
+    public void sendBrightnessUpdate(MouseEvent mouseEvent) {
+        //System.out.println("Brightness Update Sent");
         //updates the server with the new values
         UpdateServer();
     }

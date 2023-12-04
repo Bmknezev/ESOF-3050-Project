@@ -1,6 +1,7 @@
 package GUI.Control;
 
 import GUI.Control.Abstract.AbstractDeviceController;
+import GUI.Control.Interface.Updatable;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,7 +14,7 @@ import javafx.stage.Stage;
 import messages.AbstractDeviceMessage;
 import messages.server.ThermostatMessage;
 
-public class SmartThermostatMenuController extends AbstractDeviceController {
+public class SmartThermostatMenuController extends AbstractDeviceController implements Updatable {
 
     public Button coolingEnableButton;
     public Button heatingEnableButton;
@@ -87,8 +88,9 @@ public class SmartThermostatMenuController extends AbstractDeviceController {
             TemperatureStatusLabel.setText(message.getTemperature() + " °C");
             SetpointStatusLabel.setText(message.getSetpoint() + " °C");
             heatingEnableButton.setText(message.getHeatEnabled() ? "Disable Heating" : "Enable Heating");
+            heatingEnableButton.setStyle(message.getHeatEnabled() ? "-fx-background-color: Orange" : "-fx-background-color: LightGrey");
             coolingEnableButton.setText(message.getCoolEnabled() ? "Disable Cooling" : "Enable Cooling");
-
+            coolingEnableButton.setStyle(message.getCoolEnabled() ? "-fx-background-color: LightBlue" : "-fx-background-color: LightGrey");
         });
 
     }
@@ -127,9 +129,11 @@ public class SmartThermostatMenuController extends AbstractDeviceController {
     public void coolingEnableButtonPressed(ActionEvent actionEvent) {
         if(coolingEnableButton.getText().equals("Enable Cooling")){
             coolingEnableButton.setText("Disable Cooling");
+            coolingEnableButton.setStyle("-fx-background-color: LightBlue");
         }
         else{
             coolingEnableButton.setText("Enable Cooling");
+            coolingEnableButton.setStyle("-fx-background-color: LightGrey");
         }
         UpdateServer();
     }
@@ -137,9 +141,11 @@ public class SmartThermostatMenuController extends AbstractDeviceController {
     public void heatingEnableButtonPressed(ActionEvent actionEvent) {
         if(heatingEnableButton.getText().equals("Enable Heating")){
             heatingEnableButton.setText("Disable Heating");
+            heatingEnableButton.setStyle("-fx-background-color: Orange");
         }
         else{
             heatingEnableButton.setText("Enable Heating");
+            heatingEnableButton.setStyle("-fx-background-color: LightGrey");
         }
         UpdateServer();
     }

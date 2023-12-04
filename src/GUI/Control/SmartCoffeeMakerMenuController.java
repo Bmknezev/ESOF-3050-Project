@@ -1,6 +1,7 @@
 package GUI.Control;
 
 import GUI.Control.Abstract.AbstractDeviceController;
+import GUI.Control.Interface.Updatable;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,7 +15,7 @@ import messages.server.CoffeeMessage;
 
 import java.io.IOException;
 
-public class SmartCoffeeMakerMenuController extends AbstractDeviceController {
+public class SmartCoffeeMakerMenuController extends AbstractDeviceController implements Updatable {
 
     public ProgressBar waterLevel;
     public ProgressBar coffeeLevel;
