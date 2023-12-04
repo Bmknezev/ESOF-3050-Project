@@ -16,7 +16,7 @@ import java.io.IOException;
 import static javafx.application.Platform.runLater;
 
 public class SmartHome extends Application {
-    static SmartHomeClient s = new SmartHomeClient("192.168.250.88", 19920);
+    static SmartHomeClient s = new SmartHomeClient("127.0.0.1", 19920);
 
     static boolean guiTest = false;
 
