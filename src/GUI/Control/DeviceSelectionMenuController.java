@@ -1,4 +1,32 @@
-    // this is for testing
+//-----------------------------------------------------------------
+// DeviceSelectionMenuController.java
+// Group 2
+// Description: This class manages the device and user selection menu in the Smart Home system. It handles
+//              user interactions related to adding new devices, managing existing devices, managing user accounts,
+//              and navigating back to the previous menu.
+// Created By:
+// Edited By:
+// Approved By: Braydon, Francisco, Liam
+// Variables:
+//   - backButton: Button - Button for navigating back
+//   - toggleUserListButton: Button - Button for toggling user list display
+//   - welcomeUserLabel: Label - Label displaying the welcome message for users
+//   - elementListIndicatorLabel: Label - Label indicating the displayed list of elements (devices/users)
+//   - listVBox: VBox - VBox containing the list of devices/users
+//   - manageItemListMenuButton: MenuButton - Button for managing the device/user list
+//   - addItemOption: MenuItem - Menu option for adding a new device/user
+//   - deleteItemOption: MenuItem - Menu option for deleting an existing device/user
+//   - previous: Scene - Reference to the previous scene
+//   - sceneList: Scene[] - Array of scenes related to device operations
+//   - Controller: AbstractDeviceController[] - Array of device controllers
+//   - manageUserMenu: TextInputDialog - Dialog for managing user accounts
+//   - addUserMenu: TextInputDialog - Dialog for adding a new user
+//   - newDeviceMenu: TextInputDialog - Dialog for adding a new device
+//   - deleteItemMenu: TextInputDialog - Dialog for deleting an item (device/user)
+//   - userListActive: boolean - Flag indicating whether the user list is active or not
+//-----------------------------------------------------------------
+
+
 package GUI.Control;
 
 import GUI.Control.Abstract.AbstractDeviceController;

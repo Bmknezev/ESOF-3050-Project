@@ -1,3 +1,15 @@
+//-----------------------------------------------------------------
+// GarageDoorAutomationMessage.java
+// Group 2
+// Description: Represents a message for garage door automation in a system.
+//              Extends AbstractAutomationMessage.
+// Created By:
+// Edited By:
+// Approved By: Braydon, Francisco, Liam
+// Variables:
+//   - doorStatus: boolean - Represents the status of the garage door (open or closed).
+//-----------------------------------------------------------------
+
 package messages.automations;
 
 import java.util.Date;

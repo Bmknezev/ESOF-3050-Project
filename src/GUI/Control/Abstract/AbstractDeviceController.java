@@ -1,3 +1,18 @@
+//-----------------------------------------------------------------
+// AbstractDeviceController.java
+// Group 2
+// Description: This abstract class defines the structure for device controllers in the Smart Home system.
+//              It contains methods for managing server connections, handling responses for PIN changes,
+//              and retrieving device information.
+// Created By:
+// Edited By:
+// Approved By: Braydon, Francisco, Liam
+// Variables:
+//    - client: SmartHomeClient - The client used for communication
+//    - automationMenuController: static AutomationMenuController - Controller for automation menu
+//    - automationScene: static Scene - Scene for automation
+//-----------------------------------------------------------------
+
 package GUI.Control.Abstract;
 
 import ClientServer.SmartHomeClient;

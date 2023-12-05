@@ -1,3 +1,16 @@
+//-----------------------------------------------------------------
+// AbstractDeviceMessage.java
+// Group 2
+// Description: Abstract class representing a device message.
+// Created By:
+// Edited By:
+// Approved By: Braydon, Francisco, Liam
+// Variables:
+//   - deviceName: String - Name of the device.
+//   - deviceID: int - ID of the device.
+//
+//-----------------------------------------------------------------
+
 package messages;
 
 public abstract class AbstractDeviceMessage extends AbstractMessage{

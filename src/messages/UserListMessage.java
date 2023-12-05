@@ -1,3 +1,19 @@
+//-----------------------------------------------------------------
+// UserListMessage.java
+// Group 2
+// Description: Represents a message related to user management.
+// Created By:
+// Edited By:
+// Approved By: Braydon, Francisco, Liam
+// Variables:
+//   - username: String - Username associated with the user message.
+//   - password: String - Password associated with the user message.
+//   - admin: boolean - Indicates if the user is an administrator.
+//   - newUser: boolean - Indicates if the user is a new user.
+//   - userID: int - ID associated with the user.
+//
+//-----------------------------------------------------------------
+
 package messages;
 
 import messages.client.Listable;

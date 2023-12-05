@@ -1,3 +1,30 @@
+//-----------------------------------------------------------------
+// SmartLockMenuController.java
+// Group 2
+// Description: Manages the control and user interface for the Smart Lock device in the system. Controls lock status (locked/unlocked),
+//              PIN change, temporary unlocking, and handles user input.
+// Created By:
+// Edited By:
+// Approved By: Braydon, Francisco, Liam
+// Variables:
+//   - ChangePINButton: Button - Button for changing the PIN of the smart lock
+//   - CreateAutomationButton: Button - Button for creating automations for the smart lock (not implemented)
+//   - EditAutomationsButton: Button - Button for editing existing automations for the smart lock (not implemented)
+//   - SmartDeviceImageView: ImageView - Image view for displaying the smart lock's image
+//   - SmartDeviceNameLabel: Label - Label for displaying the name of the smart lock
+//   - StatusIndicatorLabel: Label - Label for indicating the status of the lock (Locked / Unlocked)
+//   - TempUnlockButton: Button - Button for temporary unlocking of the smart lock (not implemented)
+//   - TempUnlockTextField: TextField - TextField for temporary unlocking (not implemented)
+//   - ToggleLockStatusButton: Button - Button for toggling the lock status (Locked / Unlocked)
+//   - backButton: Button - Button for navigating back to the previous scene
+//   - previous: Scene - Reference to the previous scene
+//   - deviceID: int - Identifier for the smart lock device
+//   - td: TextInputDialog - Dialog for user input (changing PIN, entering PIN)
+//   - pin: int - The current PIN associated with the smart lock
+//   - client: SmartHomeClient - Reference to the Smart Home client
+//-----------------------------------------------------------------
+
+
 package GUI.Control;
 
 import GUI.Control.Abstract.AbstractDeviceController;

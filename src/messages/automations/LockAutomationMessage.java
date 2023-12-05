@@ -1,3 +1,17 @@
+//-----------------------------------------------------------------
+// LockAutomationMessage.java
+// Group 2
+// Description: Represents a message for lock automation in a system.
+//              Extends AbstractAutomationMessage.
+// Created By:
+// Edited By:
+// Approved By: Braydon, Francisco, Liam
+// Variables:
+//   - lockStatus: boolean - Represents the status of the lock (locked or unlocked).
+//   - timer: int - Represents a timer associated with the lock.
+//   - pin: int - Represents the Personal Identification Number (PIN) used with the lock.
+//-----------------------------------------------------------------
+
 package messages.automations;
 
 import java.util.Date;
