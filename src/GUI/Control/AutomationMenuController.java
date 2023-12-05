@@ -223,7 +223,9 @@ public class AutomationMenuController extends AbstractDeviceController {
 
     @FXML
     void confirmAutomationButtonPressed(ActionEvent event) {
-        date = addTimeToDate(Date.from(startDatePicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()), Integer.parseInt(minuteTextField.getText()), Integer.parseInt(hourTextField.getText()));
+        int hours = hourTextField.getText().equals("") ? 0 : Integer.parseInt(hourTextField.getText());
+        int minutes = minuteTextField.getText().equals("") ? 0 : Integer.parseInt(minuteTextField.getText());
+        date = addTimeToDate(Date.from(startDatePicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()), hours, minutes);
         //smartDeviceNameLabel.setText(date.toString());
         switch(deviceTypeNumber){
             case 0:
