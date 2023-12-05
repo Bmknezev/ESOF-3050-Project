@@ -1,3 +1,18 @@
+//-----------------------------------------------------------------
+// SmartHome.java
+// Group 2
+// Description: This class represents the main control hub for a Smart Home System,
+//              managing various smart devices and their functionalities through
+//              a graphical user interface (GUI).
+// Created By: Francisco
+// Edited By: Francisc, Braydon, Liam
+// Approved By: Braydon, Francisco, Liam
+// Variables: s - Instance of SmartHomeClient for server communication
+//            guiTest - Flag indicating test mode for the GUI
+// Error Handling: Displays connection error messages and ensures proper closure of server connections.
+//
+//-----------------------------------------------------------------
+
 import ClientServer.SmartHomeClient;
 import GUI.Control.*;
 

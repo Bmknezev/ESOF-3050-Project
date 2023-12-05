@@ -2,8 +2,8 @@
 // NewDeviceMessage.java
 // Group 2
 // Description: Represents a message used to request or add a new device.
-// Created By:
-// Edited By:
+// Created By: Braydon
+// Edited By: Francisco, Braydon
 // Approved By: Braydon, Francisco, Liam
 // Variables:
 //   - deviceName: String - Represents the name of the new device.

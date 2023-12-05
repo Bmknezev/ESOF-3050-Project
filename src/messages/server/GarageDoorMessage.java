@@ -1,3 +1,20 @@
+//-----------------------------------------------------------------
+// GarageDoorMessage.java
+// Group 2
+// Description: Represents a message related to garage door status and control.
+// Created By: Braydon
+// Edited By: Francisco, Braydon
+// Approved By: Braydon, Francisco, Liam
+// Variables:
+//   - safteySwitch: boolean - Indicates if an object is detected under the door.
+//   - doorStatus: boolean - Indicates whether the door is open or closed.
+//   - moving: boolean - Indicates if the door is in motion.
+//   - usePassword: boolean - Indicates if a password is required to open the door.
+//   - password: int - Password needed to open the door (if required).
+//   - passwordAttempts: int - Number of attempts made to enter the password incorrectly.
+// Error Handling: Not specified within this class. Custom error handling can be implemented.
+//-----------------------------------------------------------------
+
 package messages.server;
 
 import messages.AbstractDeviceMessage;

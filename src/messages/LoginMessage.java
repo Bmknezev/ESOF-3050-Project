@@ -2,8 +2,8 @@
 // LoginMessage.java
 // Group 2
 // Description: Represents a message used for user login.
-// Created By:
-// Edited By:
+// Created By: Braydon
+// Edited By: Francisc, Braydon
 // Approved By: Braydon, Francisco, Liam
 // Variables:
 //   - username: String - Represents the user's username.

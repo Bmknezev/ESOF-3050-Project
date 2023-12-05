@@ -3,8 +3,8 @@
 // Group 2
 // Description: This class manages the login process for users in the Smart Home system. It handles user
 //              authentication, login status, and transitions to the next scene upon successful login.
-// Created By:
-// Edited By:
+// Created By: Francisco
+// Edited By: Francisco, Braydon
 // Approved By: Braydon, Francisco, Liam
 // Variables:
 //   - emailTextField: TextField - TextField for entering the user's email

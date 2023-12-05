@@ -1,3 +1,19 @@
+//-----------------------------------------------------------------
+// ThermostatMessage.java
+// Group 2
+// Description: Represents a message related to thermostats.
+// Created By: Braydon
+// Edited By: Francisco, Braydon
+// Approved By: Braydon, Francisco, Liam
+// Variables:
+//   - temperature: float - Represents the current temperature.
+//   - setpoint: float - Represents the temperature the thermostat is set to.
+//   - heatEnabled: boolean - Indicates if heat is enabled (true) or not (false).
+//   - coolEnabled: boolean - Indicates if cool is enabled (true) or not (false).
+//   - mode: int - Represents the mode of the thermostat (0 for off, 1 for heat, 2 for cool).
+//
+//-----------------------------------------------------------------
+
 package messages.server;
 
 import messages.AbstractDeviceMessage;

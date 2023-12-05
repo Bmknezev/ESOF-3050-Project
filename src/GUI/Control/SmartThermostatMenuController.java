@@ -3,8 +3,8 @@
 // Group 2
 // Description: Manages the control and user interface for a Smart Thermostat device in the system. Controls temperature settings,
 //              mode (heating/cooling/off), and enables/disables heating and cooling features.
-// Created By:
-// Edited By:
+// Created By: Francisco
+// Edited By: Francisco, Braydon
 // Approved By: Braydon, Francisco, Liam
 // Variables:
 //   - backButton: Button - Button for navigating back to the previous scene

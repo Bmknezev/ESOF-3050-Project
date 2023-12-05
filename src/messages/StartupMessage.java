@@ -2,8 +2,8 @@
 // StartupMessage.java
 // Group 2
 // Description: Represents a message for system or client startup.
-// Created By:
-// Edited By:
+// Created By: Braydon
+// Edited By: Francisco, Braydon
 // Approved By: Braydon, Francisco, Liam
 // Variables:
 //   - clientID: int - ID associated with the client initiating startup.

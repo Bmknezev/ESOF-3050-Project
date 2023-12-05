@@ -1,3 +1,17 @@
+//-----------------------------------------------------------------
+// SmokeDetectorMessage.java
+// Group 2
+// Description: Represents a message related to smoke detectors.
+// Created By: Braydon
+// Edited By: Francisco, Braydon
+// Approved By: Braydon, Francisco, Liam
+// Variables:
+//   - lastTested: Date - Represents the date of the last test.
+//   - testStatus: boolean - Indicates whether a test is needed (true) or not (false).
+//   - alarmStatus: boolean - Represents the readiness of the alarm (true if ready, false if not).
+//
+//-----------------------------------------------------------------
+
 package messages.server;
 
 import messages.AbstractDeviceMessage;

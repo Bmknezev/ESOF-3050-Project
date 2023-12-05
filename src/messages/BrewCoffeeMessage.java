@@ -2,8 +2,8 @@
 // BrewCoffeeMessage.java
 // Group 2
 // Description: Represents a message for brewing coffee.
-// Created By:
-// Edited By:
+// Created By: Braydon
+// Edited By: Francisco, Braydon
 // Approved By: Braydon, Francisco, Liam
 // Variables:
 //   - size: String - Represents the size of the brewed coffee.
