@@ -1,3 +1,19 @@
+//-----------------------------------------------------------------
+// NewDeviceMessage.java
+// Group 2
+// Description: Represents a message used to request or add a new device.
+// Created By:
+// Edited By:
+// Approved By: Braydon, Francisco, Liam
+// Variables:
+//   - deviceName: String - Represents the name of the new device.
+//   - deviceID: int - Represents the ID of the new device.
+//   - deviceTypeNumber: int - Represents the type number of the new device.
+//   - deviceType: String - Represents the type/category of the new device.
+//   - pin: int - Represents the PIN associated with the device (optional).
+//
+//-----------------------------------------------------------------
+
 package messages;
 
 import messages.client.Listable;

@@ -1,3 +1,18 @@
+//-----------------------------------------------------------------
+// PinMessage.java
+// Group 2
+// Description: Represents a message regarding PIN status and changes.
+// Created By:
+// Edited By:
+// Approved By: Braydon, Francisco, Liam
+// Variables:
+//   - pin: int - Current PIN associated with a device.
+//   - newPin: int - New PIN requested for a device (if applicable).
+//   - deviceID: int - ID of the device related to the PIN.
+//   - pinStatus: boolean - Status indicating the success or failure of PIN-related operations.
+//
+//-----------------------------------------------------------------
+
 package messages;
 
 public class PinMessage extends AbstractMessage{

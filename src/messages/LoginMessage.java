@@ -1,3 +1,18 @@
+//-----------------------------------------------------------------
+// LoginMessage.java
+// Group 2
+// Description: Represents a message used for user login.
+// Created By:
+// Edited By:
+// Approved By: Braydon, Francisco, Liam
+// Variables:
+//   - username: String - Represents the user's username.
+//   - password: String - Represents the user's password.
+//   - loginStatus: boolean - Indicates the login status (whether login is successful or not).
+//   - admin: boolean - Indicates whether the user has administrative privileges.
+//
+//-----------------------------------------------------------------
+
 package messages;
 
 public class LoginMessage extends AbstractMessage{

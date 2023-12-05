@@ -1,3 +1,29 @@
+//-----------------------------------------------------------------
+// SmartGarageDoorOpenerMenuController.java
+// Group 2
+// Description: This class manages the control and user interface for the Smart Garage Door Opener device in the system. It
+//              controls garage door status (open/close), changing PIN, and handles user input.
+// Created By:
+// Edited By:
+// Approved By: Braydon, Francisco, Liam
+// Variables:
+//   - ChangePINButton: Button - Button for changing the PIN of the garage door opener
+//   - CreateAutomationButton: Button - Button for creating automations for the garage door opener
+//   - EditAutomationsButton: Button - Button for editing existing automations for the garage door opener
+//   - backButton: Button - Button for navigating back to the previous scene
+//   - SmartDeviceImageView: ImageView - Image view for displaying the smart garage door opener's image
+//   - SmartDeviceNameLabel: Label - Label for displaying the name of the smart garage door opener
+//   - StatusIndicatorLabel: Label - Label for indicating the status of the garage door (Open / Closed)
+//   - TempOpenButton: Button - Button for temporarily opening the garage door
+//   - TempOpenTextField: TextField - Text field for inputting time for temporary opening
+//   - ToggleGarageDoorStatusButton: Button - Button for toggling the garage door status (Open / Close)
+//   - previous: Scene - Reference to the previous scene
+//   - deviceID: int - Identifier for the smart garage door opener device
+//   - td: TextInputDialog - Dialog for user input (changing PIN, entering PIN)
+//   - pin: int - PIN for the garage door opener
+//   - client: SmartHomeClient - Reference to the Smart Home client
+//-----------------------------------------------------------------
+
 package GUI.Control;
 
 import GUI.Control.Abstract.AbstractDeviceController;

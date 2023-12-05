@@ -1,3 +1,29 @@
+//-----------------------------------------------------------------
+// SmartThermostatMenuController.java
+// Group 2
+// Description: Manages the control and user interface for a Smart Thermostat device in the system. Controls temperature settings,
+//              mode (heating/cooling/off), and enables/disables heating and cooling features.
+// Created By:
+// Edited By:
+// Approved By: Braydon, Francisco, Liam
+// Variables:
+//   - backButton: Button - Button for navigating back to the previous scene
+//   - ChangeTempButton: Button - Button for changing the thermostat temperature setting
+//   - ChangeTempTextField: TextField - TextField for entering a new temperature value
+//   - CreateAutomationButton: Button - Button for creating automations for the thermostat (not implemented)
+//   - EditAutomationsButton: Button - Button for editing existing automations for the thermostat (not implemented)
+//   - HeatingCoolingStatusLabel: Label - Label for indicating the current heating/cooling mode
+//   - SmartDeviceImageView: ImageView - Image view for displaying the thermostat's image
+//   - SmartDeviceNameLabel: Label - Label for displaying the name of the thermostat
+//   - TemperatureStatusLabel: Label - Label for displaying the current temperature
+//   - SetpointStatusLabel: Label - Label for displaying the setpoint temperature
+//   - coolingEnableButton: Button - Button for enabling/disabling cooling feature
+//   - heatingEnableButton: Button - Button for enabling/disabling heating feature
+//   - previous: Scene - Reference to the previous scene
+//   - deviceID: int - Identifier for the thermostat device
+//   - client: SmartHomeClient - Reference to the Smart Home client
+//-----------------------------------------------------------------
+
 package GUI.Control;
 
 import GUI.Control.Abstract.AbstractDeviceController;

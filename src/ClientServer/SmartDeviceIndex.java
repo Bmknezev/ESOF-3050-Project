@@ -1,3 +1,19 @@
+//-----------------------------------------------------------------
+// SmartDeviceIndex.java
+// Group 2
+// Description: This class serves as an index utility for Smart Device types. It provides methods to retrieve device types based on their number representation and vice versa.
+// Created By:
+// Edited By:
+// Approved By: Braydon, Francisco, Liam
+// Variables:
+//
+//
+// Error Handling:
+//
+//
+//
+//-----------------------------------------------------------------
+
 package ClientServer;
 
 public class SmartDeviceIndex {

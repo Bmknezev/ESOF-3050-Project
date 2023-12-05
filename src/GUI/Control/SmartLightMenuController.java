@@ -1,3 +1,29 @@
+//-----------------------------------------------------------------
+// SmartLightMenuController.java
+// Group 2
+// Description: Manages the control and user interface for the Smart Light device in the system. Controls light status (on/off),
+//              brightness, color, and handles user input.
+// Created By:
+// Edited By:
+// Approved By: Braydon, Francisco, Liam
+// Variables:
+//   - lightColour: Pane - Pane representing the color of the light
+//   - colourPicker: ColorPicker - ColorPicker for selecting light color
+//   - BrightnessSlider: Slider - Slider for adjusting brightness of the light
+//   - CreateAutomationButton: Button - Button for creating automations for the smart light
+//   - EditAutomationsButton: Button - Button for editing existing automations for the smart light
+//   - SmartDeviceImageView: ImageView - Image view for displaying the smart light's image
+//   - SmartDeviceNameLabel: Label - Label for displaying the name of the smart light
+//   - StatusIndicatorLabel: Label - Label for indicating the status of the light (On / Off)
+//   - ToggleLightStatusButton: Button - Button for toggling the light status (On / Off)
+//   - backButton: Button - Button for navigating back to the previous scene
+//   - brightnessLabel: Label - Label for displaying the brightness level of the light
+//   - previous: Scene - Reference to the previous scene
+//   - deviceID: int - Identifier for the smart light device
+//   - td: TextInputDialog - Dialog for user input (changing PIN, entering PIN)
+//   - client: SmartHomeClient - Reference to the Smart Home client
+//-----------------------------------------------------------------
+
 package GUI.Control;
 
 import GUI.Control.Abstract.AbstractDeviceController;

@@ -1,3 +1,15 @@
+//-----------------------------------------------------------------
+// SmokeDetectorAutomationMessage.java
+// Group 2
+// Description: Represents an automation message for a smoke detector in a system.
+//              Extends AbstractAutomationMessage.
+// Created By:
+// Edited By:
+// Approved By: Braydon, Francisco, Liam
+// Variables:
+//   - alarm: boolean - Represents the alarm status of the smoke detector.
+//-----------------------------------------------------------------
+
 package messages.automations;
 
 import java.util.Date;

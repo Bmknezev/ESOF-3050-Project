@@ -1,3 +1,26 @@
+//-----------------------------------------------------------------
+// SmartSmokeDetectorMenuController.java
+// Group 2
+// Description: Manages the control and user interface for the Smart Smoke Detector device in the system. Controls smoke detection status,
+//              battery status, test alarm, and handles user input.
+// Created By:
+// Edited By:
+// Approved By: Braydon, Francisco, Liam
+// Variables:
+//   - backButton: Button - Button for navigating back to the previous scene
+//   - batteryStatusLabel: Label - Label for displaying the battery status of the smoke detector
+//   - createAutomationButton: Button - Button for creating automations for the smoke detector (not implemented)
+//   - editAutomationsButton: Button - Button for editing existing automations for the smoke detector (not implemented)
+//   - previousTestDateLabel: Label - Label for displaying the date of the last smoke detector test
+//   - smartDeviceImageView: ImageView - Image view for displaying the smoke detector's image
+//   - smartDeviceNameLabel: Label - Label for displaying the name of the smoke detector
+//   - statusIndicatorLabel: Label - Label for indicating the smoke detection status (Active / Inactive)
+//   - testAlarmButton: Button - Button for testing the smoke detector alarm
+//   - previous: Scene - Reference to the previous scene
+//   - deviceID: int - Identifier for the smoke detector device
+//   - client: SmartHomeClient - Reference to the Smart Home client
+//-----------------------------------------------------------------
+
 package GUI.Control;
 
 import GUI.Control.Abstract.AbstractDeviceController;

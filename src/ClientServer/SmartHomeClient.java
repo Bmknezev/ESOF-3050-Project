@@ -1,3 +1,21 @@
+//-----------------------------------------------------------------
+// SmartHomeClient.java
+// Group 2
+// Description: Handles client-side operations for the Smart Home System. Manages communication with the server,
+//               interprets messages received from the server, and updates the user interface accordingly. Controls
+//               device selection, user login, PIN change, and user list functionalities.
+// Created By:
+// Edited By:
+// Approved By: Braydon, Francisco, Liam
+// Variables:
+//    - deviceController: AbstractDeviceController - Controller for the device
+//    - updatableDevice: Updatable - Controller for updating the device
+//    - mainMenuController: DeviceSelectionMenuController - Controller for the main menu
+//    - currentDeviceID: int - ID of the current device
+//    - admin: boolean - Indicates if the user is an admin
+//    - loginMenuController: LoginMenuController - Controller for the login menu
+//-----------------------------------------------------------------
+
 package ClientServer;
 
 

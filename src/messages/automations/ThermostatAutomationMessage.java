@@ -1,3 +1,16 @@
+//-----------------------------------------------------------------
+// ThermostatAutomationMessage.java
+// Group 2
+// Description: Represents an automation message for a thermostat in a system.
+//              Extends AbstractAutomationMessage.
+// Created By:
+// Edited By:
+// Approved By: Braydon, Francisco, Liam
+// Variables:
+//   - temperature: int - Represents the temperature for the thermostat.
+//   - thermostatStatus: boolean - Represents the status of the thermostat.
+//-----------------------------------------------------------------
+
 package messages.automations;
 
 import java.util.Date;

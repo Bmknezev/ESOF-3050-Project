@@ -1,3 +1,21 @@
+//-----------------------------------------------------------------
+// LoginMenuController.java
+// Group 2
+// Description: This class manages the login process for users in the Smart Home system. It handles user
+//              authentication, login status, and transitions to the next scene upon successful login.
+// Created By:
+// Edited By:
+// Approved By: Braydon, Francisco, Liam
+// Variables:
+//   - emailTextField: TextField - TextField for entering the user's email
+//   - enterButton: Button - Button for initiating the login process
+//   - passwordTextField: PasswordField - TextField for entering the user's password
+//   - quitButton: Button - Button for quitting the application
+//   - next: Scene - Reference to the next scene after successful login
+//   - stage: Stage - Reference to the application's stage
+//   - client: SmartHomeClient - Reference to the Smart Home client
+//-----------------------------------------------------------------
+
 package GUI.Control;
 
 import ClientServer.SmartHomeClient;

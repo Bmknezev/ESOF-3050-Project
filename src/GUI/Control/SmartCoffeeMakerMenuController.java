@@ -1,3 +1,34 @@
+//-----------------------------------------------------------------
+// SmartCoffeeMakerMenuController.java
+// Group 2
+// Description: This class manages the control and user interface for the Smart Coffee Maker device in the system. It handles
+//              brewing coffee, displaying device status, and updating device parameters like water, coffee, and bean levels.
+// Created By:
+// Edited By:
+// Approved By: Braydon, Francisco, Liam
+// Variables:
+//   - waterLevel: ProgressBar - Represents the water level in the coffee maker
+//   - coffeeLevel: ProgressBar - Represents the coffee level in the coffee maker
+//   - coffeeBeanLevel: ProgressBar - Represents the coffee bean level in the coffee maker
+//   - smallButton: RadioButton - Radio button for selecting a small size for brewing coffee
+//   - mediumButton: RadioButton - Radio button for selecting a medium size for brewing coffee
+//   - largeButton: RadioButton - Radio button for selecting a large size for brewing coffee
+//   - extraLargeButton: RadioButton - Radio button for selecting an extra-large size for brewing coffee
+//   - BrewCoffeeButton: Button - Button for initiating the coffee brewing process
+//   - CreateAutomationButton: Button - Button for creating automations for the coffee maker
+//   - EditAutomationsButton: Button - Button for editing existing automations for the coffee maker
+//   - backButton: Button - Button for navigating back to the previous scene
+//   - Size: ToggleGroup - Toggle group for selecting coffee size options
+//   - SmartDeviceImageView: ImageView - Image view for displaying the smart coffee maker's image
+//   - SmartDeviceNameLabel: Label - Label for displaying the name of the smart coffee maker
+//   - StatusIndicatorLabel: Label - Label for indicating the status of the smart coffee maker (Ready to Brew / Not Ready to Brew)
+//   - Strength: ToggleGroup - Toggle group for selecting coffee strength options
+//   - Temperature: ToggleGroup - Toggle group for selecting temperature options for brewing coffee
+//   - previous: Scene - Reference to the previous scene
+//   - deviceID: int - Identifier for the smart coffee maker device
+//   - client: SmartHomeClient - Reference to the Smart Home client
+//-----------------------------------------------------------------
+
 package GUI.Control;
 
 import GUI.Control.Abstract.AbstractDeviceController;
