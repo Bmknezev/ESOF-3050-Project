@@ -1,11 +1,19 @@
 package GUI.Control;
 
+import ClientServer.SmartDeviceIndex;
 import GUI.Control.Abstract.AbstractDeviceController;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import messages.AbstractDeviceMessage;
+import messages.automations.LightAutomationMessage;
+
+import java.util.Date;
 
 public class AutomationMenuController extends AbstractDeviceController {
 
@@ -65,41 +73,213 @@ public class AutomationMenuController extends AbstractDeviceController {
 
     @FXML
     private RadioButton noEndDateRadioButton;
-
-    private RadioButton disableableRadioButtons[] = {secondsRadioButton, minutesRadioButton, hoursRadioButton, daysRadioButton, yesEndDateRadioButton, noEndDateRadioButton};
-
+    AbstractDeviceController device;
+    private Scene previous;
+    private int deviceTypeNumber, brightness;
+    private boolean lightStatus;
+    private String colour;
 
     public void update(AbstractDeviceController a){
+        previous = a.getScene();
         smartDeviceNameLabel.setText(a.getDeviceName());
         smartDeviceTypeLabel.setText(a.getDeviceType());
-        //smartDeviceActionsVBox.getChildren().addAll(a.getDeviceActions());
+        deviceTypeNumber = SmartDeviceIndex.getDeviceTypeNumber(a.getDeviceType());
+
+        addAutomatableActions();
+    }
+
+    private void addAutomatableActions(){
+        switch(deviceTypeNumber){
+            case 0:
+                addLightActions();
+                break;
+            case 1:
+                //addLockActions();
+                break;
+            case 2:
+                //addThermostatActions();
+                break;
+            case 3:
+                //addCoffeeMachineActions();
+                break;
+            case 4:
+                //addGarageDoorActions();
+                break;
+            case 5:
+                //AddSmokeDetectorActions();
+                break;
+            default:
+                // error
+                break;
+        }
+    }
+
+    private void addLightActions(){
+        SmartLightMenuController light = (SmartLightMenuController) device;
+
+            // this creates the light toggle actions
+        HBox lightToggleHBox = new HBox();
+        lightToggleHBox.setSpacing(10);
+        lightToggleHBox.setAlignment(javafx.geometry.Pos.CENTER);
+
+        ToggleGroup LightToggleGroup = new ToggleGroup();
+        RadioButton onRadioButton = new RadioButton("On");
+        RadioButton offRadioButton = new RadioButton("Off");
+        RadioButton toggleRadioButton = new RadioButton("Toggle");
+        RadioButton noChangeRadioButton = new RadioButton("No Change");
+
+        onRadioButton.setToggleGroup(LightToggleGroup);
+        offRadioButton.setToggleGroup(LightToggleGroup);
+        toggleRadioButton.setToggleGroup(LightToggleGroup);
+        noChangeRadioButton.setToggleGroup(LightToggleGroup);
+        noChangeRadioButton.setSelected(true);
+
+        onRadioButton.setOnAction(event -> {
+            if (onRadioButton.isSelected()){
+                lightStatus = true;
+            }
+        });
+
+        offRadioButton.setOnAction(event -> {
+            if (offRadioButton.isSelected()){
+                lightStatus = false;
+            }
+        });
+
+        toggleRadioButton.setOnAction(event -> {
+            if (toggleRadioButton.isSelected()){
+                lightStatus = !light.getLightStatus();
+            }
+        });
+
+        noChangeRadioButton.setOnAction(event -> {
+            if (noChangeRadioButton.isSelected()){
+                lightStatus = light.getLightStatus();
+            }
+        });
+
+        lightToggleHBox.getChildren().addAll(onRadioButton, offRadioButton, toggleRadioButton, noChangeRadioButton);
+
+            // this creates the brightness slider actions
+        HBox brightnessSliderHBox = new HBox();
+        brightnessSliderHBox.setSpacing(10);
+        brightnessSliderHBox.setAlignment(javafx.geometry.Pos.CENTER);
+
+        RadioButton brightnessRadioButton = new RadioButton("Change Brightness: ");
+
+        Slider brightnessSlider = new Slider();
+        brightnessSlider.setDisable(true);
+        brightnessSlider.setValue(50);
+
+        Label brightnessLabel = new Label("50%");
+
+        brightnessRadioButton.setOnAction(event -> {
+            if (brightnessRadioButton.isSelected()){
+                brightnessSlider.setDisable(false);
+                brightness = light.getBrightness();
+            }
+            else{
+                brightnessSlider.setDisable(true);
+            }
+        });
+
+        brightnessSlider.setOnMouseDragged(event -> {
+            brightnessLabel.setText((int)brightnessSlider.getValue() + "%");
+            brightness = (int)brightnessSlider.getValue();
+        });
+
+        brightnessSliderHBox.getChildren().addAll(brightnessRadioButton, brightnessSlider, brightnessLabel);
+
+            // this creates the light colour actions
+        HBox lightColourHBox = new HBox();
+        lightColourHBox.setSpacing(10);
+        lightColourHBox.setAlignment(javafx.geometry.Pos.CENTER);
+
+        RadioButton colourRadioButton = new RadioButton("Change Colour: ");
+
+        ColorPicker colourPicker = new ColorPicker();
+        colourPicker.setDisable(true);
+
+        colourRadioButton.setOnAction(event -> {
+            if (colourRadioButton.isSelected()){
+                colourPicker.setDisable(false);
+                colour = light.getColour();
+            }
+            else{
+                colourPicker.setDisable(true);
+            }
+        });
+
+        colourPicker.setOnAction(event -> {
+            colour = colourPicker.getValue().toString().substring(2, 8);
+        });
+
+        lightColourHBox.getChildren().addAll(colourRadioButton, colourPicker);
+
+        smartDeviceActionsVBox.getChildren().addAll(lightToggleHBox, brightnessSliderHBox, lightColourHBox);
     }
 
 
     @FXML
     void confirmAutomationButtonPressed(ActionEvent event) {
+        switch(deviceTypeNumber){
+            case 0:
+                confirmLightAutomation();
+                break;
+            case 1:
+                //confirmLockAutomation();
+                break;
+            case 2:
+                //confirmThermostatAutomation();
+                break;
+            case 3:
+                //confirmCoffeeMachineAutomation();
+                break;
+            case 4:
+                //confirmGarageDoorAutomation();
+                break;
+            case 5:
+                //confirmSmokeDetectorAutomation();
+                break;
+            default:
+                // error
+                break;
+        }
+    }
 
+    private void confirmLightAutomation(){
+        LightAutomationMessage lam = new LightAutomationMessage(device.getDeviceID(), colour, brightness, lightStatus, startDatePicker.getValue());
+        client.UpdateServer(lam);
     }
 
     @FXML
     void yesRepeatPressed(ActionEvent event) {
-            // this enables all the radio buttons
-        for(int i = 0; i < disableableRadioButtons.length; i++){
-            disableableRadioButtons[i].setDisable(false);
-        }
-            // this enables the end date picker if the user has chosen to have an end date
+        secondsRadioButton.setDisable(false);
+        minutesRadioButton.setDisable(false);
+        hoursRadioButton.setDisable(false);
+        daysRadioButton.setDisable(false);
+        yesEndDateRadioButton.setDisable(false);
+        noEndDateRadioButton.setDisable(false);
+        repeatFrequencyTextField.setDisable(false);
+
         if (endDateSelection.getSelectedToggle() == yesEndDateRadioButton)
             endDatePicker.setDisable(false);
+
     }
 
     @FXML
     void noRepeatPressed(ActionEvent event) {
-            // this disables all the radio buttons
-        for(int i = 0; i < disableableRadioButtons.length; i++){
-            disableableRadioButtons[i].setDisable(true);
-        }
-            // this disables the end date picker
+
+        secondsRadioButton.setDisable(true);
+        minutesRadioButton.setDisable(true);
+        hoursRadioButton.setDisable(true);
+        daysRadioButton.setDisable(true);
+        yesEndDateRadioButton.setDisable(true);
+        noEndDateRadioButton.setDisable(true);
+        repeatFrequencyTextField.setDisable(true);
+
         endDatePicker.setDisable(true);
+
     }
 
     @FXML
@@ -113,6 +293,7 @@ public class AutomationMenuController extends AbstractDeviceController {
 
     @FXML
     void backButtonPressed(ActionEvent event) {
-
+        Stage stage = (Stage) backButton.getScene().getWindow();
+        stage.setScene(previous);
     }
 }
