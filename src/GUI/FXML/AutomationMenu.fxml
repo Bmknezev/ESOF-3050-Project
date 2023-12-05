@@ -108,7 +108,7 @@
                </children>
             </VBox>
             <Separator />
-            <VBox fx:id="smartDeviceActionsVBox" alignment="CENTER">
+            <VBox fx:id="smartDeviceActionsVBox" alignment="CENTER" spacing="8.0">
                <children>
                   <Label text="Automatable Actions:">
                      <font>
