@@ -159,6 +159,7 @@ public class SmartLightMenuController extends AbstractDeviceController implement
     }
 
     public void CreateAutomationButtonPressed(ActionEvent actionEvent) {
+
         automationMenuController.update(this);
         Stage stage = (Stage) CreateAutomationButton.getScene().getWindow();
         stage.setScene(automationScene);

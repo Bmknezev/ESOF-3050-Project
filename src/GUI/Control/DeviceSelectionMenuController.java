@@ -264,7 +264,7 @@ import messages.client.Listable;
         VBox dpContent = new VBox(8);
 
         ToggleGroup deviceTypeGroup = new ToggleGroup();
-        RadioButton[] deviceTypeSelectionButtons = new RadioButton[6];
+        RadioButton[] deviceTypeSelectionButtons = new RadioButton[5];
 
         // these create all the radio buttons and add them to the toggle group
         for (int i = 0; i < deviceTypeSelectionButtons.length; i++) {
@@ -278,7 +278,6 @@ import messages.client.Listable;
         deviceTypeSelectionButtons[2].setText("Smart Thermostat");
         deviceTypeSelectionButtons[3].setText("Smart Coffee Machine");
         deviceTypeSelectionButtons[4].setText("Smart Garage Door");
-        deviceTypeSelectionButtons[5].setText("Smart Smoke Detector");
 
         newDeviceMenu.setResultConverter((ButtonType button) -> {
             int deviceType = 0;

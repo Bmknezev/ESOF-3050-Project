@@ -22,7 +22,7 @@ public class LightAutomationMessage extends AbstractAutomationMessage{
     private int brightness;
     private boolean lightStatus;
 
-    public LightAutomationMessage(int deviceID, String colour, int brightness, boolean lightStatus, LocalDate date) {
+    public LightAutomationMessage(int deviceID, String colour, int brightness, boolean lightStatus, Date date) {
         super(deviceID, date, 0);
         this.colour = colour;
         this.brightness = brightness;

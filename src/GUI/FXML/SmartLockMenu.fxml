@@ -45,8 +45,7 @@
             <Button fx:id="ToggleLockStatusButton" mnemonicParsing="false" onAction="#ToggleLockStatusButtonPressed" prefWidth="150.0" text="Lock / Unlock" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
             <Button fx:id="TempUnlockButton" mnemonicParsing="false" onAction="#TempUnlockButtonPressed" prefWidth="150.0" text="Unlock" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
             <Button fx:id="CreateAutomationButton" mnemonicParsing="false" onAction="#CreateAutomationButtonPressed" prefWidth="150.0" text="Create Auto Lock" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-            <Button fx:id="EditAutomationsButton" mnemonicParsing="false" onAction="#EditAutomationButtonPressed" prefWidth="150.0" text="Edit Auto Locks" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-            <Button fx:id="ChangePINButton" mnemonicParsing="false" onAction="#ChangePINButtonPressed" prefWidth="150.0" text="**Change PIN**" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+            <Button fx:id="ChangePINButton" mnemonicParsing="false" onAction="#ChangePINButtonPressed" prefWidth="150.0" text="**Change PIN**" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
             <Label text="Unlock Temporarily:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <padding>
                   <Insets right="8.0" />

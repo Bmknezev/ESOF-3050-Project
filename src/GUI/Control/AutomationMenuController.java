@@ -46,10 +46,15 @@ import javafx.stage.Stage;
 import messages.AbstractDeviceMessage;
 import messages.automations.LightAutomationMessage;
 
+import java.time.ZoneId;
+import java.util.Calendar;
 import java.util.Date;
 
 public class AutomationMenuController extends AbstractDeviceController {
-
+    @FXML
+    public TextField hourTextField;
+    @FXML
+    public TextField minuteTextField;
     @FXML
     private Label smartDeviceNameLabel;
 
@@ -57,22 +62,7 @@ public class AutomationMenuController extends AbstractDeviceController {
     private Label smartDeviceTypeLabel;
 
     @FXML
-    private TextField repeatFrequencyTextField;
-
-    @FXML
     private DatePicker startDatePicker;
-
-    @FXML
-    private DatePicker endDatePicker;
-
-    @FXML
-    private ToggleGroup repeatSelection;
-
-    @FXML
-    private ToggleGroup repeatFrequencySelection;
-
-    @FXML
-    private ToggleGroup endDateSelection;
 
     @FXML
     private Button backButton;
@@ -83,36 +73,16 @@ public class AutomationMenuController extends AbstractDeviceController {
     @FXML
     private VBox smartDeviceActionsVBox;
 
-    @FXML
-    private RadioButton yesRepeatRadioButton;
-
-    @FXML
-    private RadioButton noRepeatRadioButton;
-
-    @FXML
-    private RadioButton secondsRadioButton;
-
-    @FXML
-    private RadioButton minutesRadioButton;
-
-    @FXML
-    private RadioButton hoursRadioButton;
-
-    @FXML
-    private RadioButton daysRadioButton;
-
-    @FXML
-    private RadioButton yesEndDateRadioButton;
-
-    @FXML
-    private RadioButton noEndDateRadioButton;
     AbstractDeviceController device;
+    SmartLightMenuController light = (SmartLightMenuController) device;
     private Scene previous;
+    private Date date;
     private int deviceTypeNumber, brightness;
     private boolean lightStatus;
     private String colour;
 
     public void update(AbstractDeviceController a){
+        smartDeviceActionsVBox.getChildren().clear();
         previous = a.getScene();
         smartDeviceNameLabel.setText(a.getDeviceName());
         smartDeviceTypeLabel.setText(a.getDeviceType());
@@ -148,8 +118,6 @@ public class AutomationMenuController extends AbstractDeviceController {
     }
 
     private void addLightActions(){
-        SmartLightMenuController light = (SmartLightMenuController) device;
-
             // this creates the light toggle actions
         HBox lightToggleHBox = new HBox();
         lightToggleHBox.setSpacing(10);
@@ -255,6 +223,8 @@ public class AutomationMenuController extends AbstractDeviceController {
 
     @FXML
     void confirmAutomationButtonPressed(ActionEvent event) {
+        date = addTimeToDate(Date.from(startDatePicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()), Integer.parseInt(minuteTextField.getText()), Integer.parseInt(hourTextField.getText()));
+        //smartDeviceNameLabel.setText(date.toString());
         switch(deviceTypeNumber){
             case 0:
                 confirmLightAutomation();
@@ -281,52 +251,21 @@ public class AutomationMenuController extends AbstractDeviceController {
     }
 
     private void confirmLightAutomation(){
-        LightAutomationMessage lam = new LightAutomationMessage(device.getDeviceID(), colour, brightness, lightStatus, startDatePicker.getValue());
+        LightAutomationMessage lam = new LightAutomationMessage(light.getDeviceID(), colour, brightness, lightStatus, date);
         client.UpdateServer(lam);
-    }
-
-    @FXML
-    void yesRepeatPressed(ActionEvent event) {
-        secondsRadioButton.setDisable(false);
-        minutesRadioButton.setDisable(false);
-        hoursRadioButton.setDisable(false);
-        daysRadioButton.setDisable(false);
-        yesEndDateRadioButton.setDisable(false);
-        noEndDateRadioButton.setDisable(false);
-        repeatFrequencyTextField.setDisable(false);
-
-        if (endDateSelection.getSelectedToggle() == yesEndDateRadioButton)
-            endDatePicker.setDisable(false);
-
-    }
-
-    @FXML
-    void noRepeatPressed(ActionEvent event) {
-
-        secondsRadioButton.setDisable(true);
-        minutesRadioButton.setDisable(true);
-        hoursRadioButton.setDisable(true);
-        daysRadioButton.setDisable(true);
-        yesEndDateRadioButton.setDisable(true);
-        noEndDateRadioButton.setDisable(true);
-        repeatFrequencyTextField.setDisable(true);
-
-        endDatePicker.setDisable(true);
-
-    }
-
-    @FXML
-    void yesEndDatePressed(ActionEvent event) {
-        endDatePicker.setDisable(false);
-    }
-    @FXML
-    void noEndDatePressed(ActionEvent event) {
-        endDatePicker.setDisable(true);
     }
 
     @FXML
     void backButtonPressed(ActionEvent event) {
         Stage stage = (Stage) backButton.getScene().getWindow();
         stage.setScene(previous);
+    }
+
+    public Date addTimeToDate(Date date, int hours, int minutes) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.HOUR_OF_DAY, hours);
+        calendar.add(Calendar.MINUTE, minutes);
+        return calendar.getTime();
     }
 }

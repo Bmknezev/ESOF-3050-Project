@@ -62,7 +62,6 @@
          <children>
             <Button fx:id="ChangeTempButton" mnemonicParsing="false" onAction="#ChangeTempButtonPressed" prefWidth="150.0" text="Change" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
             <Button fx:id="CreateAutomationButton" mnemonicParsing="false" prefWidth="180.0" text="Create Temperature Schedule" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-            <Button fx:id="EditAutomationsButton" mnemonicParsing="false" prefWidth="180.0" text="Edit Temperature Schedules" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
             <TextField fx:id="ChangeTempTextField" prefWidth="150.0" promptText="Enter a Target Temperature" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.valignment="CENTER" GridPane.vgrow="NEVER">
                <GridPane.margin>
                   <Insets left="8.0" right="8.0" />

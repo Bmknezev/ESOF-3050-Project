@@ -18,15 +18,14 @@ package messages.automations;
 
 import messages.AbstractMessage;
 
-import java.time.LocalDate;
 import java.util.Date;
 
 public class AbstractAutomationMessage extends AbstractMessage {
 
     private int deviceID, deviceType;
-    private LocalDate date;
+    private Date date;
 
-    public AbstractAutomationMessage(int deviceID, LocalDate date, int deviceType) {
+    public AbstractAutomationMessage(int deviceID, Date date, int deviceType) {
         super(4);
         this.deviceID = deviceID;
         this.date = date;
@@ -37,7 +36,7 @@ public class AbstractAutomationMessage extends AbstractMessage {
         return deviceID;
     }
 
-    public LocalDate getDate() {
+    public Date getDate() {
         return date;
     }
 

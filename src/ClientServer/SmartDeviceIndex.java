@@ -30,8 +30,6 @@ public class SmartDeviceIndex {
                 return "Smart Coffee Machine";
             case 4:
                 return "Smart Garage Door";
-            case 5:
-                return "Smart Smoke Detector";
             default:
                 return "Error: Device type not found";
         }
@@ -49,8 +47,6 @@ public class SmartDeviceIndex {
                 return 3;
             case "Smart Garage Door":
                 return 4;
-            case "Smart Smoke Detector":
-                return 5;
             default:
                 return -1;
         }

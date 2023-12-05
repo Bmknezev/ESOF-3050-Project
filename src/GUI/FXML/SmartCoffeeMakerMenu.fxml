@@ -55,7 +55,6 @@
          <children>
             <Button fx:id="BrewCoffeeButton" mnemonicParsing="false" onAction="#BrewCoffeeButtonPressed" prefWidth="150.0" text="Brew Coffee" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
             <Button fx:id="CreateAutomationButton" mnemonicParsing="false" prefWidth="150.0" text="Create Coffee Schedule" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
-            <Button fx:id="EditAutomationsButton" mnemonicParsing="false" prefWidth="150.0" text="Edit Coffee Schedules" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
             <Label text="Size:" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets right="8.0" />

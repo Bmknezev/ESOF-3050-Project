@@ -93,11 +93,6 @@ public class SmartHome extends Application {
         Scene garageDoorOpenerDeviceScene = new Scene(garageDoorOpenerDevicePane, 600, 575);
 
         //getting loader and a pane for the smoke detector device scene
-        FXMLLoader smokeDetectorDevicePaneLoader = new FXMLLoader(getClass().getResource("/GUI/FXML/SmartSmokeDetectorMenu.fxml"));
-        Parent smokeDetectorDevicePane = smokeDetectorDevicePaneLoader.load();
-        Scene smokeDetectorDeviceScene = new Scene(smokeDetectorDevicePane, 600, 575);
-
-        //getting loader and a pane for the smoke detector device scene
         FXMLLoader automationPaneLoader = new FXMLLoader(getClass().getResource("/GUI/FXML/AutomationMenu.fxml"));
         Parent automationPane = automationPaneLoader.load();
         Scene automationScene = new Scene(automationPane);
@@ -137,11 +132,6 @@ public class SmartHome extends Application {
         garageDoorOpenerDevicePaneController.setPreviousScene(deviceSelectionScene);
         garageDoorOpenerDeviceScene.setUserData(garageDoorOpenerDevicePaneController);
 
-        //injecting the device selection scene into the controller of the smoke detector device scene as the previous scene
-        SmartSmokeDetectorMenuController smokeDetectorDevicePaneController = smokeDetectorDevicePaneLoader.getController();
-        smokeDetectorDevicePaneController.setPreviousScene(deviceSelectionScene);
-        smokeDetectorDeviceScene.setUserData(smokeDetectorDevicePaneController);
-
         AutomationMenuController automationMenuController = automationPaneLoader.getController();
         AbstractDeviceController.addAutomationMenu(automationMenuController, automationScene);
 
@@ -155,7 +145,6 @@ public class SmartHome extends Application {
         thermostatDevicePaneController.addServer(s);
         coffeeMakerDevicePaneController.addServer(s);
         garageDoorOpenerDevicePaneController.addServer(s);
-        smokeDetectorDevicePaneController.addServer(s);
         deviceSelectionPaneController.addServer(s);
         loginPaneController.addServer(s);
 
@@ -170,7 +159,6 @@ public class SmartHome extends Application {
         sceneList[2] = thermostatDeviceScene;
         sceneList[3] = coffeeMakerDeviceScene;
         sceneList[4] = garageDoorOpenerDeviceScene;
-        sceneList[5] = smokeDetectorDeviceScene;
 
 
         //making list of device controllers to change values
@@ -180,7 +168,6 @@ public class SmartHome extends Application {
         Controller[2] = thermostatDevicePaneController;
         Controller[3] = coffeeMakerDevicePaneController;
         Controller[4] = garageDoorOpenerDevicePaneController;
-        Controller[5] = smokeDetectorDevicePaneController;
 
         //adding both lists to device selection menu controller
         deviceSelectionPaneController.addScene(sceneList, Controller);

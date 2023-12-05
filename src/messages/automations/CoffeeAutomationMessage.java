@@ -13,6 +13,7 @@
 
 package messages.automations;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class CoffeeAutomationMessage extends AbstractAutomationMessage{
