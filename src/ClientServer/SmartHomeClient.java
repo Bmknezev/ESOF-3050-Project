@@ -47,7 +47,7 @@ private LoginMenuController loginMenuController;
 
     @Override
     protected void handleMessageFromServer(Object msg) {
-        System.out.println("Message received from server.");
+        System.out.println("Message received from server." + msg.toString());
 
 
            //check message type

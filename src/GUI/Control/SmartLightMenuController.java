@@ -26,6 +26,7 @@
 
 package GUI.Control;
 
+import ClientServer.SmartDeviceIndex;
 import GUI.Control.Abstract.AbstractDeviceController;
 import GUI.Control.Interface.Updatable;
 import javafx.application.Platform;
@@ -199,5 +200,39 @@ public class SmartLightMenuController extends AbstractDeviceController implement
         //System.out.println("Brightness Update Sent");
         //updates the server with the new values
         UpdateServer();
+    }
+
+    @Override
+    public String getDeviceName() {
+        return SmartDeviceNameLabel.getText();
+    }
+    @Override
+    public String getDeviceType() {
+        return SmartDeviceIndex.getDeviceType(0);
+    }
+    @Override
+    public int getDeviceID() {
+        return deviceID;
+    }
+    @Override
+    public Scene getScene(){
+        return SmartDeviceNameLabel.getScene();
+    }
+
+    public String getColour() {
+        return String.format("%08x", colourPicker.getValue().hashCode());
+    }
+
+    public int getBrightness() {
+        return (int) BrightnessSlider.getValue();
+    }
+
+    public boolean getLightStatus(){
+        if(Objects.equals(StatusIndicatorLabel.getText(), "On")){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 }

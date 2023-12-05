@@ -49,4 +49,12 @@ public abstract class AbstractDeviceController {
     public String getDeviceType() {
         return "";
     }
+
+    public int getDeviceID() {
+        return -1;
+    }
+
+    public Scene getScene(){
+        return null;
+    }
 }
