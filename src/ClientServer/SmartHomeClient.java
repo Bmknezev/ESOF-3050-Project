@@ -159,7 +159,10 @@ private LoginMenuController loginMenuController;
             alert.setTitle("Error");
             alert.setHeaderText("Connection to server lost.");
             alert.setContentText("Please check your internet connection and ensure the server is still online.");
-            alert.showAndWait();
+            try {
+                alert.showAndWait();
+            } catch (Exception ignored) {
+            }
             Platform.exit();
         });
 
