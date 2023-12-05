@@ -7,7 +7,7 @@ public class ThermostatAutomationMessage extends AbstractAutomationMessage{
     private boolean thermostatStatus;
 
     public ThermostatAutomationMessage(int deviceID, int temperature, boolean thermostatStatus, Date date) {
-        super(deviceID, date);
+        super(deviceID, date, 2);
         this.temperature = temperature;
         this.thermostatStatus = thermostatStatus;
     }

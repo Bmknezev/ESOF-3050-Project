@@ -8,7 +8,7 @@ public class LockAutomationMessage extends AbstractAutomationMessage{
     private int pin;
 
     public LockAutomationMessage(int deviceID, boolean lockStatus, int timer, int pin, Date date) {
-        super(deviceID, date);
+        super(deviceID, date, 1);
         this.lockStatus = lockStatus;
         this.timer = timer;
         this.pin = pin;

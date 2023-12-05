@@ -1,6 +1,7 @@
 package messages;
 
 import messages.client.Listable;
+import ClientServer.SmartDeviceIndex;
 
 public class NewDeviceMessage extends AbstractMessage implements Listable {
     //request a new device
@@ -20,29 +21,7 @@ public class NewDeviceMessage extends AbstractMessage implements Listable {
     }
 
     private void determineDeviceTypeNumber(String deviceType) {
-        switch (deviceType) {
-            case "Smart Light":
-                deviceTypeNumber = 0;
-                break;
-            case "Smart Lock":
-                deviceTypeNumber = 1;
-                break;
-            case "Smart Thermostat":
-                deviceTypeNumber = 2;
-                break;
-            case "Smart Coffee Machine":
-                deviceTypeNumber = 3;
-                break;
-            case "Smart Garage Door":
-                deviceTypeNumber = 4;
-                break;
-            case "Smart Smoke Detector":
-                deviceTypeNumber = 5;
-                break;
-            default:
-                System.out.println("Error: Device type not found");
-                break;
-        }
+        deviceTypeNumber = SmartDeviceIndex.getDeviceTypeNumber(deviceType);
     }
 
     public NewDeviceMessage(int id) {

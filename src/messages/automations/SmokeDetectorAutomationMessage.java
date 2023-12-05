@@ -6,7 +6,7 @@ public class SmokeDetectorAutomationMessage extends AbstractAutomationMessage{
     private boolean alarm;
 
     public SmokeDetectorAutomationMessage(int deviceID, boolean alarm, Date date) {
-        super(deviceID, date);
+        super(deviceID, date, 5);
         this.alarm = alarm;
     }
 

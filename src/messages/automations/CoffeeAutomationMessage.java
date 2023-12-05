@@ -7,7 +7,7 @@ public class CoffeeAutomationMessage extends AbstractAutomationMessage{
     private int coffeeMachineAction;
 
     public CoffeeAutomationMessage(int deviceID, int coffeeMachineID, int coffeeMachineAction, Date date) {
-        super(deviceID, date);
+        super(deviceID, date, 3);
         this.coffeeMachineID = coffeeMachineID;
         this.coffeeMachineAction = coffeeMachineAction;
     }

@@ -6,7 +6,7 @@ public class GarageDoorAutomationMessage extends AbstractAutomationMessage{
     private boolean doorStatus;
 
     public GarageDoorAutomationMessage(int deviceID, boolean doorStatus, Date date) {
-        super(deviceID, date);
+        super(deviceID, date, 4);
         this.doorStatus = doorStatus;
     }
 

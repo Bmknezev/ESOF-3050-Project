@@ -69,6 +69,12 @@ public class AutomationMenuController extends AbstractDeviceController {
     private RadioButton disableableRadioButtons[] = {secondsRadioButton, minutesRadioButton, hoursRadioButton, daysRadioButton, yesEndDateRadioButton, noEndDateRadioButton};
 
 
+    public void update(AbstractDeviceController a){
+        smartDeviceNameLabel.setText(a.getDeviceName());
+        smartDeviceTypeLabel.setText(a.getDeviceType());
+        //smartDeviceActionsVBox.getChildren().addAll(a.getDeviceActions());
+    }
+
 
     @FXML
     void confirmAutomationButtonPressed(ActionEvent event) {

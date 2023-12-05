@@ -66,7 +66,6 @@ public class SmartLightMenuController extends AbstractDeviceController implement
     public void BackButtonPressed(ActionEvent actionEvent) {
         Stage stage = (Stage) backButton.getScene().getWindow();
         stage.setScene(previous);
-
     }
 
     @Override
@@ -133,10 +132,9 @@ public class SmartLightMenuController extends AbstractDeviceController implement
     }
 
     public void CreateAutomationButtonPressed(ActionEvent actionEvent) {
-        Date date = new Date();
-        date.setTime(date.getTime() + 10000);
-        LightAutomationMessage message = new LightAutomationMessage(deviceID, lightColour.getStyle().substring(23), (int) BrightnessSlider.getValue(), true, date);
-        client.UpdateServer(message);
+        automationMenuController.update(this);
+        Stage stage = (Stage) CreateAutomationButton.getScene().getWindow();
+        stage.setScene(automationScene);
     }
 
     public void EditAutomationsButtonPressed(ActionEvent actionEvent) {
