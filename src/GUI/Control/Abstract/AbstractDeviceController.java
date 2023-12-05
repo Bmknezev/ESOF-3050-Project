@@ -57,4 +57,8 @@ public abstract class AbstractDeviceController {
     public Scene getScene(){
         return null;
     }
+
+    public SmartHomeClient getClient(){
+        return client;
+    }
 }

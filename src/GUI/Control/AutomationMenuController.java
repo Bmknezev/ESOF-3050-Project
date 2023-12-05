@@ -74,7 +74,7 @@ public class AutomationMenuController extends AbstractDeviceController {
     private VBox smartDeviceActionsVBox;
 
     AbstractDeviceController device;
-    SmartLightMenuController light = (SmartLightMenuController) device;
+    SmartLightMenuController light;
     private Scene previous;
     private Date date;
     private int deviceTypeNumber, brightness;
@@ -82,6 +82,9 @@ public class AutomationMenuController extends AbstractDeviceController {
     private String colour;
 
     public void update(AbstractDeviceController a){
+        this.client = a.getClient();
+        device = a;
+        light = (SmartLightMenuController) device;
         smartDeviceActionsVBox.getChildren().clear();
         previous = a.getScene();
         smartDeviceNameLabel.setText(a.getDeviceName());
