@@ -5,8 +5,8 @@
 //              It manages user interactions related to setting up device automation, such as specifying
 //              repeat frequency, start and end dates, and handling button presses for confirmations and
 //              navigation.
-// Created By:
-// Edited By:
+// Created By: Francisco
+// Edited By:Francisco, Braydon
 // Approved By: Braydon, Francisco, Liam
 // Variables:
 //   - smartDeviceNameLabel: Label - Label displaying the smart device name

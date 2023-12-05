@@ -3,8 +3,8 @@
 // Group 2
 // Description: This class manages the control and user interface for the Smart Garage Door Opener device in the system. It
 //              controls garage door status (open/close), changing PIN, and handles user input.
-// Created By:
-// Edited By:
+// Created By: Francisco
+// Edited By: Francisco, Braydon
 // Approved By: Braydon, Francisco, Liam
 // Variables:
 //   - ChangePINButton: Button - Button for changing the PIN of the garage door opener

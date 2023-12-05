@@ -3,8 +3,8 @@
 // Group 2
 // Description: Represents an automation message for a thermostat in a system.
 //              Extends AbstractAutomationMessage.
-// Created By:
-// Edited By:
+// Created By: Braydon
+// Edited By: Francisco, Braydon
 // Approved By: Braydon, Francisco, Liam
 // Variables:
 //   - temperature: int - Represents the temperature for the thermostat.

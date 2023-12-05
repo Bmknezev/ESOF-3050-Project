@@ -2,8 +2,8 @@
 // PinMessage.java
 // Group 2
 // Description: Represents a message regarding PIN status and changes.
-// Created By:
-// Edited By:
+// Created By: Braydon
+// Edited By: Francisco, Braydon
 // Approved By: Braydon, Francisco, Liam
 // Variables:
 //   - pin: int - Current PIN associated with a device.

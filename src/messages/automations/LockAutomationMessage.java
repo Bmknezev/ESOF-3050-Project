@@ -3,8 +3,8 @@
 // Group 2
 // Description: Represents a message for lock automation in a system.
 //              Extends AbstractAutomationMessage.
-// Created By:
-// Edited By:
+// Created By: Braydon
+// Edited By: Francisco, Braydon
 // Approved By: Braydon, Francisco, Liam
 // Variables:
 //   - lockStatus: boolean - Represents the status of the lock (locked or unlocked).

@@ -3,8 +3,8 @@
 // Group 2
 // Description: Represents a message for light automation in a system.
 //              Extends AbstractAutomationMessage.
-// Created By:
-// Edited By:
+// Created By: Braydon
+// Edited By: Francisco, Braydon
 // Approved By: Braydon, Francisco, Liam
 // Variables:
 //   - colour: String - Represents the color of the light.

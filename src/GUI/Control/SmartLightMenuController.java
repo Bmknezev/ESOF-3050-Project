@@ -3,8 +3,8 @@
 // Group 2
 // Description: Manages the control and user interface for the Smart Light device in the system. Controls light status (on/off),
 //              brightness, color, and handles user input.
-// Created By:
-// Edited By:
+// Created By: Francisco
+// Edited By: Francisco, Braydon
 // Approved By: Braydon, Francisco, Liam
 // Variables:
 //   - lightColour: Pane - Pane representing the color of the light

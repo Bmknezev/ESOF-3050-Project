@@ -1,3 +1,17 @@
+//-----------------------------------------------------------------
+// LightMessage.java
+// Group 2
+// Description: Represents a message related to controlling and querying the status of a light.
+// Created By: Braydon
+// Edited By: Francisco, Braydon
+// Approved By: Braydon, Francisco, Liam
+// Variables:
+//   - colour: String - Represents the color of the light.
+//   - brightness: int - Represents the brightness level of the light.
+//   - lightStatus: boolean - Indicates the status of the light (on/off).
+//
+//-----------------------------------------------------------------
+
 package messages.server;
 
 import messages.AbstractDeviceMessage;

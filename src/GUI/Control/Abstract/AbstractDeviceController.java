@@ -4,8 +4,8 @@
 // Description: This abstract class defines the structure for device controllers in the Smart Home system.
 //              It contains methods for managing server connections, handling responses for PIN changes,
 //              and retrieving device information.
-// Created By:
-// Edited By:
+// Created By: Francisco
+// Edited By: Francisco, Braydon
 // Approved By: Braydon, Francisco, Liam
 // Variables:
 //    - client: SmartHomeClient - The client used for communication

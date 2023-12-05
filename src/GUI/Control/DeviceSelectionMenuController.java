@@ -4,8 +4,8 @@
 // Description: This class manages the device and user selection menu in the Smart Home system. It handles
 //              user interactions related to adding new devices, managing existing devices, managing user accounts,
 //              and navigating back to the previous menu.
-// Created By:
-// Edited By:
+// Created By: Francisco
+// Edited By: Francisco, Braydon
 // Approved By: Braydon, Francisco, Liam
 // Variables:
 //   - backButton: Button - Button for navigating back

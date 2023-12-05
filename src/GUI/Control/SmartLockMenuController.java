@@ -3,8 +3,8 @@
 // Group 2
 // Description: Manages the control and user interface for the Smart Lock device in the system. Controls lock status (locked/unlocked),
 //              PIN change, temporary unlocking, and handles user input.
-// Created By:
-// Edited By:
+// Created By: Francisco
+// Edited By: Francisco, Braydon
 // Approved By: Braydon, Francisco, Liam
 // Variables:
 //   - ChangePINButton: Button - Button for changing the PIN of the smart lock

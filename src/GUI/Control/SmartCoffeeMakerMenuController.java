@@ -3,8 +3,8 @@
 // Group 2
 // Description: This class manages the control and user interface for the Smart Coffee Maker device in the system. It handles
 //              brewing coffee, displaying device status, and updating device parameters like water, coffee, and bean levels.
-// Created By:
-// Edited By:
+// Created By: Francisco
+// Edited By: Francisco, Braydon
 // Approved By: Braydon, Francisco, Liam
 // Variables:
 //   - waterLevel: ProgressBar - Represents the water level in the coffee maker

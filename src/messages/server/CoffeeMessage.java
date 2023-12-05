@@ -1,3 +1,20 @@
+//-----------------------------------------------------------------
+// CoffeeMessage.java
+// Group 2
+// Description: Represents a message related to coffee brewing.
+// Created By: Braydon
+// Edited By: Francisco, Braydon
+// Approved By: Braydon, Francisco, Liam
+// Variables:
+//   - cupStatus: boolean - Indicates whether a cup is in place or not.
+//   - waterLevel: double - Represents the water level for brewing (0-1).
+//   - coffeeBeanLevel: double - Represents the coffee bean level for brewing (0-1).
+//   - coffeeType: String - Allows the user to specify the type of coffee.
+//   - readyToBrew: boolean - Indicates if the coffee machine is ready to brew.
+//   - coffeeLevel: double - Represents the amount of coffee in the pot.
+//
+//-----------------------------------------------------------------
+
 package messages.server;
 
 import messages.AbstractDeviceMessage;
