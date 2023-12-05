@@ -13,6 +13,7 @@
 //
 //-----------------------------------------------------------------
 
+import ClientServer.AutomationBuffer;
 import ClientServer.SmartHomeClient;
 import GUI.Control.*;
 
@@ -173,7 +174,7 @@ public class SmartHome extends Application {
         AutomationMenuController automationMenuController = automationPaneLoader.getController();
         AbstractDeviceController.addAutomationMenu(automationMenuController, automationScene);
 
-
+        AutomationBuffer.addAutomationMenuController(automationMenuController);
 
 
 
@@ -183,8 +184,10 @@ public class SmartHome extends Application {
         thermostatDevicePaneController.addServer(s);
         coffeeMakerDevicePaneController.addServer(s);
         garageDoorOpenerDevicePaneController.addServer(s);
+        automationMenuController.addServer(s);
         deviceSelectionPaneController.addServer(s);
         loginPaneController.addServer(s);
+        AutomationBuffer.addSever(s);
 
 
 

@@ -26,6 +26,7 @@
 
 package GUI.Control;
 
+import ClientServer.AutomationBuffer;
 import ClientServer.SmartDeviceIndex;
 import GUI.Control.Abstract.AbstractDeviceController;
 import GUI.Control.Interface.Updatable;
@@ -52,6 +53,7 @@ import java.util.Objects;
 public class SmartLightMenuController extends AbstractDeviceController implements Updatable {
 
     public Pane lightColour;
+    @FXML
     public ColorPicker colourPicker;
     @FXML
     private Slider BrightnessSlider;
@@ -84,6 +86,7 @@ public class SmartLightMenuController extends AbstractDeviceController implement
         // this is just a default object to test the GUI
 
     private int deviceID;
+    private String colour = "ffff00";
 
 
     public void setPreviousScene(Scene previousScene) {
@@ -132,8 +135,6 @@ public class SmartLightMenuController extends AbstractDeviceController implement
 
     }
 
-
-
     public void ToggleLightStatusButtonPressed(ActionEvent actionEvent) {
         //runs when the on/off button is pressed
 
@@ -159,16 +160,11 @@ public class SmartLightMenuController extends AbstractDeviceController implement
     }
 
     public void CreateAutomationButtonPressed(ActionEvent actionEvent) {
-
-        automationMenuController.update(this);
+        AutomationBuffer.createLightAutomation(deviceID, SmartDeviceNameLabel.getText(), colour, (int) BrightnessSlider.getValue(), getLightStatus());
+        automationMenuController.setPrevious(this.getScene());
         Stage stage = (Stage) CreateAutomationButton.getScene().getWindow();
         stage.setScene(automationScene);
     }
-
-    public void EditAutomationsButtonPressed(ActionEvent actionEvent) {
-
-    }
-
 
     public void BrightnessSliderDragged(MouseEvent mouseEvent) {
         //change text on the brightness label to match the slider
@@ -188,11 +184,11 @@ public class SmartLightMenuController extends AbstractDeviceController implement
 
     public void changeColour(ActionEvent actionEvent) {
         //Integer colourInt = colourPicker.getValue().hashCode(), tempInt;
-        //String colour = String.format("%08x", colourPicker.getValue().hashCode());
+        colour = String.format("%08x", colourPicker.getValue().hashCode());
 
         //System.out.println("New Colour Is: #" + colour);
             //uses the built in colour picker to change the colour of the light
-        lightColour.setStyle("-fx-background-color: #" + String.format("%08x", colourPicker.getValue().hashCode()));
+        lightColour.setStyle("-fx-background-color: #" + colour);
         //updates the server with the new values
         UpdateServer();
     }
@@ -218,14 +214,6 @@ public class SmartLightMenuController extends AbstractDeviceController implement
     @Override
     public Scene getScene(){
         return SmartDeviceNameLabel.getScene();
-    }
-
-    public String getColour() {
-        return String.format("%08x", colourPicker.getValue().hashCode());
-    }
-
-    public int getBrightness() {
-        return (int) BrightnessSlider.getValue();
     }
 
     public boolean getLightStatus(){

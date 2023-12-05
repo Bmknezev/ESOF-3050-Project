@@ -34,6 +34,7 @@
 package GUI.Control;
 
 import ClientServer.SmartDeviceIndex;
+import ClientServer.SmartHomeClient;
 import GUI.Control.Abstract.AbstractDeviceController;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -42,9 +43,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import messages.AbstractDeviceMessage;
 import messages.automations.LightAutomationMessage;
+import ClientServer.AutomationBuffer;
 
 import java.time.ZoneId;
 import java.util.Calendar;
@@ -72,92 +75,50 @@ public class AutomationMenuController extends AbstractDeviceController {
 
     @FXML
     private VBox smartDeviceActionsVBox;
-
-    AbstractDeviceController device;
-    SmartLightMenuController light;
     private Scene previous;
     private Date date;
-    private int deviceTypeNumber, brightness;
-    private boolean lightStatus;
-    private String colour;
 
-    public void update(AbstractDeviceController a){
-        this.client = a.getClient();
-        device = a;
-        light = (SmartLightMenuController) device;
+    private int deviceTypeNumber;
+
+    public void addServer(SmartHomeClient s) {
+        client = s;
+    }
+
+    public void setPrevious(Scene s){
+        previous = s;
+    }
+
+    public void setTitle(String name, int deviceTypeNumber ){
+        smartDeviceNameLabel.setText(name);
+        smartDeviceTypeLabel.setText(SmartDeviceIndex.getDeviceType(deviceTypeNumber));
+
+        this.deviceTypeNumber = deviceTypeNumber;
         smartDeviceActionsVBox.getChildren().clear();
-        previous = a.getScene();
-        smartDeviceNameLabel.setText(a.getDeviceName());
-        smartDeviceTypeLabel.setText(a.getDeviceType());
-        deviceTypeNumber = SmartDeviceIndex.getDeviceTypeNumber(a.getDeviceType());
-
-        addAutomatableActions();
     }
 
-    private void addAutomatableActions(){
-        switch(deviceTypeNumber){
-            case 0:
-                addLightActions();
-                break;
-            case 1:
-                //addLockActions();
-                break;
-            case 2:
-                //addThermostatActions();
-                break;
-            case 3:
-                //addCoffeeMachineActions();
-                break;
-            case 4:
-                //addGarageDoorActions();
-                break;
-            default:
-                // error
-                break;
-        }
-    }
-
-    private void addLightActions(){
+    public void addLightActions(ToggleGroup lightToggleGroup, Slider brightnessSlider, ColorPicker colourPicker){
             // this creates the light toggle actions
         HBox lightToggleHBox = new HBox();
         lightToggleHBox.setSpacing(10);
         lightToggleHBox.setAlignment(javafx.geometry.Pos.CENTER);
 
-        ToggleGroup LightToggleGroup = new ToggleGroup();
         RadioButton onRadioButton = new RadioButton("On");
-        RadioButton offRadioButton = new RadioButton("Off");
-        RadioButton toggleRadioButton = new RadioButton("Toggle");
-        RadioButton noChangeRadioButton = new RadioButton("No Change");
+        onRadioButton.setUserData(1);
+        onRadioButton.setToggleGroup(lightToggleGroup);
 
-        onRadioButton.setToggleGroup(LightToggleGroup);
-        offRadioButton.setToggleGroup(LightToggleGroup);
-        toggleRadioButton.setToggleGroup(LightToggleGroup);
-        noChangeRadioButton.setToggleGroup(LightToggleGroup);
+        RadioButton offRadioButton = new RadioButton("Off");
+        offRadioButton.setUserData(2);
+        offRadioButton.setToggleGroup(lightToggleGroup);
+
+        RadioButton toggleRadioButton = new RadioButton("Toggle");
+        toggleRadioButton.setUserData(3);
+        toggleRadioButton.setToggleGroup(lightToggleGroup);
+
+        RadioButton noChangeRadioButton = new RadioButton("No Change");
+        noChangeRadioButton.setUserData(4);
+        noChangeRadioButton.setToggleGroup(lightToggleGroup);
         noChangeRadioButton.setSelected(true);
 
-        onRadioButton.setOnAction(event -> {
-            if (onRadioButton.isSelected()){
-                lightStatus = true;
-            }
-        });
-
-        offRadioButton.setOnAction(event -> {
-            if (offRadioButton.isSelected()){
-                lightStatus = false;
-            }
-        });
-
-        toggleRadioButton.setOnAction(event -> {
-            if (toggleRadioButton.isSelected()){
-                lightStatus = !light.getLightStatus();
-            }
-        });
-
-        noChangeRadioButton.setOnAction(event -> {
-            if (noChangeRadioButton.isSelected()){
-                lightStatus = light.getLightStatus();
-            }
-        });
 
         lightToggleHBox.getChildren().addAll(onRadioButton, offRadioButton, toggleRadioButton, noChangeRadioButton);
 
@@ -168,16 +129,13 @@ public class AutomationMenuController extends AbstractDeviceController {
 
         RadioButton brightnessRadioButton = new RadioButton("Change Brightness: ");
 
-        Slider brightnessSlider = new Slider();
         brightnessSlider.setDisable(true);
-        brightnessSlider.setValue(50);
 
         Label brightnessLabel = new Label("50%");
 
         brightnessRadioButton.setOnAction(event -> {
             if (brightnessRadioButton.isSelected()){
                 brightnessSlider.setDisable(false);
-                brightness = light.getBrightness();
             }
             else{
                 brightnessSlider.setDisable(true);
@@ -186,7 +144,6 @@ public class AutomationMenuController extends AbstractDeviceController {
 
         brightnessSlider.setOnMouseDragged(event -> {
             brightnessLabel.setText((int)brightnessSlider.getValue() + "%");
-            brightness = (int)brightnessSlider.getValue();
         });
 
         brightnessSliderHBox.getChildren().addAll(brightnessRadioButton, brightnessSlider, brightnessLabel);
@@ -198,21 +155,15 @@ public class AutomationMenuController extends AbstractDeviceController {
 
         RadioButton colourRadioButton = new RadioButton("Change Colour: ");
 
-        ColorPicker colourPicker = new ColorPicker();
         colourPicker.setDisable(true);
 
         colourRadioButton.setOnAction(event -> {
             if (colourRadioButton.isSelected()){
                 colourPicker.setDisable(false);
-                colour = light.getColour();
             }
             else{
                 colourPicker.setDisable(true);
             }
-        });
-
-        colourPicker.setOnAction(event -> {
-            colour = colourPicker.getValue().toString().substring(2, 8);
         });
 
         lightColourHBox.getChildren().addAll(colourRadioButton, colourPicker);
@@ -220,16 +171,17 @@ public class AutomationMenuController extends AbstractDeviceController {
         smartDeviceActionsVBox.getChildren().addAll(lightToggleHBox, brightnessSliderHBox, lightColourHBox);
     }
 
+    public void addLockActions(){
 
+    }
     @FXML
     void confirmAutomationButtonPressed(ActionEvent event) {
         int hours = hourTextField.getText().equals("") ? 0 : Integer.parseInt(hourTextField.getText());
         int minutes = minuteTextField.getText().equals("") ? 0 : Integer.parseInt(minuteTextField.getText());
         date = addTimeToDate(Date.from(startDatePicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()), hours, minutes);
-        //smartDeviceNameLabel.setText(date.toString());
         switch(deviceTypeNumber){
             case 0:
-                confirmLightAutomation();
+                AutomationBuffer.confirmLightAutomation(date);
                 break;
             case 1:
                 //confirmLockAutomation();
@@ -250,11 +202,6 @@ public class AutomationMenuController extends AbstractDeviceController {
                 // error
                 break;
         }
-    }
-
-    private void confirmLightAutomation(){
-        LightAutomationMessage lam = new LightAutomationMessage(light.getDeviceID(), colour, brightness, lightStatus, date);
-        client.UpdateServer(lam);
     }
 
     @FXML

@@ -51,9 +51,6 @@ public class SmartLockMenuController extends AbstractDeviceController implements
     private Button CreateAutomationButton;
 
     @FXML
-    private Button EditAutomationsButton;
-
-    @FXML
     private ImageView SmartDeviceImageView;
 
     @FXML
@@ -80,12 +77,6 @@ public class SmartLockMenuController extends AbstractDeviceController implements
     private int deviceID;
     private TextInputDialog td = new TextInputDialog("");
     private int pin;
-
-
-
-
-
-
 
     public void setPreviousScene(Scene previousScene) {
         previous = previousScene;
@@ -139,11 +130,6 @@ public class SmartLockMenuController extends AbstractDeviceController implements
 
     @FXML
     void CreateAutomationButtonPressed(ActionEvent event) {
-
-    }
-
-    @FXML
-    void EditAutomationButtonPressed(ActionEvent event) {
 
     }
 
