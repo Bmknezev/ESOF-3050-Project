@@ -3,7 +3,6 @@ import GUI.Control.*;
 
 import GUI.Control.Abstract.AbstractDeviceController;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

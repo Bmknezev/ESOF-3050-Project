@@ -2,7 +2,7 @@
 // AbstractMessage.java
 // Group 2
 // Description: Base abstract class for messages.
-// Created By:
+// Created By: Braydon
 // Edited By:
 // Approved By: Braydon, Francisco, Liam
 // Variables:

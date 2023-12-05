@@ -3,7 +3,7 @@
 // Group 2
 // Description: Represents an automation message for a thermostat in a system.
 //              Extends AbstractAutomationMessage.
-// Created By:
+// Created By: Braydon
 // Edited By:
 // Approved By: Braydon, Francisco, Liam
 // Variables:

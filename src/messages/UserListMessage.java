@@ -2,7 +2,7 @@
 // UserListMessage.java
 // Group 2
 // Description: Represents a message related to user management.
-// Created By:
+// Created By: Braydon
 // Edited By:
 // Approved By: Braydon, Francisco, Liam
 // Variables:

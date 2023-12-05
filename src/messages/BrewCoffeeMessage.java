@@ -2,7 +2,7 @@
 // BrewCoffeeMessage.java
 // Group 2
 // Description: Represents a message for brewing coffee.
-// Created By:
+// Created By: Braydon
 // Edited By:
 // Approved By: Braydon, Francisco, Liam
 // Variables:

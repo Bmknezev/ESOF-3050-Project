@@ -2,7 +2,7 @@
 // AbstractDeviceMessage.java
 // Group 2
 // Description: Abstract class representing a device message.
-// Created By:
+// Created By: Braydon
 // Edited By:
 // Approved By: Braydon, Francisco, Liam
 // Variables:

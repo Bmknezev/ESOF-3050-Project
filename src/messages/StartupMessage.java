@@ -2,7 +2,7 @@
 // StartupMessage.java
 // Group 2
 // Description: Represents a message for system or client startup.
-// Created By:
+// Created By: Braydon
 // Edited By:
 // Approved By: Braydon, Francisco, Liam
 // Variables:

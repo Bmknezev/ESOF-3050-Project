@@ -2,7 +2,7 @@
 // PinMessage.java
 // Group 2
 // Description: Represents a message regarding PIN status and changes.
-// Created By:
+// Created By: Braydon
 // Edited By:
 // Approved By: Braydon, Francisco, Liam
 // Variables:

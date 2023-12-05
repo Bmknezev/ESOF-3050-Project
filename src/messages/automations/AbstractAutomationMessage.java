@@ -2,7 +2,7 @@
 // AbstractAutomationMessage.java
 // Group 2
 // Description: This class represents an abstract automation message that serves as a blueprint for specific automation events.
-// Created By:
+// Created By: Braydon
 // Edited By:
 // Approved By: Braydon, Francisco, Liam
 // Variables:

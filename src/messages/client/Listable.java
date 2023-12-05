@@ -3,7 +3,7 @@
 // Group 2
 // Description: Interface defining methods for retrieving information
 //              used for listing items.
-// Created By:
+// Created By: Francisco
 // Edited By:
 // Approved By: Braydon, Francisco, Liam
 // Variables:

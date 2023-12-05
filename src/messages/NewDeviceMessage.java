@@ -2,7 +2,7 @@
 // NewDeviceMessage.java
 // Group 2
 // Description: Represents a message used to request or add a new device.
-// Created By:
+// Created By: Braydon
 // Edited By:
 // Approved By: Braydon, Francisco, Liam
 // Variables:
