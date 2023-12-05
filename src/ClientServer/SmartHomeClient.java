@@ -4,7 +4,7 @@
 // Description: Handles client-side operations for the Smart Home System. Manages communication with the server,
 //               interprets messages received from the server, and updates the user interface accordingly. Controls
 //               device selection, user login, PIN change, and user list functionalities.
-// Created By: Francisco
+// Created By: Braydon
 // Edited By: Francisco, Braydon
 // Approved By: Braydon, Francisco, Liam
 // Variables:
@@ -47,7 +47,7 @@ private LoginMenuController loginMenuController;
 
     @Override
     protected void handleMessageFromServer(Object msg) {
-        System.out.println("Message received from server." + msg.toString());
+        //System.out.println("Message received from server." + msg.toString());
 
 
            //check message type

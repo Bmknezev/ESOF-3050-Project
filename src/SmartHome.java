@@ -4,7 +4,7 @@
 // Description: This class represents the main control hub for a Smart Home System,
 //              managing various smart devices and their functionalities through
 //              a graphical user interface (GUI).
-// Created By: Francisco
+// Created By: Braydon
 // Edited By: Francisc, Braydon, Liam
 // Approved By: Braydon, Francisco, Liam
 // Variables: s - Instance of SmartHomeClient for server communication
@@ -58,13 +58,14 @@ public class SmartHome extends Application {
         });
         while(wait.get());
 
+
         s = new SmartHomeClient(ip.get(), 19920);
 
         boolean connectionFailed = false;
 
             try {
                 s.openConnection();
-            } catch (IOException e){
+            } catch (Exception e){
                 connectionFailed = true;
                 //throw new RuntimeException(e);
                 //create new stage and display error message
