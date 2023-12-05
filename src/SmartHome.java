@@ -18,26 +18,50 @@ import GUI.Control.*;
 
 import GUI.Control.Abstract.AbstractDeviceController;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextInputDialog;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicReference;
 
 import static javafx.application.Platform.runLater;
 
 public class SmartHome extends Application {
-    static SmartHomeClient s = new SmartHomeClient("127.0.0.1", 19920);
-
-    static boolean guiTest = false;
+    static SmartHomeClient s;
 
     public static void main(String[] args) {
+       AtomicReference<String> ip = new AtomicReference<>("127.0.0.1");
+        AtomicBoolean wait = new AtomicBoolean(true);
+        //dialog box for inputting ip address
+        Platform.runLater(() -> {
+            TextInputDialog dialog = new TextInputDialog("");
+            dialog.setTitle("IP Address");
+            dialog.setHeaderText("Enter IP Address");
+            dialog.setContentText("IP Address:");
+            dialog.setResultConverter((ButtonType button) -> {
+                if (button == ButtonType.OK) {
+                    ip.set(dialog.getEditor().getText());
+                    wait.set(false);
+                }
+
+                return null;
+            });
+            dialog.showAndWait();
+        });
+        while(wait.get());
+
+        s = new SmartHomeClient(ip.get(), 19920);
+
         boolean connectionFailed = false;
 
-        if (!guiTest){
             try {
                 s.openConnection();
             } catch (IOException e){
@@ -52,7 +76,7 @@ public class SmartHome extends Application {
                     alert.showAndWait();
                 });
             }
-        }
+
         if(!connectionFailed)
             launch(args);
 
@@ -187,10 +211,8 @@ public class SmartHome extends Application {
         deviceSelectionPaneController.addScene(sceneList, Controller);
 
 
-        if (!guiTest){
-            s.setLoginMenuController(loginPaneController);
-            s.getDevices(deviceSelectionPaneController);
-        }
+        s.setLoginMenuController(loginPaneController);
+        s.getDevices(deviceSelectionPaneController);
 
         primaryStage.setTitle("Smart Home");
         primaryStage.setScene(loginScene);

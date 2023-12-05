@@ -108,9 +108,6 @@ public class AutomationMenuController extends AbstractDeviceController {
             case 4:
                 //addGarageDoorActions();
                 break;
-            case 5:
-                //AddSmokeDetectorActions();
-                break;
             default:
                 // error
                 break;
