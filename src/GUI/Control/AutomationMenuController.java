@@ -171,7 +171,50 @@ public class AutomationMenuController extends AbstractDeviceController {
         smartDeviceActionsVBox.getChildren().addAll(lightToggleHBox, brightnessSliderHBox, lightColourHBox);
     }
 
-    public void addLockActions(){
+    public void addLockActions(ToggleGroup lockToggleGroup, TextField timerTextField, TextField pinTextField){
+        // this creates the lock toggle actions
+        HBox lockToggleHBox = new HBox();
+        lockToggleHBox.setSpacing(10);
+        lockToggleHBox.setAlignment(javafx.geometry.Pos.CENTER);
+
+        RadioButton lockRadioButton = new RadioButton("Lock");
+        lockRadioButton.setUserData(1);
+        lockRadioButton.setToggleGroup(lockToggleGroup);
+
+        RadioButton unlockRadioButton = new RadioButton("Unlock");
+        unlockRadioButton.setUserData(2);
+        unlockRadioButton.setToggleGroup(lockToggleGroup);
+
+        lockToggleHBox.getChildren().addAll(lockRadioButton, unlockRadioButton);
+
+        // this creates the timer actions
+        HBox timerHBox = new HBox();
+        timerHBox.setSpacing(10);
+        timerHBox.setAlignment(javafx.geometry.Pos.CENTER);
+
+        RadioButton timerRadioButton = new RadioButton("Set Timer: ");
+
+        timerTextField.setDisable(true);
+
+        timerRadioButton.setOnAction(event -> {
+            if (timerRadioButton.isSelected()){
+                timerTextField.setDisable(false);
+            }
+            else{
+                timerTextField.setDisable(true);
+            }
+        });
+
+        timerHBox.getChildren().addAll(timerRadioButton, timerTextField);
+
+        // this creates the pin actions
+        HBox pinHBox = new HBox();
+        pinHBox.setSpacing(10);
+        pinHBox.setAlignment(javafx.geometry.Pos.CENTER);
+
+        pinHBox.getChildren().addAll(pinTextField);
+
+        smartDeviceActionsVBox.getChildren().addAll(lockToggleHBox, timerHBox, pinHBox);
 
     }
     @FXML
@@ -184,7 +227,7 @@ public class AutomationMenuController extends AbstractDeviceController {
                 AutomationBuffer.confirmLightAutomation(date);
                 break;
             case 1:
-                //confirmLockAutomation();
+                AutomationBuffer.confirmLockAutomation(date);
                 break;
             case 2:
                 //confirmThermostatAutomation();

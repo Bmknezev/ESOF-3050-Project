@@ -27,6 +27,7 @@
 
 package GUI.Control;
 
+import ClientServer.AutomationBuffer;
 import GUI.Control.Abstract.AbstractDeviceController;
 import GUI.Control.Interface.Updatable;
 import javafx.application.Platform;
@@ -130,7 +131,10 @@ public class SmartLockMenuController extends AbstractDeviceController implements
 
     @FXML
     void CreateAutomationButtonPressed(ActionEvent event) {
-
+        AutomationBuffer.createLockAutomation(deviceID, SmartDeviceNameLabel.getText(), StatusIndicatorLabel.getText().equals("Locked"), pin);
+        automationMenuController.setPrevious(this.getScene());
+        Stage stage = (Stage) CreateAutomationButton.getScene().getWindow();
+        stage.setScene(automationScene);
     }
 
     @FXML

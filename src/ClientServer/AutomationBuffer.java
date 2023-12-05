@@ -3,8 +3,10 @@ package ClientServer;
 import GUI.Control.AutomationMenuController;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Slider;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import messages.automations.LightAutomationMessage;
+import messages.automations.LockAutomationMessage;
 
 import java.util.Date;
 
@@ -16,13 +18,23 @@ public class AutomationBuffer {
     private static int deviceID;
     private static String deviceName;
 
-    // light specific automation variables
+    // smart light specific automation variables
     private static boolean lightStatus;
     private static ToggleGroup lightToggleGroup;
+
     private static int brightness;
     private static Slider brightnessSlider = new Slider();
+
     private static String colour;
     private static ColorPicker colourPicker = new ColorPicker();
+
+    // smart lock specific variables
+
+    private static boolean lockStatus;
+    private static ToggleGroup lockToggleGroup;
+
+    private static int timer, pin;
+    private static TextField timerTextField, pinTextField;
 
     public static void createLightAutomation(int deviceID, String deviceName, String colour, int brightness, boolean lightStatus) {
         AutomationBuffer.deviceID = deviceID;
@@ -67,13 +79,42 @@ public class AutomationBuffer {
         client.UpdateServer(lam);
     }
 
-    public static void createLockAutomation(int deviceID, String deviceName, boolean lockStatus) {
+    public static void createLockAutomation(int deviceID, String deviceName, boolean lockStatus, int pin) {
         AutomationBuffer.deviceID = deviceID;
         AutomationBuffer.deviceName = deviceName;
-        AutomationBuffer.lightStatus = lockStatus;
+        AutomationBuffer.lockStatus = lockStatus;
+        AutomationBuffer.timer = 0;
+        AutomationBuffer.pin = pin;
+
+        lockToggleGroup = new ToggleGroup();
+
+        timerTextField = new TextField();
+        timerTextField.setPromptText("Enter time in seconds");
+
+        pinTextField = new TextField();
+        pinTextField.setPromptText("Enter pin to make changes");
 
         automationMenuController.setTitle(deviceName, 1);
-        automationMenuController.addLockActions();
+        automationMenuController.addLockActions(lockToggleGroup, timerTextField, pinTextField);
+    }
+
+    public static void confirmLockAutomation(Date date){
+
+        switch ((int)lockToggleGroup.getSelectedToggle().getUserData()){
+            case (1):
+                lockStatus = true;
+                break;
+            case(2):
+                lockStatus = false;
+                break;
+        }
+
+        timer = timerTextField.getText().equals("") ? 0 : Integer.parseInt(timerTextField.getText());
+
+        if (pinTextField.getText().equals(Integer.toString(pin))){
+            LockAutomationMessage lam = new LockAutomationMessage(deviceID, lockStatus, timer, pin, date);
+            client.UpdateServer(lam);
+        }
     }
 
     public static void addSever(SmartHomeClient client){

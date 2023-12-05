@@ -142,15 +142,19 @@ public class SmartHome extends Application {
         LoginMenuController loginPaneController = loginPaneLoader.getController();
         loginPaneController.setNextScene(deviceSelectionScene, primaryStage);
 
+        // injecting the login scene into the controller of the device selection scene as the previous scene
+        DeviceSelectionMenuController deviceSelectionPaneController = deviceSelectionPaneLoader.getController();
+        deviceSelectionPaneController.setPreviousScene(loginScene);
+        
+        AutomationMenuController automationMenuController = automationPaneLoader.getController();
+        AbstractDeviceController.addAutomationMenu(automationMenuController, automationScene);
+
+        AutomationBuffer.addAutomationMenuController(automationMenuController);
+
         // injecting the device selection scene into the controller of the light device scene as the previous scene
         SmartLightMenuController lightDevicePaneController = lightDevicePaneLoader.getController();
         lightDevicePaneController.setPreviousScene(deviceSelectionScene);
         lightDeviceScene.setUserData(lightDevicePaneController);
-
-        // injecting the login scene into the controller of the device selection scene as the previous scene
-        DeviceSelectionMenuController deviceSelectionPaneController = deviceSelectionPaneLoader.getController();
-        deviceSelectionPaneController.setPreviousScene(loginScene);
-        //deviceSelectionPaneController.addNewDevice(lightDeviceScene, lightDevicePaneController.getSmartDevice());
 
         //injecting the device selection scene into the controller of the lock device scene as the previous scene
         SmartLockMenuController lockDevicePaneController = lockDevicePaneLoader.getController();
@@ -171,11 +175,6 @@ public class SmartHome extends Application {
         SmartGarageDoorOpenerMenuController garageDoorOpenerDevicePaneController = garageDoorOpenerDevicePaneLoader.getController();
         garageDoorOpenerDevicePaneController.setPreviousScene(deviceSelectionScene);
         garageDoorOpenerDeviceScene.setUserData(garageDoorOpenerDevicePaneController);
-
-        AutomationMenuController automationMenuController = automationPaneLoader.getController();
-        AbstractDeviceController.addAutomationMenu(automationMenuController, automationScene);
-
-        AutomationBuffer.addAutomationMenuController(automationMenuController);
 
 
 
