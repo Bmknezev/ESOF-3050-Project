@@ -62,9 +62,6 @@ public class SmartLightMenuController extends AbstractDeviceController implement
     private Button CreateAutomationButton;
 
     @FXML
-    private Button EditAutomationsButton;
-
-    @FXML
     private ImageView SmartDeviceImageView;
 
     @FXML
@@ -161,7 +158,7 @@ public class SmartLightMenuController extends AbstractDeviceController implement
 
     public void CreateAutomationButtonPressed(ActionEvent actionEvent) {
         AutomationBuffer.createLightAutomation(deviceID, SmartDeviceNameLabel.getText(), colour, (int) BrightnessSlider.getValue(), getLightStatus());
-        automationMenuController.setPrevious(this.getScene());
+        automationMenuController.setPrevious(CreateAutomationButton.getScene());
         Stage stage = (Stage) CreateAutomationButton.getScene().getWindow();
         stage.setScene(automationScene);
     }

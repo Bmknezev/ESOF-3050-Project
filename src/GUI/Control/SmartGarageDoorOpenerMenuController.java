@@ -26,6 +26,7 @@
 
 package GUI.Control;
 
+import ClientServer.AutomationBuffer;
 import GUI.Control.Abstract.AbstractDeviceController;
 import GUI.Control.Interface.Updatable;
 import javafx.application.Platform;
@@ -184,5 +185,13 @@ public class SmartGarageDoorOpenerMenuController extends AbstractDeviceControlle
     @Override
     public void setPIN(int newPin) {
         pin = newPin;
+    }
+
+    @FXML
+    public void CreateAutomationButtonPressed(ActionEvent actionEvent) {
+        AutomationBuffer.createGarageDoorAutomation(deviceID, SmartDeviceNameLabel.getText(), pin);
+        automationMenuController.setPrevious(CreateAutomationButton.getScene());
+        Stage stage = (Stage) CreateAutomationButton.getScene().getWindow();
+        stage.setScene(automationScene);
     }
 }

@@ -26,6 +26,7 @@
 
 package GUI.Control;
 
+import ClientServer.AutomationBuffer;
 import GUI.Control.Abstract.AbstractDeviceController;
 import GUI.Control.Interface.Updatable;
 import javafx.application.Platform;
@@ -54,9 +55,6 @@ public class SmartThermostatMenuController extends AbstractDeviceController impl
     private Button CreateAutomationButton;
 
     @FXML
-    private Button EditAutomationsButton;
-
-    @FXML
     private Button backButton;
 
     @FXML
@@ -78,6 +76,8 @@ public class SmartThermostatMenuController extends AbstractDeviceController impl
     // this is just a default object to test the GUI
 
     private int deviceID;
+
+    private float temperature;
 
 
     // this is a method that sets the previous scene to the scene that was passed in
@@ -112,6 +112,7 @@ public class SmartThermostatMenuController extends AbstractDeviceController impl
             SmartDeviceNameLabel.setText(message.getName());
             deviceID = message.getDeviceID();
             TemperatureStatusLabel.setText(message.getTemperature() + " °C");
+            temperature = message.getSetpoint();
             SetpointStatusLabel.setText(message.getSetpoint() + " °C");
             heatingEnableButton.setText(message.getHeatEnabled() ? "Disable Heating" : "Enable Heating");
             heatingEnableButton.setStyle(message.getHeatEnabled() ? "-fx-background-color: Orange" : "-fx-background-color: LightGrey");
@@ -174,5 +175,13 @@ public class SmartThermostatMenuController extends AbstractDeviceController impl
             heatingEnableButton.setStyle("-fx-background-color: LightGrey");
         }
         UpdateServer();
+    }
+
+    @FXML
+    void CreateAutomationButtonPressed(ActionEvent event) {
+        AutomationBuffer.createThermostatAutomation(deviceID, SmartDeviceNameLabel.getText(), temperature);
+        automationMenuController.setPrevious(CreateAutomationButton.getScene());
+        Stage stage = (Stage) CreateAutomationButton.getScene().getWindow();
+        stage.setScene(automationScene);
     }
 }

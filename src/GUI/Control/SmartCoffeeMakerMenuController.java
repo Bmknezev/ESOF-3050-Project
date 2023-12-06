@@ -31,6 +31,7 @@
 
 package GUI.Control;
 
+import ClientServer.AutomationBuffer;
 import GUI.Control.Abstract.AbstractDeviceController;
 import GUI.Control.Interface.Updatable;
 import javafx.application.Platform;
@@ -132,5 +133,13 @@ public class SmartCoffeeMakerMenuController extends AbstractDeviceController imp
         }catch (IOException e){
             System.out.println("Error sending message to server.");
         }
+    }
+
+    @FXML
+    public void CreateAutomationButtonPressed(ActionEvent actionEvent) {
+        AutomationBuffer.createCoffeeMachineAutomation(deviceID, SmartDeviceNameLabel.getText());
+        automationMenuController.setPrevious(CreateAutomationButton.getScene());
+        Stage stage = (Stage) CreateAutomationButton.getScene().getWindow();
+        stage.setScene(automationScene);
     }
 }

@@ -44,7 +44,7 @@
          <children>
             <Button fx:id="ToggleGarageDoorStatusButton" mnemonicParsing="false" onAction="#ToggleGarageDoorButtonPressed" prefWidth="150.0" text="Close / Open" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
             <Button fx:id="TempOpenButton" mnemonicParsing="false" prefWidth="150.0" text="Open" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Button fx:id="CreateAutomationButton" mnemonicParsing="false" prefWidth="150.0" text="Create Door Schedule" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+            <Button fx:id="CreateAutomationButton" mnemonicParsing="false" onAction="#CreateAutomationButtonPressed" prefWidth="150.0" text="Create Door Schedule" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
             <Button fx:id="ChangePINButton" mnemonicParsing="false" onAction="#ChangePINButtonPressed" prefWidth="150.0" text="**Change PIN**" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
             <Label text="Open Temporarily:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <padding>

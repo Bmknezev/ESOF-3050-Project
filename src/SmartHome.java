@@ -135,7 +135,7 @@ public class SmartHome extends Application {
         //getting loader and a pane for the smoke detector device scene
         FXMLLoader automationPaneLoader = new FXMLLoader(getClass().getResource("/GUI/FXML/AutomationMenu.fxml"));
         Parent automationPane = automationPaneLoader.load();
-        Scene automationScene = new Scene(automationPane);
+        Scene automationScene = new Scene(automationPane, 600, 750);
 
 
         // injecting device selection scene into the controller of the login scene as the next scene

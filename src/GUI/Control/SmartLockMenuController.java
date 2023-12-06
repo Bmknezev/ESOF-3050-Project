@@ -131,8 +131,8 @@ public class SmartLockMenuController extends AbstractDeviceController implements
 
     @FXML
     void CreateAutomationButtonPressed(ActionEvent event) {
-        AutomationBuffer.createLockAutomation(deviceID, SmartDeviceNameLabel.getText(), StatusIndicatorLabel.getText().equals("Locked"), pin);
-        automationMenuController.setPrevious(this.getScene());
+        AutomationBuffer.createLockAutomation(deviceID, SmartDeviceNameLabel.getText(), pin);
+        automationMenuController.setPrevious(CreateAutomationButton.getScene());
         Stage stage = (Stage) CreateAutomationButton.getScene().getWindow();
         stage.setScene(automationScene);
     }
